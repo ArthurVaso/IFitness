@@ -60,7 +60,8 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/btn_login"
-        android:background="@color/light_gray"
+        android:backgroundTint="@color/background_opposite"
+        android:textColor="@color/background"
         style="@style/Widget.MaterialComponents.Button.UnelevatedButton"/>
 
     <TextView
@@ -76,7 +77,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="@color/light_gray"
+        android:background="@color/toolbar"
         android:layout_marginTop="32dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
@@ -100,6 +101,7 @@
             android:layout_marginRight="8dp"
             android:layout_marginLeft="8dp"
             android:text="@string/user_login_btn_register"
+            android:textColor="@color/background"
             style="@style/Widget.MaterialComponents.Button.TextButton"/>
     </LinearLayout>
 </LinearLayout>

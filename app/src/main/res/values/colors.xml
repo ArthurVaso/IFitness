@@ -8,5 +8,11 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="blue_gray">#5F5C75</color>
-    <color name="light_gray">#CCCCCC</color>
+    <!-- Imagens definidas para uso no projeto -->
+    <color name="toolbar">#EB3530</color>
+    <color name="background">#EB3530</color>
+    <color name="background_complementary">#FF524D</color>
+    <color name="background_strong">#9E1510</color>
+    <color name="background_opposite">#6BE896</color>
+    <color name="background_opposite_strong">#029E38</color>
 </resources>

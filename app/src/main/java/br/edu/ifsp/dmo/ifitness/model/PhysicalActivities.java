@@ -1,14 +1,7 @@
 package br.edu.ifsp.dmo.ifitness.model;
 
-import androidx.annotation.NonNull;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
-
-@Entity(tableName = "physical_activities")
 public class PhysicalActivities {
 
-    @NonNull
-    @PrimaryKey
     private String id;
     private String user;
     private String activityCategory;
