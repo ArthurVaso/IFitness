@@ -77,6 +77,6 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/btn_register"
-        android:background="@color/light_gray"
+        android:background="@color/toolbar"
         style="@style/Widget.MaterialComponents.Button.UnelevatedButton"/>
 </LinearLayout>
