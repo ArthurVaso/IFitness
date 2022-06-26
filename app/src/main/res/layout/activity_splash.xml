@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SplashActivity"
-    android:background="@color/ic_launcher_ifitness_background"
+    android:background="@color/colorPrimary"
     android:gravity="center">
 
     <LinearLayout
@@ -17,11 +17,11 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="IFitness"
             android:textAppearance="@style/TextAppearance.AppCompat.Title.Inverse"
-            android:textStyle="bold"
             android:textColor="@android:color/black"
-            android:gravity="center"/>
+            android:textStyle="bold" />
 
         <ImageView
             android:layout_width="200dp"
@@ -32,21 +32,21 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="Dev fitness"
             android:textAppearance="@style/TextAppearance.AppCompat.Title.Inverse"
-            android:textStyle="bold"
             android:textColor="@android:color/black"
-            android:gravity="center"/>
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="200dp"
+            android:gravity="center"
             android:text="Institituto Federal de São Paulo"
             android:textAppearance="@style/TextAppearance.AppCompat.Small.Inverse"
-            android:textStyle="bold"
             android:textColor="@android:color/black"
-            android:gravity="center"
-            android:layout_marginTop="200dp"/>
+            android:textStyle="bold" />
 
     </LinearLayout>
 
