@@ -1,9 +1,20 @@
 package br.edu.ifsp.dmo.ifitness.model;
 
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
-public class User {
+import javax.annotation.Nonnull;
+
+@Entity(tableName = "user")
+public class User implements Serializable {
+
+    @Nonnull
+    @PrimaryKey
     private String id;
     private String name;
     private String surname;
@@ -33,6 +44,7 @@ public class User {
         this.image = image;
     }
 
+    @Ignore
     public User() {
         this("", "",
                 "", "", "",
@@ -40,11 +52,12 @@ public class User {
                 "", "");
     }
 
+    @Nonnull
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(@Nonnull String id) {
         this.id = id;
     }
 

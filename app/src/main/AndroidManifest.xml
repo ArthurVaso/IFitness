@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IFitness">
         <activity
+            android:name=".SportsActivity"
+            android:exported="false" />
+        <activity
             android:name=".UserRegisterActivity"
             android:exported="false" />
         <activity
@@ -33,14 +36,6 @@
         <activity
             android:name=".MainActivity"
             android:exported="false">
-
-            <!--
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            -->
         </activity>
     </application>
 
