@@ -1,10 +1,20 @@
 package br.edu.ifsp.dmo.ifitness.model;
 
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
-public class PhysicalActivities {
+import javax.annotation.Nonnull;
 
+@Entity(tableName = "physical-activities")
+public class PhysicalActivities implements Serializable {
+
+    @Nonnull
+    @PrimaryKey
     private String id;
     private String user;
     private String activityCategory;
@@ -24,15 +34,17 @@ public class PhysicalActivities {
         this.activityDate = activityDate;
     }
 
+    @Ignore
     public PhysicalActivities() {
         this("", "", "", "", "");
     }
 
+    @Nonnull
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(@Nonnull String id) {
         this.id = id;
     }
 

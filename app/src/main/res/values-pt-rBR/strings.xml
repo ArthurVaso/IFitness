@@ -2,10 +2,15 @@
 <resources>
     <!-- res/layout/activity_main.xml -->
     <string name="app_name">IFitness</string>
+
+    <!-- res/layout/activity_sports.xml -->
     <string name="walking">Caminhada</string>
     <string name="running">Corrida</string>
     <string name="swimming">Natação</string>
     <string name="cycling">Ciclismo</string>
+
+    <!-- java/br.edu.ifsp.dmo.ifitness/SportsActivity.java -->
+    <string name="sports_title">Atividades</string>
 
     <!-- java/br.edu.ifsp.dmo.ifitness/MAinActivity.java -->
     <string name="toggle_open">Open</string>
@@ -18,7 +23,7 @@
     <string name="home">Home</string>
     <string name="user">Usuário</string>
     <string name="Profile">Perfil</string>
-    <string name="category">Categoria</string>
+    <string name="activities">Atividades</string>
     <string name="logout">Sair</string>
 
     <!-- res/layout/menu_header_layout.xml -->

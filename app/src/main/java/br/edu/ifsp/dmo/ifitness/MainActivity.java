@@ -53,9 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         toggle.syncState();
 
-        Log.d("arthur", "onCreate ONE: " + navigationView);
         navigationView = findViewById(R.id.menu_nav_view);
-        Log.d("arthur", "onCreate TWO: " + navigationView);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -73,9 +71,10 @@ public class MainActivity extends AppCompatActivity {
                                 UserProfileActivity.class);
                         startActivity(intent);
                         break;
-                    case R.id.nav_category:
-                        Toast.makeText(MainActivity.this, "Categorias",
-                                Toast.LENGTH_SHORT).show();
+                    case R.id.nav_activities:
+                        intent = new Intent(MainActivity.this,
+                                SportsActivity.class);
+                        startActivity(intent);
                         break;
                     case R.id.nav_logout:
                         Toast.makeText(MainActivity.this, "Sair",
@@ -103,51 +102,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        layoutIcomWalk = findViewById(R.id.ll_icon_walk);
-        layoutIcomWalk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,
-                        DetailSportActivity.class);
-                intent.putExtra("title", getString(R.string.walking));
-                startActivity(intent);
-            }
-        });
+        //lista das ultimas atividades
 
-        layoutIcomWalk = findViewById(R.id.ll_icon_run);
-        layoutIcomWalk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,
-                        DetailSportActivity.class);
-                intent.putExtra("title", getString(R.string.running));
-                startActivity(intent);
-            }
-        });
 
-        layoutIcomWalk = findViewById(R.id.ll_icon_swim);
-        layoutIcomWalk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,
-                        DetailSportActivity.class);
-                intent.putExtra("title", getString(R.string.swimming));
-                startActivity(intent);
-            }
-        });
-
-        layoutIcomWalk = findViewById(R.id.ll_icon_bike);
-        layoutIcomWalk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,
-                        DetailSportActivity.class);
-                intent.putExtra("title", getString(R.string.cycling));
-                startActivity(intent);
-            }
-        });
     }
-/*
+/* aqui é o sistema para tirar a foto do usuario
     @Override
     protected void onResume() {
         super.onResume();
