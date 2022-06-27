@@ -30,7 +30,6 @@ public class DetailSportActivity extends AppCompatActivity {
         Intent intent = getIntent();
         title = intent.getStringExtra("title").toString();
 
-        Log.d("arthur", "Titulo = " + title + " -> ");
         toolbarTitle = findViewById(R.id.toolbar_title);
         toolbarTitle.setText(title);
     }
