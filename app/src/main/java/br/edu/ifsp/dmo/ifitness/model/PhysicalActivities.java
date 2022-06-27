@@ -1,5 +1,8 @@
 package br.edu.ifsp.dmo.ifitness.model;
 
+import java.util.Objects;
+import java.util.UUID;
+
 public class PhysicalActivities {
 
     private String id;
@@ -9,6 +12,82 @@ public class PhysicalActivities {
     private String duration;
     private String activityDate;
 
+    public PhysicalActivities(String user,
+                              String activityCategory,
+                              String distance, String duration,
+                              String activityDate) {
+        this.id = UUID.randomUUID().toString();
+        this.user = user;
+        this.activityCategory = activityCategory;
+        this.distance = distance;
+        this.duration = duration;
+        this.activityDate = activityDate;
+    }
+
+    public PhysicalActivities() {
+        this("", "", "", "", "");
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getActivityCategory() {
+        return activityCategory;
+    }
+
+    public void setActivityCategory(String activityCategory) {
+        this.activityCategory = activityCategory;
+    }
+
+    public String getDistance() {
+        return distance;
+    }
+
+    public void setDistance(String distance) {
+        this.distance = distance;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
+    public String getActivityDate() {
+        return activityDate;
+    }
+
+    public void setActivityDate(String activityDate) {
+        this.activityDate = activityDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof PhysicalActivities)) return false;
+        PhysicalActivities that = (PhysicalActivities) o;
+        return id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }
 
 /*2. A aplicação deve persistir os dados de todas as atividades físicas. Cada atividade
