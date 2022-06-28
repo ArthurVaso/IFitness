@@ -43,7 +43,6 @@ public class SportsActivity extends AppCompatActivity {
                 Intent intent = new Intent(SportsActivity.this,
                         DetailSportActivity.class);
                 intent.putExtra("title", getString(R.string.walking));
-                Log.d("sport", "passou");
                 startActivity(intent);
             }
         });
@@ -55,7 +54,6 @@ public class SportsActivity extends AppCompatActivity {
                 Intent intent = new Intent(SportsActivity.this,
                         DetailSportActivity.class);
                 intent.putExtra("title", getString(R.string.running));
-                Log.d("sport", "passou");
                 startActivity(intent);
             }
         });
@@ -67,7 +65,6 @@ public class SportsActivity extends AppCompatActivity {
                 Intent intent = new Intent(SportsActivity.this,
                         DetailSportActivity.class);
                 intent.putExtra("title", getString(R.string.swimming));
-                Log.d("sport", "passou");
                 startActivity(intent);
             }
         });
@@ -79,7 +76,6 @@ public class SportsActivity extends AppCompatActivity {
                 Intent intent = new Intent(SportsActivity.this,
                         DetailSportActivity.class);
                 intent.putExtra("title", getString(R.string.cycling));
-                Log.d("sport", "passou");
                 startActivity(intent);
             }
         });
