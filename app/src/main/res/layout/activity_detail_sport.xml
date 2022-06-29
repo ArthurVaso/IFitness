@@ -26,107 +26,146 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_margin="4dp"
                 android:layout_weight="1"
-                android:orientation="horizontal"
-                android:layout_margin="4dp">
+                android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_weight=".5"
                     android:id="@+id/img_date"
-                    android:src="@drawable/date"
-                    android:layout_marginLeft="8dp"/>
-                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight=".5"
+                    android:src="@drawable/date" />
+
+                <Button
+                    android:id="@+id/detail_sport_btn_date_picker"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="2"
-                    android:text="//"
-                    android:id="@+id/txt_date"
-                    android:layout_marginLeft="4dp"
-                    android:gravity="center_vertical"
-                    android:textAppearance="@android:style/TextAppearance.Medium"/>
+                    android:backgroundTint="@android:color/white"
+                    android:onClick="showDatePickerDialog"
+                    android:text="Selecione a data"
+                    android:textColor="@android:color/black" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_margin="4dp"
                 android:layout_weight="1"
-                android:orientation="horizontal"
-                android:layout_margin="4dp">
+                android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_weight=".5"
                     android:id="@+id/img_time"
-                    android:src="@drawable/time"
-                    android:layout_marginLeft="8dp"/>
-                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight=".5"
+                    android:src="@drawable/time" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/detail_sport_txt_hour"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:text="tempo"
-                    android:id="@+id/txt_time"
-                    android:layout_marginLeft="4dp"
-                    android:gravity="center_vertical"
-                    android:textAppearance="@android:style/TextAppearance.Medium"/>
+                    android:layout_weight="1"
+                    android:hint="Hour">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/detail_sport_edit_txt_hour"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="number" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/detail_sport_txt_minute"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:hint="Minute">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/detail_sport_edit_txt_minute"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="number" />
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_margin="4dp"
                 android:layout_weight="1"
-                android:orientation="horizontal"
-                android:layout_margin="4dp">
+                android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_weight=".5"
                     android:id="@+id/img_distance"
-                    android:src="@drawable/distance"
-                    android:layout_marginLeft="8dp"/>
-                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_weight=".5"
+                    android:src="@drawable/distance" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/detail_sport_txt_distance"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:text="km"
-                    android:id="@+id/txt_distance"
-                    android:layout_marginLeft="4dp"
-                    android:gravity="center_vertical"
-                    android:textAppearance="@android:style/TextAppearance.Medium"/>
+                    android:layout_weight="1.5"
+                    android:hint="Minute">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/detail_sport_edit_txt_distance"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="number" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Spinner
+                    android:id="@+id/detail_sport_sp_distance"
+                    style="@style/Widget.AppCompat.Spinner.DropDown"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".5"
+                    android:entries="@array/distance" />
             </LinearLayout>
 
+            <!--
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_margin="4dp"
                 android:layout_weight="1"
-                android:orientation="horizontal"
-                android:layout_margin="4dp">
+                android:orientation="horizontal">
 
                 <ImageView
+                    android:id="@+id/img_calories"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
+                    android:layout_marginLeft="8dp"
                     android:layout_weight=".5"
-                    android:id="@+id/img_calories"
-                    android:src="@drawable/calories"
-                    android:layout_marginLeft="8dp"/>
+                    android:src="@drawable/calories" />
+
                 <TextView
+                    android:id="@+id/txt_calories"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:text="Calorias"
-                    android:id="@+id/txt_calories"
                     android:layout_marginLeft="4dp"
+                    android:layout_weight="2"
                     android:gravity="center_vertical"
-                    android:textAppearance="@android:style/TextAppearance.Medium"/>
-            </LinearLayout>
+                    android:text="Calorias"
+                    android:textAppearance="@android:style/TextAppearance.Medium" />
+            </LinearLayout> -->
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </RelativeLayout>

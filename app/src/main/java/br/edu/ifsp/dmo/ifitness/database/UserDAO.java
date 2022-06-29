@@ -1,4 +1,4 @@
 package br.edu.ifsp.dmo.ifitness.database;
 
-public class UserDAO {
+public interface UserDAO {
 }

@@ -87,4 +87,10 @@
         <item>Sergipe (SE)</item>
         <item>Tocantins (TO)</item>
     </string-array>
+
+    <!-- res/layout/activity_user_profile.xml -->
+    <string-array name="distance">
+        <item>km</item>
+        <item>m</item>
+    </string-array>
 </resources>
