@@ -31,7 +31,7 @@
 
     <!-- res/layout/activity_user_login.xml -->
     <string name="user_login_title">Login</string>
-    <string name="user_login_email">exemplo@exemplo.com</string>
+    <string name="user_login_email">E-mail</string>
     <string name="user_login_password">Senha</string>
     <string name="user_login_forgot_password">Esqueceu sua senha</string>
     <string name="txt_login_not_account">Não tem uma conta?</string>
@@ -41,7 +41,7 @@
     <!-- res/layout/activity_user_register.xml -->
     <string name="user_register_title">Cadastro</string>
     <string name="user_register_name">Nome de Usuário</string>
-    <string name="user_register_email">exemplo@exemplo.com</string>
+    <string name="user_register_email">E-mail</string>
     <string name="user_register_password">Senha</string>
     <string name="btn_register">CADASTRAR</string>
 
@@ -49,7 +49,7 @@
     <string name="user_profile_title">Perfil</string>
     <string name="user_profile_name">Nome</string>
     <string name="user_profile_surname">Sobrenome</string>
-    <string name="user_profile_email">exemplo@exemplo.com</string>
+    <string name="user_profile_email">E-mail</string>
     <string name="address">Endereço</string>
     <string name="user_profile_street">Rua</string>
     <string name="user_profile_number">Número</string>
@@ -58,6 +58,10 @@
     <string name="user_profile_city">Cidade</string>
     <string name="user_profile_zip_code">CEP</string>
     <string name="save">SALVAR</string>
+    <string-array name="gender">
+        <item>Masculino</item>
+        <item>Feminino</item>
+    </string-array>
     <string-array name="uf">
         <item>Acre (AC)</item>
         <item>Alagoas (AL)</item>

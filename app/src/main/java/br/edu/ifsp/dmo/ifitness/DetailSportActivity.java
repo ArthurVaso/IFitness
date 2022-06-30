@@ -1,29 +1,26 @@
 package br.edu.ifsp.dmo.ifitness;
 
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.DialogFragment;
-
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
-import br.edu.ifsp.dmo.ifitness.repository.DatePickerFragment;
-
-public class DetailSportActivity extends AppCompatActivity {
+public class DetailSportActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private Toolbar toolbar;
     private TextView toolbarTitle;
     private String title;
-    private Button btndatePicker;
+    private Button btnDatePicker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,21 +39,36 @@ public class DetailSportActivity extends AppCompatActivity {
         toolbarTitle = findViewById(R.id.toolbar_title);
         toolbarTitle.setText(title);
 
-        btndatePicker = findViewById(R.id.detail_sport_btn_date_picker);
-        btndatePicker.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
+        btnDatePicker = findViewById(R.id.detail_sport_btn_date_picker);
+        btnDatePicker.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
+
+        findViewById(R.id.detail_sport_btn_date_picker).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDatePickerDialog();
+            }
+        });
+    }
+
+    public void showDatePickerDialog(){
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                this,
+                this,
+                Calendar.getInstance().get(Calendar.YEAR),
+                Calendar.getInstance().get(Calendar.MONTH),
+                Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+        datePickerDialog.show();
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        String date = month + "/" + dayOfMonth + "/" + year;
+        btnDatePicker.setText(date);
     }
 
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
-    }
-
-    public void showDatePickerDialog(View view) {
-        DialogFragment fragment = new DatePickerFragment();
-        fragment.show(getSupportFragmentManager(), "datePicker");
-        Log.d("picker", "showDatePickerDialog: " + fragment.getTag() + " | " +
-                fragment.toString());
-        btndatePicker.setText(fragment.toString());
     }
 }

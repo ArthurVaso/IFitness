@@ -48,11 +48,12 @@
                     android:id="@+id/detail_sport_btn_date_picker"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
                     android:layout_weight="2"
-                    android:backgroundTint="@android:color/white"
-                    android:onClick="showDatePickerDialog"
                     android:text="Selecione a data"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@android:color/black"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
             </LinearLayout>
 
             <LinearLayout
@@ -75,13 +76,16 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="8dp"
                     android:layout_weight="1"
                     android:hint="Hour">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/detail_sport_edit_txt_hour"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:inputType="number" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -90,6 +94,8 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="8dp"
                     android:layout_weight="1"
                     android:hint="Minute">
 
@@ -121,13 +127,16 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1.5"
-                    android:hint="Minute">
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_weight="1"
+                    android:hint="Distance">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/detail_sport_edit_txt_distance"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:inputType="number" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -136,8 +145,30 @@
                     style="@style/Widget.AppCompat.Spinner.DropDown"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight=".5"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_weight="1"
                     android:entries="@array/distance" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/detail_sport_btn_save"
+                    style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_weight="1"
+                    android:background="@color/colorPrimary"
+                    android:text="SAVE" />
             </LinearLayout>
 
             <!--
