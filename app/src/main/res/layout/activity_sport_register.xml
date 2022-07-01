@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailSportActivity">
+    tools:context=".SportRegisterActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -45,13 +45,13 @@
                     android:src="@drawable/date" />
 
                 <Button
-                    android:id="@+id/detail_sport_btn_date_picker"
+                    android:id="@+id/sport_register_btn_date_picker"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_weight="2"
-                    android:text="Selecione a data"
+                    android:text="@string/sport_register_select_date"
                     android:textColor="@android:color/black"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
             </LinearLayout>
@@ -72,7 +72,7 @@
                     android:src="@drawable/time" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/detail_sport_txt_hour"
+                    android:id="@+id/sport_register_txt_hour"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -80,27 +80,27 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_weight="1"
-                    android:hint="Hour">
+                    android:hint="@string/sport_register_hour">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/detail_sport_edit_txt_hour"
+                        android:id="@+id/sport_register_edit_txt_hour"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="number" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/detail_sport_txt_minute"
+                    android:id="@+id/sport_register_txt_minute"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginTop="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_weight="1"
-                    android:hint="Minute">
+                    android:hint="@string/sport_register_minute">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/detail_sport_edit_txt_minute"
+                        android:id="@+id/sport_register_edit_txt_minute"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:inputType="number" />
@@ -123,7 +123,7 @@
                     android:src="@drawable/distance" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/detail_sport_txt_distance"
+                    android:id="@+id/sport_register_txt_distance"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -131,17 +131,17 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_weight="1"
-                    android:hint="Distance">
+                    android:hint="@string/sport_register_distance">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/detail_sport_edit_txt_distance"
+                        android:id="@+id/sport_register_edit_txt_distance"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="number" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Spinner
-                    android:id="@+id/detail_sport_sp_distance"
+                    android:id="@+id/sport_register_sp_distance"
                     style="@style/Widget.AppCompat.Spinner.DropDown"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -159,7 +159,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/detail_sport_btn_save"
+                    android:id="@+id/sport_register_btn_save"
                     style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -168,10 +168,10 @@
                     android:layout_marginRight="8dp"
                     android:layout_weight="1"
                     android:background="@color/colorPrimary"
-                    android:text="SAVE" />
+                    android:text="@string/btn_save" />
             </LinearLayout>
 
-            <!--
+            <!-- NOT USED
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"

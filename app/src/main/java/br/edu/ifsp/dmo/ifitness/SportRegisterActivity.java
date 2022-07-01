@@ -15,7 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class DetailSportActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+public class SportRegisterActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private Toolbar toolbar;
     private TextView toolbarTitle;
@@ -25,7 +25,7 @@ public class DetailSportActivity extends AppCompatActivity implements DatePicker
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_sport);
+        setContentView(R.layout.activity_sport_register);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -39,10 +39,10 @@ public class DetailSportActivity extends AppCompatActivity implements DatePicker
         toolbarTitle = findViewById(R.id.toolbar_title);
         toolbarTitle.setText(title);
 
-        btnDatePicker = findViewById(R.id.detail_sport_btn_date_picker);
+        btnDatePicker = findViewById(R.id.sport_register_btn_date_picker);
         btnDatePicker.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
 
-        findViewById(R.id.detail_sport_btn_date_picker).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.sport_register_btn_date_picker).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showDatePickerDialog();
@@ -62,7 +62,7 @@ public class DetailSportActivity extends AppCompatActivity implements DatePicker
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        String date = month + "/" + dayOfMonth + "/" + year;
+        String date = dayOfMonth + "/" + month + "/" + year;
         btnDatePicker.setText(date);
     }
 

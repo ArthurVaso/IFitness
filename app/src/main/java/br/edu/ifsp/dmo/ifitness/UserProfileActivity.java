@@ -53,7 +53,7 @@ public class UserProfileActivity extends AppCompatActivity implements DatePicker
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        String txtDate = month + "/" + dayOfMonth + "/" + year;
+        String txtDate = dayOfMonth + "/" + month + "/" + year;
         btnDatePicker.setText(txtDate);
     }
 
