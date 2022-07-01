@@ -92,7 +92,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/txt_login_not_account"
+            android:text="@string/user_login_txt_login_not_account"
             android:gravity="center"/>
         <Button
             android:layout_width="match_parent"
@@ -100,7 +100,7 @@
             android:id="@+id/btn_login_register"
             android:layout_marginRight="8dp"
             android:layout_marginLeft="8dp"
-            android:text="@string/user_login_btn_register"
+            android:text="@string/btn_register"
             android:textColor="@color/colorPrimary"
             style="@style/Widget.MaterialComponents.Button.TextButton"/>
     </LinearLayout>

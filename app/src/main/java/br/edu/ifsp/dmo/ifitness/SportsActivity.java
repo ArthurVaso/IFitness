@@ -1,15 +1,14 @@
 package br.edu.ifsp.dmo.ifitness;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 public class SportsActivity extends AppCompatActivity {
 
@@ -41,8 +40,8 @@ public class SportsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SportsActivity.this,
-                        DetailSportActivity.class);
-                intent.putExtra("title", getString(R.string.walking));
+                        SportRegisterActivity.class);
+                intent.putExtra("title", getString(R.string.sports_walking));
                 startActivity(intent);
             }
         });
@@ -52,8 +51,8 @@ public class SportsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SportsActivity.this,
-                        DetailSportActivity.class);
-                intent.putExtra("title", getString(R.string.running));
+                        SportRegisterActivity.class);
+                intent.putExtra("title", getString(R.string.sports_running));
                 startActivity(intent);
             }
         });
@@ -63,8 +62,8 @@ public class SportsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SportsActivity.this,
-                        DetailSportActivity.class);
-                intent.putExtra("title", getString(R.string.swimming));
+                        SportRegisterActivity.class);
+                intent.putExtra("title", getString(R.string.sports_swimming));
                 startActivity(intent);
             }
         });
@@ -74,8 +73,8 @@ public class SportsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SportsActivity.this,
-                        DetailSportActivity.class);
-                intent.putExtra("title", getString(R.string.cycling));
+                        SportRegisterActivity.class);
+                intent.putExtra("title", getString(R.string.sports_cycling));
                 startActivity(intent);
             }
         });

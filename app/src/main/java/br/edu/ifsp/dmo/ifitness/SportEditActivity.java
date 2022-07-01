@@ -11,11 +11,12 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
-public class DetailSportActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+public class SportEditActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+
+    //ESTA CLASSE É CHAMDA DIRETAMENTE DA MAIN
+    //UM ICONE SELECIONA DA LISTA TRAZ PARA CA
 
     private Toolbar toolbar;
     private TextView toolbarTitle;
@@ -25,7 +26,7 @@ public class DetailSportActivity extends AppCompatActivity implements DatePicker
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_sport);
+        setContentView(R.layout.activity_sport_edit);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -34,15 +35,16 @@ public class DetailSportActivity extends AppCompatActivity implements DatePicker
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         Intent intent = getIntent();
-        title = intent.getStringExtra("title").toString();
+        //TEM QUE PUXAR O TITULO DA ATIVIDADE QUE SERÁ ALTERADA
+        //Ex:. Corrida, Natação, ...
+        //title = intent.getStringExtra("title").toString();
 
         toolbarTitle = findViewById(R.id.toolbar_title);
         toolbarTitle.setText(title);
 
-        btnDatePicker = findViewById(R.id.detail_sport_btn_date_picker);
-        btnDatePicker.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
+        btnDatePicker = findViewById(R.id.sport_edit_btn_date_picker);
 
-        findViewById(R.id.detail_sport_btn_date_picker).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.sport_edit_btn_date_picker).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showDatePickerDialog();
@@ -62,7 +64,7 @@ public class DetailSportActivity extends AppCompatActivity implements DatePicker
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        String date = month + "/" + dayOfMonth + "/" + year;
+        String date = dayOfMonth + "/" + month + "/" + year;
         btnDatePicker.setText(date);
     }
 

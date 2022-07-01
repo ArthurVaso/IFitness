@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IFitness">
         <activity
+            android:name=".SportEditActivity"
+            android:exported="false" />
+        <activity
             android:name=".SportsActivity"
             android:exported="false" />
         <activity
@@ -22,7 +25,7 @@
             android:name=".UserLoginActivity"
             android:exported="false" />
         <activity
-            android:name=".DetailSportActivity"
+            android:name=".SportRegisterActivity"
             android:exported="false" />
         <activity
             android:name=".SplashActivity"
@@ -35,8 +38,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
     </application>
 
 </manifest>
