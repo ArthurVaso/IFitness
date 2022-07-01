@@ -1,8 +1,6 @@
 package br.edu.ifsp.dmo.ifitness;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -14,7 +12,6 @@ public class BadgesActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private TextView toolbarTitle;
-    private String title;
     
     private TextView points;
     private LinearLayout noBadges;
@@ -36,21 +33,15 @@ public class BadgesActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        Intent intent = getIntent();
-        //title = intent.getStringExtra("title").toString();
-
         toolbarTitle = findViewById(R.id.toolbar_title);
-        //toolbarTitle.setText(title);
+        toolbarTitle.setText(R.string.badges_title);
         
         points = findViewById(R.id.badges_txt_points);
         String txtPoints = getString(R.string.badges_your_points)
                 + String.valueOf(userPoints)
                 + getString(R.string.badges_km);
         points.setText(txtPoints);
-        Log.d("pontos", "onCreate: " + txtPoints);
-        Log.d("pontos", "onCreate: " + getString(R.string.badges_your_points));
-        Log.d("pontos", "onCreate: " + userPoints);
-        Log.d("pontos", "onCreate: " + getString(R.string.badges_km));
+
         noBadges = findViewById(R.id.no_badges);
         badgeBeginner = findViewById(R.id.badge_beginner);
         badgeBronze = findViewById(R.id.badge_bronze);

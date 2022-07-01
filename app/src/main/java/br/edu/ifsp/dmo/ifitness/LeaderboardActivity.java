@@ -1,6 +1,5 @@
 package br.edu.ifsp.dmo.ifitness;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -11,7 +10,6 @@ public class LeaderboardActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private TextView toolbarTitle;
-    private String title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,11 +22,8 @@ public class LeaderboardActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        Intent intent = getIntent();
-        //title = intent.getStringExtra("title").toString();
-
         toolbarTitle = findViewById(R.id.toolbar_title);
-        //toolbarTitle.setText(title);
+        toolbarTitle.setText(R.string.leaderboard_title);
     }
 
     @Override

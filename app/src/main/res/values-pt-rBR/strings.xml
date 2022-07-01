@@ -115,14 +115,16 @@
         <string name="sport_edit_distance">Distância</string>
 
     <!-- res/layout/activity_badges.xml -->
-        <string name="badge_title">Conquistas</string>
-        <string name="badges_no_badges">Nenhum conquista adquirida</string>
+        <string name="badges_title">Conquistas</string>
+        <string name="badges_no_badges">Nenhuma conquista adquirida</string>
         <string name="badge_15">Exercitou-se por 15km</string>
         <string name="badge_25">Exercitou-se por 25km</string>
         <string name="badge_50">Exercitou-se por 50km</string>
         <string name="badge_100">Exercitou-se por 100km</string>
         <string name="badge_150">Exercitou-se por 150km</string>
-    <string name="badges_points">"Your Points: "</string>
-    <string name="badges_your_points">Your points:</string>
-    <string name="badges_km">km</string>
+        <string name="badges_your_points">Sua pontuação: </string>
+        <string name="badges_km">km</string>
+
+    <!-- res/layout/activity_leaderboard.xml -->
+        <string name="leaderboard_title">Leaderboard</string>
 </resources>
