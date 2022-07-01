@@ -16,6 +16,14 @@
         android:title="@string/menu_drawer_activities"
         android:icon="@drawable/ic_menu_category_black"/>
 
+    <item android:id="@+id/nav_leaderboard"
+        android:title="@string/menu_drawer_leaderboard"
+        android:icon="@drawable/ic_menu_leaderboard"/>
+
+    <item android:id="@+id/nav_badges"
+        android:title="@string/menu_drawer_badges"
+        android:icon="@drawable/ic_menu_badge"/>
+
     <item android:id="@+id/nav_logout"
         android:title="@string/menu_drawer_logout"
         android:icon="@drawable/ic_menu_logout"/>

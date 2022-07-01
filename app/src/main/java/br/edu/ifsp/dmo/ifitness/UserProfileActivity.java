@@ -33,7 +33,7 @@ public class UserProfileActivity extends AppCompatActivity implements DatePicker
         toolbarTitle.setText(getString(R.string.user_profile_title));
 
         btnDatePicker = findViewById(R.id.user_profile_btn_date_picker);
-        findViewById(R.id.user_profile_btn_date_picker).setOnClickListener(new View.OnClickListener() {
+        btnDatePicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showDatePickerDialog();

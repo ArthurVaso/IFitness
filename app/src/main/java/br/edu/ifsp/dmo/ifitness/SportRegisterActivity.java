@@ -42,7 +42,7 @@ public class SportRegisterActivity extends AppCompatActivity implements DatePick
         btnDatePicker = findViewById(R.id.sport_register_btn_date_picker);
         btnDatePicker.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
 
-        findViewById(R.id.sport_register_btn_date_picker).setOnClickListener(new View.OnClickListener() {
+        btnDatePicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showDatePickerDialog();

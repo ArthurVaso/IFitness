@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IFitness">
         <activity
+            android:name=".BadgesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LeaderboardActivity"
+            android:exported="false" />
+        <activity
             android:name=".SportEditActivity"
             android:exported="false" />
         <activity
@@ -38,7 +44,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
     </application>
 
 </manifest>
