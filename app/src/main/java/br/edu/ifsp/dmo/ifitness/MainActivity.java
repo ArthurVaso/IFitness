@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
 
     private NavigationView navigationView;
     private TextView txtLogin;
+
+
+    private ImageView profileImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,11 +120,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        profileImage = navigationView.getHeaderView(0)
+                .findViewById(R.id.header_profile_image);
         //lista das ultimas atividades
 
 
     }
-/* aqui é o sistema para tirar a foto do usuario
+/* aqui é o sistema para colocar a foto do usuario
     @Override
     protected void onResume() {
         super.onResume();
@@ -134,9 +140,9 @@ public class MainActivity extends AppCompatActivity {
                             .getDefaultSharedPreferences(MainActivity.this)
                             .getString(MediaStore.EXTRA_OUTPUT, null);
                     if(perfilImage != null){
-                        imagePerfil.setImageURI(Uri.parse(perfilImage));
+                        profileImage.setImageURI(Uri.parse(perfilImage));
                     }else{
-                        imagePerfil.setImageResource(R.drawable.profile_image);
+                        profileImage.setImageResource(R.drawable.profile_image);
                     }
                 }
             }
