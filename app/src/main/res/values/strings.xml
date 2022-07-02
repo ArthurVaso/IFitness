@@ -1,53 +1,55 @@
 <resources>
     <!-- for general purpose -->
-        <!-- Commands -->
-        <string name="toggle_open">Open</string>
-        <string name="toggle_close">Close</string>
+    <!-- Commands -->
+    <string name="toggle_open">Open</string>
+    <string name="toggle_close">Close</string>
 
-        <!-- Buttons -->
-        <string name="btn_register">REGISTER</string>
-        <string name="btn_login">LOGIN</string>
-        <string name="btn_save">SAVE</string>
-        <string name="btn_delete">DELETE</string>
+    <!-- Buttons -->
+    <string name="btn_register">REGISTER</string>
+    <string name="btn_login">LOGIN</string>
+    <string name="btn_save">SAVE</string>
+    <string name="btn_delete">DELETE</string>
 
     <!-- res/layout/activity_main.xml -->
-        <string name="app_name">IFitness</string>
+    <string name="app_name">IFitness</string>
 
     <!-- res/layout/activity_sports.xml -->
-        <string name="sports_title">Activities</string>
-        <string name="sports_walking">Walking</string>
-        <string name="sports_running">Running</string>
-        <string name="sports_swimming">Swimming</string>
-        <string name="sports_cycling">Cycling</string>
+    <string name="sports_title">Activities</string>
+    <string name="sports_walking">Walking</string>
+    <string name="sports_running">Running</string>
+    <string name="sports_swimming">Swimming</string>
+    <string name="sports_cycling">Cycling</string>
 
     <!-- res/menu/menu_drawer.xml -->
-        <string name="menu_drawer_home">Home</string>
-        <string name="menu_drawer_user">User</string>
-        <string name="menu_drawer_Profile">Profile</string>
-        <string name="menu_drawer_activities">Activities</string>
-        <string name="menu_drawer_logout">Logout</string>
+    <string name="menu_drawer_home">Home</string>
+    <string name="menu_drawer_user">User</string>
+    <string name="menu_drawer_Profile">Profile</string>
+    <string name="menu_drawer_activities">Activities</string>
+    <string name="menu_drawer_leaderboard">Leaderboard</string>
+    <string name="menu_drawer_badges">Badges</string>
+    <string name="menu_drawer_logout">Logout</string>
 
     <!-- res/layout/menu_header_layout.xml -->
-        <string name="menu_header_login">Login</string>
+    <string name="menu_header_login">Login</string>
 
     <!-- res/layout/activity_user_login.xml -->
-        <string name="user_login_title">Login</string>
-        <string name="user_login_email">E-mail</string>
-        <string name="user_login_password">Password</string>
-        <string name="user_login_forgot_password">Forgot your password</string>
-        <string name="user_login_txt_login_not_account">Don’t have an account?</string>
+    <string name="user_login_title">Login</string>
+    <string name="user_login_email">E-mail</string>
+    <string name="user_login_password">Password</string>
+    <string name="user_login_forgot_password">Forgot your password</string>
+    <string name="user_login_txt_login_not_account">Don’t have an account?</string>
 
     <!-- res/layout/activity_user_register.xml -->
-        <string name="user_register_title">Register</string>
-        <string name="user_register_name">User Name</string>
-        <string name="user_register_email">E-mail</string>
-        <string name="user_register_password">Password</string>
+    <string name="user_register_title">Register</string>
+    <string name="user_register_name">User Name</string>
+    <string name="user_register_email">E-mail</string>
+    <string name="user_register_password">Password</string>
 
     <!-- res/layout/activity_user_profile.xml -->
-        <string name="user_profile_title">Profile</string>
-        <string name="user_profile_name">Name</string>
-        <string name="user_profile_surname">Surname</string>
-        <string name="user_profile_email">E-mail</string>
+    <string name="user_profile_title">Profile</string>
+    <string name="user_profile_name">Name</string>
+    <string name="user_profile_surname">Surname</string>
+    <string name="user_profile_email">E-mail</string>
     <!-- NOT USED
         <string name="user_profile_address">Adress</string>
         <string name="user_profile_street">Street</string>
@@ -57,10 +59,10 @@
         <string name="user_profile_city">City</string>
         <string name="user_profile_zip_code">Zip code</string>
     -->
-        <string-array name="gender">
-            <item>Male</item>
-            <item>Female</item>
-        </string-array>
+    <string-array name="gender">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
     <!-- NOT USED
         <string-array name="uf">
             <item>Acre (AC)</item>
@@ -94,20 +96,38 @@
     -->
 
     <!-- res/layout/activity_sport_register.xml -->
-        <string name="sport_register_title">Activity register</string>
-        <string name="sport_register_select_date">Select date</string>
-        <string name="sport_register_hour">Hour</string>
-        <string name="sport_register_minute">Minute</string>
-        <string name="sport_register_distance">Distance</string>
-        <string-array name="distance">
-            <item>km</item>
-            <item>m</item>
-        </string-array>
+    <string name="sport_register_title">Activity register</string>
+    <string name="sport_register_select_date">Select date</string>
+    <string name="sport_register_hour">Hour</string>
+    <string name="sport_register_minute">Minute</string>
+    <string name="sport_register_distance">Distance</string>
+    <string-array name="distance">
+        <item>km</item>
+        <item>m</item>
+    </string-array>
 
     <!-- res/layout/activity_sport_edit.xml -->
-        <string name="sport_edit_title">Activity edit</string>
-        <string name="sport_edit_select_date">Select date</string>
-        <string name="sport_edit_hour">Hour</string>
-        <string name="sport_edit_minute">Minute</string>
-        <string name="sport_edit_distance">Distance</string>
+    <string name="sport_edit_title">Activity edit</string>
+    <string name="sport_edit_select_date">Select date</string>
+    <string name="sport_edit_hour">Hour</string>
+    <string name="sport_edit_minute">Minute</string>
+    <string name="sport_edit_distance">Distance</string>
+
+    <!-- res/layout/activity_badges.xml -->
+    <string name="badges_title">Badges</string>
+    <string name="badges_no_badges">No badges gained.</string>
+    <string name="badge_15">You exercised for 15km</string>
+    <string name="badge_25">You exercised for 25km</string>
+    <string name="badge_50">You exercised for 50km</string>
+    <string name="badge_100">You exercised for 100km</string>
+    <string name="badge_150">You exercised for 150km</string>
+    <string name="badges_your_points">Your points: </string>
+    <string name="badges_km">km</string>
+
+    <!-- res/layout/activity_leaderboard.xml -->
+    <string name="leaderboard_title">Leaderboard</string>
+
+    <!-- app/src/main/java/br/edu/ifsp/dmo/ifitness/LeaderboardActivity.java -->
+    <string name="user_reposutory_user">"User "</string>
+    <string name="user_repository_success">" registered with success."</string>
 </resources>

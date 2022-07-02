@@ -75,6 +75,16 @@ public class MainActivity extends AppCompatActivity {
                                 SportsActivity.class);
                         startActivity(intent);
                         break;
+                    case R.id.nav_leaderboard:
+                        intent = new Intent(MainActivity.this,
+                                LeaderboardActivity.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.nav_badges:
+                        intent = new Intent(MainActivity.this,
+                                BadgesActivity.class);
+                        startActivity(intent);
+                        break;
                     case R.id.nav_logout:
                         Toast.makeText(MainActivity.this, "Sair",
                                 Toast.LENGTH_SHORT).show();

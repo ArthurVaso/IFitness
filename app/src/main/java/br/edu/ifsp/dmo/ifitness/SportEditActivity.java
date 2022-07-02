@@ -44,7 +44,7 @@ public class SportEditActivity extends AppCompatActivity implements DatePickerDi
 
         btnDatePicker = findViewById(R.id.sport_edit_btn_date_picker);
 
-        findViewById(R.id.sport_edit_btn_date_picker).setOnClickListener(new View.OnClickListener() {
+        btnDatePicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showDatePickerDialog();
