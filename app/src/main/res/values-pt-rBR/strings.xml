@@ -127,4 +127,8 @@
 
     <!-- res/layout/activity_leaderboard.xml -->
         <string name="leaderboard_title">Leaderboard</string>
+
+    <!-- app/src/main/java/br/edu/ifsp/dmo/ifitness/LeaderboardActivity.java -->
+		<string name="user_reposutory_user">"Usuário "</string>
+		<string name="user_repository_success">" registrado com sucesso."</string>
 </resources>
