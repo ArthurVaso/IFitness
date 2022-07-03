@@ -17,6 +17,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.json.JSONException;
@@ -27,7 +28,9 @@ import java.io.UnsupportedEncodingException;
 import br.edu.ifsp.dmo.ifitness.R;
 import br.edu.ifsp.dmo.ifitness.database.AppDatabase;
 import br.edu.ifsp.dmo.ifitness.database.UserDAO;
+import br.edu.ifsp.dmo.ifitness.model.PhysicalActivities;
 import br.edu.ifsp.dmo.ifitness.model.User;
+import br.edu.ifsp.dmo.ifitness.model.UserWithActivities;
 import br.edu.ifsp.dmo.ifitness.viewmodel.UserViewModel;
 
 public class UserRepository {
@@ -55,6 +58,7 @@ public class UserRepository {
 
     public void createUser(User user){
         JSONObject parameters = new JSONObject();
+        Log.d("create", "createUser: start");
         try{
             parameters.put("email", user.getEmail());
             parameters.put("password", user.getPassword());
@@ -64,6 +68,7 @@ public class UserRepository {
         }catch (JSONException e){
             e.printStackTrace();
         }
+        Log.d("create", "createUser: after parameters");
 
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.POST,
@@ -75,13 +80,15 @@ public class UserRepository {
                         try {
                             user.setId(response.getString("localId"));
                             user.setPassword(response.getString("idToken"));
+                            Log.d("create", "createUser: before firebase");
 
                             firestore.collection("user")
                                     .document(user.getId()).set(user)
                                     .addOnSuccessListener(unused -> {
-                                        Log.d(this.toString(), R.string.user_reposutory_user +
+                                        Log.d(this.toString(), R.string.user_repository_user +
                                                 user.getEmail() + R.string.user_repository_success);
                                     });
+                            Log.d("create", "createUser: after firebase");
                         }catch (JSONException e){
                             e.printStackTrace();
                         }
@@ -95,11 +102,12 @@ public class UserRepository {
                 }
         );
         queue.add(request);
+        Log.d("create", "createUser: end");
     }
 
     public LiveData<User> login(String email, String password){
         MutableLiveData<User> liveData = new MutableLiveData<>();
-
+        Log.d("login", "login: start");
         JSONObject parameters = new JSONObject();
         try {
             parameters.put("email", email);
@@ -110,7 +118,7 @@ public class UserRepository {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
+        Log.d("login", "login: after parameters");
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,
                 BASE_URL + SIGNIN + KEY,
                 parameters,
@@ -120,6 +128,7 @@ public class UserRepository {
                         try {
                             String localId = response.getString("localId");
                             String idToken = response.getString("idToken");
+                            Log.d("login", "login: before firebase");
 
                             firestore.collection("user").document(localId)
                                     .get()
@@ -135,6 +144,7 @@ public class UserRepository {
 
                                 firestore.collection("user").document(localId).set(user);
                             });
+                            Log.d("login", "login: after firebase");
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -161,6 +171,7 @@ public class UserRepository {
                 });
 
         queue.add(request);
+        Log.d("login", "login: end");
 
         return liveData;
     }
@@ -206,4 +217,31 @@ public class UserRepository {
 
         queue.add(request);
     }
+
+    public LiveData<UserWithActivities> load(String userId) {
+        UserWithActivities userWithActivities = new UserWithActivities();
+        MutableLiveData<UserWithActivities> liveData = new MutableLiveData<>();
+        Log.d("load", "load: start");
+
+        DocumentReference userRef = firestore.collection("user").document(userId);
+
+        userRef.get().addOnSuccessListener(snapshot -> {
+            User user = snapshot.toObject(User.class);
+
+            user.setId(user.getId());
+
+            userWithActivities.setUser(user);
+
+            userRef.collection("physical-activities").get().addOnCompleteListener(snap -> {
+                snap.getResult().forEach(doc -> {
+                    PhysicalActivities physicalActivities = doc.toObject(PhysicalActivities.class);
+                    physicalActivities.setId(doc.getId());
+                    userWithActivities.getPhysicalActivities().add(physicalActivities);
+                });
+            });
+        });
+        Log.d("load", "load: end");
+        return liveData;
+    }
+
 }

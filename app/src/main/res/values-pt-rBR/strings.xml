@@ -10,6 +10,8 @@
         <string name="btn_login">ENTRAR</string>
         <string name="btn_save">SAVE</string>
         <string name="btn_delete">EXCLUIR</string>
+        <string name="btn_cancel">CANCEL</string>
+        <string name="btn_ok">OK</string>
 
     <!-- res/layout/activity_main.xml -->
         <string name="app_name">IFitness</string>
@@ -40,11 +42,22 @@
         <string name="user_login_forgot_password">Esqueceu sua senha</string>
         <string name="user_login_txt_login_not_account">Não tem uma conta?</string>
 
+    <!-- app/src/main/java/br/edu/ifsp/dmo/ifitness/UserLoginActivity.java -->
+        <string name="user_login_wrong_values">E-mail/Password errado!</string>
+        <string name="user_login_check_email">Favor, verificar seu e-mail para alterar sua senha.</string>
+        <string name="user_login_reset_password">Redefinir senha</string>
+
     <!-- res/layout/activity_user_register.xml -->
         <string name="user_register_title">Cadastro</string>
         <string name="user_register_name">Nome de Usuário</string>
         <string name="user_register_email">E-mail</string>
         <string name="user_register_password">Senha</string>
+
+    <!-- app/src/main/java/br/edu/ifsp/dmo/ifitness/UserRegisterActivity.java -->
+        <string name="user_register_error_msg_password">A senha deve ter 6 ou mais digitos.</string>
+        <string name="user_register_name_empty">O campo nome não pode estar vazio.</string>
+        <string name="user_register_password_empty">O campo senha  não pode estar vazio.</string>
+        <string name="user_register_email_empty">O campo e-mail  não pode estar vazio.</string>
 
     <!-- res/layout/activity_user_profile.xml -->
         <string name="user_profile_title">Perfil</string>
@@ -128,7 +141,10 @@
     <!-- res/layout/activity_leaderboard.xml -->
         <string name="leaderboard_title">Leaderboard</string>
 
-    <!-- app/src/main/java/br/edu/ifsp/dmo/ifitness/LeaderboardActivity.java -->
-		<string name="user_reposutory_user">"Usuário "</string>
-		<string name="user_repository_success">" registrado com sucesso."</string>
+    <!-- app/src/main/java/br/edu/ifsp/dmo/ifitness/RepositoryActivity.java -->
+		<string name="user_repository_user">Usuário </string>
+		<string name="user_repository_success"> registrado com sucesso.</string>
+
+    <!-- res/layout/dialog_reset_password.xml -->
+        <string name="dialog_reset_email">E-mail</string>
 </resources>

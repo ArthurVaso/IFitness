@@ -1,13 +1,18 @@
 package br.edu.ifsp.dmo.ifitness.viewmodel;
 
 import android.app.Application;
+import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
+import java.util.Optional;
 
 import br.edu.ifsp.dmo.ifitness.model.User;
+import br.edu.ifsp.dmo.ifitness.model.UserWithActivities;
 import br.edu.ifsp.dmo.ifitness.repository.UserRepository;
 
 public class UserViewModel extends AndroidViewModel {
@@ -33,6 +38,19 @@ public class UserViewModel extends AndroidViewModel {
         PreferenceManager.getDefaultSharedPreferences(getApplication())
                 .edit().remove(USER_ID)
                 .apply();
+    }
+
+    public LiveData<UserWithActivities> islogged() {
+        SharedPreferences sharedPreferences =
+                PreferenceManager
+                        .getDefaultSharedPreferences(getApplication());
+        Optional<String> id = Optional
+                .ofNullable(sharedPreferences
+                        .getString(USER_ID, null));
+        if(!id.isPresent()){
+            return new MutableLiveData<>(null);
+        }
+        return userRepository.load(id.get());
     }
 
     public void resetPassword(String email) {

@@ -17,6 +17,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.FileProvider;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -27,9 +29,13 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import br.edu.ifsp.dmo.ifitness.model.UserWithActivities;
+import br.edu.ifsp.dmo.ifitness.viewmodel.UserViewModel;
+
 public class UserProfileActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private final int REQUEST_TAKE_PHOTO = 1;
+
     private Toolbar toolbar;
     private TextView toolbarTitle;
 
@@ -40,8 +46,14 @@ public class UserProfileActivity extends AppCompatActivity implements DatePicker
     private TextInputEditText txtPhone;
     private Spinner spnGender;
     private ImageView profileImage;
+    
+    private Button btnUpdate;
+    
     private Uri photoURI;
+    
+    private UserViewModel userViewModel;
 
+    private UserWithActivities userWithActivities;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +62,9 @@ public class UserProfileActivity extends AppCompatActivity implements DatePicker
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        userViewModel = new ViewModelProvider(this)
+                .get(UserViewModel.class);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -64,6 +79,7 @@ public class UserProfileActivity extends AppCompatActivity implements DatePicker
         txtPhone = findViewById(R.id.user_profile_txt_phone);
         spnGender = findViewById(R.id.user_profile_sp_gender);
         profileImage = findViewById(R.id.user_profile_image);
+        btnUpdate = findViewById(R.id.user_profile_btn_save);
 
         btnDatePicker.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,6 +104,47 @@ public class UserProfileActivity extends AppCompatActivity implements DatePicker
         }else{
             profileImage.setImageResource(R.drawable.profile_image);
         }
+
+        userViewModel.islogged().observe(this, new Observer<UserWithActivities>() {
+            @Override
+            public void onChanged(UserWithActivities userWithActivities) {
+                if(userWithActivities != null){
+                    UserProfileActivity.this.userWithActivities = userWithActivities;
+                    txtName.setText(userWithActivities.getUser().getName());
+                    txtSurname.setText(userWithActivities.getUser().getSurname());
+                    txtEmail.setText(userWithActivities.getUser().getEmail());
+                    btnDatePicker.setText(userWithActivities.getUser().getBirthdayDate());
+                    txtPhone.setText(userWithActivities.getUser().getPhone());
+                    String[] gender = getResources().getStringArray(R.array.gender);
+                    for (int i = 0; i < gender.length; i++){
+                        if(gender[i].equals(userWithActivities.getUser().getGender())){
+                            spnGender.setSelection(i);
+                        }
+                    }
+
+                    /*
+                    if (usuarioComEndereco.getEnderecos().size() > 0){
+                        Endereco endereco = usuarioComEndereco.getEnderecos().get(0);
+                        txtLogradouro.setText(endereco.getLogradouro());
+                        txtNumero.setText(endereco.getNumero());
+                        txtComplemento.setText(endereco.getComplemento());
+                        txtCidade.setText(endereco.getCidade());
+                        txtCep.setText(endereco.getCep());
+                        String[] uf = getResources().getStringArray(R.array.uf);
+                        for (int i = 0; i < uf.length; i++){
+                            if(uf[i].equals(endereco.getEstado())){
+                                spnUf.setSelection(i);
+                            }
+                        }
+                    }
+                    */
+                }else{
+                    startActivity(new Intent(UserProfileActivity.this,
+                            UserLoginActivity.class));
+                    finish();
+                }
+            }
+        });
     }
 
     public void showDatePickerDialog(){
