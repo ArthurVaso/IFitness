@@ -155,4 +155,5 @@
     <string name="user_login_credentials">Please enter your credentials.</string>
     <string name="user_login_success">Login successful.</string>
     <string name="user_login_valid_credentials">Please enter valid user credentials.</string>
+    <string name="user_profile_success">Data update with success.</string>
 </resources>

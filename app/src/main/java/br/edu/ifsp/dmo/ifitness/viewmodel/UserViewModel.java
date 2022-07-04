@@ -55,4 +55,8 @@ public class UserViewModel extends AndroidViewModel {
     public void resetPassword(String email) {
         userRepository.resetPassword(email);
     }
+
+    public void update(User user) {
+        userRepository.update(user);
+    }
 }

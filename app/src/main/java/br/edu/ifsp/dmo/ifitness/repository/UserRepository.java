@@ -105,8 +105,8 @@ public class UserRepository {
 
     public LiveData<User> login(String email, String password){
         MutableLiveData<User> liveData = new MutableLiveData<>();
-        Log.d("login", "login: start");
         JSONObject parameters = new JSONObject();
+
         try {
             parameters.put("email", email);
             parameters.put("password", password);
@@ -116,7 +116,6 @@ public class UserRepository {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Log.d("login", "login: after parameters");
         JsonObjectRequest request =
                 new JsonObjectRequest(Request.Method.POST,
                 BASE_URL + SIGNIN + KEY,
@@ -129,7 +128,6 @@ public class UserRepository {
                                     response.getString("localId");
                             String idToken =
                                     response.getString("idToken");
-                            Log.d("login", "login: before firebase");
 
                             firestore.collection("user")
                                     .document(localId)
@@ -149,7 +147,6 @@ public class UserRepository {
                                 firestore.collection("user")
                                         .document(localId).set(user);
                             });
-                            Log.d("login", "login: after firebase");
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -159,28 +156,23 @@ public class UserRepository {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         NetworkResponse response = error.networkResponse;
-                        Log.d("login", "login: erro1");
                         if (error instanceof ServerError && response != null) {
-                            Log.d("login", "login: erroif");
                             try {
                                 String res = new String(response.data,
                                         HttpHeaderParser.parseCharset(response.headers, "utf-8"));
                                 JSONObject obj = new JSONObject(res);
                                 Log.d(this.toString(), obj.toString());
-                                Log.d("login", "login: errotry");
                             } catch ( UnsupportedEncodingException e1) {
                                 e1.printStackTrace();
                             } catch (JSONException e2) {
                                 e2.printStackTrace();
                             }
                         }
-                        Log.d("login", "login: errofim");
                         liveData.setValue(null);
                     }
                 });
 
         queue.add(request);
-        Log.d("login", "login: end");
 
         return liveData;
     }
@@ -229,7 +221,6 @@ public class UserRepository {
 
     public LiveData<User> load(String userId) {
         MutableLiveData<User> liveData = new MutableLiveData<>();
-        Log.d("load", "load: start");
 
         DocumentReference userRef =
                 firestore.collection("user")
@@ -242,8 +233,19 @@ public class UserRepository {
 
             liveData.setValue(user);
         });
-        Log.d("load", "load: end");
         return liveData;
+    }
+
+    public Boolean update(User user){
+        final Boolean[] atualized = {false};
+
+        DocumentReference usuarioRef = firestore.collection("user").document(user.getId());
+
+        usuarioRef.set(user).addOnSuccessListener(unused -> {
+            atualized[0] = true;
+        });
+
+        return atualized[0];
     }
 
 }

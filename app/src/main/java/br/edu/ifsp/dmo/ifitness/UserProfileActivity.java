@@ -13,6 +13,7 @@ import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -55,6 +56,7 @@ public class UserProfileActivity extends AppCompatActivity implements DatePicker
     private UserViewModel userViewModel;
 
     private UserWithActivities userWithActivities;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +83,13 @@ public class UserProfileActivity extends AppCompatActivity implements DatePicker
         spnGender = findViewById(R.id.user_profile_sp_gender);
         profileImage = findViewById(R.id.user_profile_image);
         btnUpdate = findViewById(R.id.user_profile_btn_save);
+
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                update();
+            }
+        });
 
         btnDatePicker.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,6 +138,52 @@ public class UserProfileActivity extends AppCompatActivity implements DatePicker
                 }
             }
         });
+    }
+
+    private void update() {
+        if(!validate()){
+            return;
+        }
+
+        user.setName(txtName.getText().toString());
+        user.setSurname(txtSurname.getText().toString());
+        user.setEmail(txtEmail.getText().toString());
+        user.setBirthdayDate(btnDatePicker.getText().toString());
+        user.setPhone(txtPhone.getText().toString());
+        getResources().getStringArray(R.array.gender);
+        user.setGender(getResources().getStringArray(R.array.gender)[spnGender.getSelectedItemPosition()]);
+
+        userViewModel.update(user);
+        Toast.makeText(this, getString(R.string.user_profile_success), Toast.LENGTH_SHORT).show();
+    }
+
+    private boolean validate(){
+        boolean isValid = true;
+        if(txtName.getText().toString().trim().isEmpty()){
+            txtName.setError("Fill the field name.");
+            isValid = false;
+        }else{
+            txtName.setError(null);
+        }
+        if(txtSurname.getText().toString().trim().isEmpty()){
+            txtSurname.setError("Fill the field surname.");
+            isValid = false;
+        }else{
+            txtSurname.setError(null);
+        }
+        if(txtEmail.getText().toString().trim().isEmpty()){
+            txtEmail.setError("Fill the field  e-mail.");
+            isValid = false;
+        }else{
+            txtEmail.setError(null);
+        }
+        if(txtPhone.getText().toString().trim().isEmpty()){
+            txtPhone.setError("Fill the field  phone.");
+            isValid = false;
+        }else{
+            txtPhone.setError(null);
+        }
+        return isValid;
     }
 
     public void showDatePickerDialog(){
