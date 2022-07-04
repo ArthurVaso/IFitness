@@ -41,7 +41,6 @@ public class UserViewModel extends AndroidViewModel {
     }
 
     public LiveData<UserWithActivities> islogged() {
-    //public LiveData<User> islogged() {
         SharedPreferences sharedPreferences =
                 PreferenceManager
                         .getDefaultSharedPreferences(
@@ -63,9 +62,4 @@ public class UserViewModel extends AndroidViewModel {
         userRepository.update(userWithActivities);
     }
 
-    /*
-    public void update(User user) {
-        userRepository.update(user);
-    }
-    */
 }

@@ -137,16 +137,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         userViewModel.islogged().observe(this, new Observer<UserWithActivities>() {
-        //userViewModel.islogged().observe(this, new Observer<User>() {
             @Override
             public void onChanged(UserWithActivities userWithActivities) {
-            //public void onChanged(User user) {
                 if(userWithActivities != null){
-                //if(user != null){
                     txtLogin.setText(userWithActivities.getUser().getName()
                             + " " + userWithActivities.getUser().getSurname());
-                    //txtLogin.setText(user.getName()
-                    //        + " " + user.getSurname());
                     String imageProfile = PreferenceManager
                             .getDefaultSharedPreferences(MainActivity.this)
                             .getString(MediaStore.EXTRA_OUTPUT, null);

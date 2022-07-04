@@ -16,10 +16,10 @@ public class SportsActivity extends AppCompatActivity {
     private TextView toolbarTitle;
     private DrawerLayout toolbarDrawer;
 
-    private LinearLayout layoutIcomWalk;
-    private LinearLayout layoutIcomRun;
-    private LinearLayout layoutIcomSwim;
-    private LinearLayout layoutIcomBike;
+    private LinearLayout layoutIconWalk;
+    private LinearLayout layoutIconRun;
+    private LinearLayout layoutIconSwim;
+    private LinearLayout layoutIconBike;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +35,8 @@ public class SportsActivity extends AppCompatActivity {
         toolbarTitle = findViewById(R.id.toolbar_title);
         toolbarTitle.setText(getString(R.string.sports_title));
 
-        layoutIcomWalk = findViewById(R.id.sport_icon_walk);
-        layoutIcomWalk.setOnClickListener(new View.OnClickListener() {
+        layoutIconWalk = findViewById(R.id.sport_icon_walk);
+        layoutIconWalk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SportsActivity.this,
@@ -46,8 +46,8 @@ public class SportsActivity extends AppCompatActivity {
             }
         });
 
-        layoutIcomWalk = findViewById(R.id.sport_icon_run);
-        layoutIcomWalk.setOnClickListener(new View.OnClickListener() {
+        layoutIconWalk = findViewById(R.id.sport_icon_run);
+        layoutIconWalk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SportsActivity.this,
@@ -57,8 +57,8 @@ public class SportsActivity extends AppCompatActivity {
             }
         });
 
-        layoutIcomWalk = findViewById(R.id.sport_icon_swim);
-        layoutIcomWalk.setOnClickListener(new View.OnClickListener() {
+        layoutIconWalk = findViewById(R.id.sport_icon_swim);
+        layoutIconWalk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SportsActivity.this,
@@ -68,8 +68,8 @@ public class SportsActivity extends AppCompatActivity {
             }
         });
 
-        layoutIcomWalk = findViewById(R.id.sport_icon_bike);
-        layoutIcomWalk.setOnClickListener(new View.OnClickListener() {
+        layoutIconWalk = findViewById(R.id.sport_icon_bike);
+        layoutIconWalk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SportsActivity.this,

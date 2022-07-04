@@ -46,6 +46,9 @@
         <string name="user_login_wrong_values">E-mail/Password errado!</string>
         <string name="user_login_check_email">Favor, verificar seu e-mail para alterar sua senha.</string>
         <string name="user_login_reset_password">Redefinir senha</string>
+        <string name="user_login_credentials">Por foavor entre com suas informações.</string>
+        <string name="user_login_success">Sucesso ao logar.</string>
+        <string name="user_login_valid_credentials">Por foavor entre com suas informações válidas.</string>
 
     <!-- res/layout/activity_user_register.xml -->
         <string name="user_register_title">Cadastro</string>
@@ -59,12 +62,17 @@
         <string name="user_register_name_empty">O campo nome não pode estar vazio.</string>
         <string name="user_register_password_empty">O campo senha  não pode estar vazio.</string>
         <string name="user_register_email_empty">O campo e-mail  não pode estar vazio.</string>
+        <string name="user_registry_check_password">Por favoe, verifique sua senha.</string>
+        <string name="user_registry_credentials">Por foavor entre com suas informações.</string>
+        <string name="user_register_success">Usuário registrado.</string>
+        <string name="user_register_fail">Falha ao registrar usuário.</string>
 
     <!-- res/layout/activity_user_profile.xml -->
         <string name="user_profile_title">Perfil</string>
         <string name="user_profile_name">Nome</string>
         <string name="user_profile_surname">Sobrenome</string>
         <string name="user_profile_email">E-mail</string>
+
     <!-- NOT USED
         <string name="user_profile_address">Endereço</string>
         <string name="user_profile_street">Rua</string>
@@ -110,12 +118,16 @@
         </string-array>
     -->
 
+    <!-- app/src/main/java/br/edu/ifsp/dmo/ifitness/UserProfileActivity.java -->
+        <string name="user_profile_success">Dados atualizados com sucesso.</string>
+
     <!-- res/layout/activity_sport_register.xml -->
         <string name="sport_register_title">Registro de atividade</string>
         <string name="sport_register_select_date">Selecione a data</string>
         <string name="sport_register_hour">Hora</string>
         <string name="sport_register_minute">Minuto</string>
         <string name="sport_register_distance">Distância</string>
+        <string name="sport_register_meters">Metros</string>
         <string-array name="distance">
             <item>km</item>
             <item>m</item>
@@ -148,12 +160,4 @@
 
     <!-- res/layout/dialog_reset_password.xml -->
         <string name="dialog_reset_email">E-mail</string>
-    <string name="user_registry_check_password">Please check both having same password.</string>
-    <string name="user_registry_credentials">Please enter your credentials.</string>
-    <string name="user_register_success">User registered.</string>
-    <string name="user_register_fail">Fail to register user.</string>
-    <string name="user_login_credentials">Please enter your credentials.</string>
-    <string name="user_login_success">Login successful.</string>
-    <string name="user_login_valid_credentials">Please enter valid user credentials.</string>
-    <string name="user_profile_success">Data update with success.</string>
 </resources>

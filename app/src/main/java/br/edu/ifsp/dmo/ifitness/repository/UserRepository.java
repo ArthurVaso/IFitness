@@ -82,7 +82,6 @@ public class UserRepository {
                         try {
                             user.setId(response.getString("localId"));
                             user.setPassword(response.getString("idToken"));
-                            Log.d("create", "createUser: before firebase");
 
                             firestore.collection("user")
                                     .document(user.getId())
@@ -223,7 +222,6 @@ public class UserRepository {
     }
 
     public LiveData<UserWithActivities> load(String userId) {
-    //public LiveData<User> load(String userId) {
         UserWithActivities userWithActivities = new UserWithActivities();
         MutableLiveData<UserWithActivities> liveData = new MutableLiveData<>();
         //MutableLiveData<User> liveData = new MutableLiveData<>();
@@ -249,28 +247,24 @@ public class UserRepository {
                 });
 
                 liveData.setValue(userWithActivities);
-                //liveData.setValue(user);
             });
         });
         return liveData;
     }
 
     public Boolean update(UserWithActivities userWithActivities){
-    //public Boolean update(User user){
         final Boolean[] atualized = {false};
 
         DocumentReference userRef = firestore.collection("user").document(userWithActivities.getUser().getId());
-        //DocumentReference userRef = firestore.collection("user").document(user.getId());
 
         userRef.set(userWithActivities.getUser()).addOnSuccessListener(unused -> {
-        //userRef.set(user).addOnSuccessListener(unused -> {
             atualized[0] = true;
         });
 
-        /*
+
         CollectionReference physicalActivitiesRef = userRef.collection("physical-activities");
 
-        PhysicalActivities physicalActivities = userWithActivities.getPhysicalActivities().get();
+        PhysicalActivities physicalActivities = userWithActivities.getPhysicalActivities().get(0);
 
         if(physicalActivities.getId().isEmpty()){
             physicalActivitiesRef.add(physicalActivities).addOnSuccessListener( end ->{
@@ -282,7 +276,6 @@ public class UserRepository {
                 atualized[0] = true;
             });
         }
-        */
 
         return atualized[0];
     }

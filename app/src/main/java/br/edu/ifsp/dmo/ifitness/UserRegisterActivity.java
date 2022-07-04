@@ -75,9 +75,7 @@ public class UserRegisterActivity extends AppCompatActivity {
                                 ""
                         );
                         if (user.getPassword().length() >= 6) {
-                            // insere um novo usuário no BD
                             userViewModel.createUser(user);
-                            // efetua o login do novo usuário
                             userViewModel.login(user.getEmail(), user.getPassword())
                                     .observe(UserRegisterActivity.this, new Observer<User>() {
                                         @Override
