@@ -1,12 +1,14 @@
 package br.edu.ifsp.dmo.ifitness;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -14,8 +16,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.navigation.NavigationView;
+
+import br.edu.ifsp.dmo.ifitness.model.User;
+import br.edu.ifsp.dmo.ifitness.model.UserWithActivities;
+import br.edu.ifsp.dmo.ifitness.viewmodel.UserViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,18 +31,20 @@ public class MainActivity extends AppCompatActivity {
     private TextView toolbarTitle;
     private DrawerLayout toolbarDrawer;
 
-    private LinearLayout layoutIcomWalk;
-    private LinearLayout layoutIcomRun;
-    private LinearLayout layoutIcomSwim;
-    private LinearLayout layoutIcomBike;
-
     private NavigationView navigationView;
     private TextView txtLogin;
+
+    private ImageView profileImage;
+
+    private UserViewModel userViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        userViewModel = new ViewModelProvider(this)
+                .get(UserViewModel.class);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -86,20 +96,20 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                         break;
                     case R.id.nav_logout:
-                        Toast.makeText(MainActivity.this, "Sair",
-                                Toast.LENGTH_SHORT).show();
+                        userViewModel.logout();
+                        finish();
+                        startActivity(getIntent());
                         break;
+                        /*
                     case R.id.nav_test:
                         intent = new Intent(MainActivity.this,
                                 SportEditActivity.class);
                         startActivity(intent);
                         break;
-                    default:
-                        throw new IllegalStateException("Unexpected value: " + item.getItemId());
+                        */
                 }
 
                 toolbarDrawer.closeDrawer(GravityCompat.START);
-
                 return true;
             }
         });
@@ -116,33 +126,40 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        profileImage = navigationView.getHeaderView(0)
+                .findViewById(R.id.header_profile_image);
         //lista das ultimas atividades
 
 
     }
-/* aqui é o sistema para tirar a foto do usuario
+
     @Override
     protected void onResume() {
         super.onResume();
-        usuarioViewModel.isLogged().observe(this, new Observer<UsuarioComEndereco>() {
+        userViewModel.islogged().observe(this, new Observer<UserWithActivities>() {
+        //userViewModel.islogged().observe(this, new Observer<User>() {
             @Override
-            public void onChanged(UsuarioComEndereco usuarioComEndereco) {
-                if(usuarioComEndereco != null){
-                    txtLogin.setText(usuarioComEndereco.getUsuario().getNome()
-                            + " " + usuarioComEndereco.getUsuario().getSobrenome());
-                    String perfilImage = PreferenceManager
+            public void onChanged(UserWithActivities userWithActivities) {
+            //public void onChanged(User user) {
+                if(userWithActivities != null){
+                //if(user != null){
+                    txtLogin.setText(userWithActivities.getUser().getName()
+                            + " " + userWithActivities.getUser().getSurname());
+                    //txtLogin.setText(user.getName()
+                    //        + " " + user.getSurname());
+                    String imageProfile = PreferenceManager
                             .getDefaultSharedPreferences(MainActivity.this)
                             .getString(MediaStore.EXTRA_OUTPUT, null);
-                    if(perfilImage != null){
-                        imagePerfil.setImageURI(Uri.parse(perfilImage));
+                    if(imageProfile != null){
+                        profileImage.setImageURI(Uri.parse(imageProfile));
                     }else{
-                        imagePerfil.setImageResource(R.drawable.profile_image);
+                        profileImage.setImageResource(R.drawable.profile_image);
                     }
                 }
             }
         });
     }
-*/
+
     @Override
     public void onBackPressed() {
         if(toolbarDrawer.isDrawerOpen(GravityCompat.START)){

@@ -13,8 +13,8 @@ import javax.annotation.Nonnull;
 @Entity(tableName = "physical-activities")
 public class PhysicalActivities implements Serializable {
 
-    @Nonnull
     @PrimaryKey
+    @Nonnull
     private String id;
     private String user;
     private String activityCategory;

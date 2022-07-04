@@ -1,5 +1,6 @@
 package br.edu.ifsp.dmo.ifitness.model;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
@@ -8,12 +9,10 @@ import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
-import javax.annotation.Nonnull;
-
 @Entity(tableName = "user")
 public class User implements Serializable {
 
-    @Nonnull
+    @NonNull
     @PrimaryKey
     private String id;
     private String name;
@@ -52,12 +51,12 @@ public class User implements Serializable {
                 "", "");
     }
 
-    @Nonnull
+    @NonNull
     public String getId() {
         return id;
     }
 
-    public void setId(@Nonnull String id) {
+    public void setId(@NonNull String id) {
         this.id = id;
     }
 
