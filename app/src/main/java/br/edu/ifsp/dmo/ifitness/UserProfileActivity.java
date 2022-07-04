@@ -115,22 +115,35 @@ public class UserProfileActivity extends AppCompatActivity implements DatePicker
             profileImage.setImageResource(R.drawable.profile_image);
         }
 
-        userViewModel.islogged().observe(this, new Observer<User>() {
+        userViewModel.islogged().observe(this, new Observer<UserWithActivities>() {
+        //userViewModel.islogged().observe(this, new Observer<User>() {
             @Override
-            public void onChanged(User user) {
-                if(user != null){
+            public void onChanged(UserWithActivities userWithActivities) {
+            //public void onChanged(User user) {
+                if(userWithActivities != null){
+
                     UserProfileActivity.this.userWithActivities = userWithActivities;
                     txtName.setText(userWithActivities.getUser().getName());
                     txtSurname.setText(userWithActivities.getUser().getSurname());
                     txtEmail.setText(userWithActivities.getUser().getEmail());
                     btnDatePicker.setText(userWithActivities.getUser().getBirthdayDate());
                     txtPhone.setText(userWithActivities.getUser().getPhone());
+
+                    /*
+                    UserProfileActivity.this.user = user;
+                    txtName.setText(user.getName());
+                    txtSurname.setText(user.getSurname());
+                    txtEmail.setText(user.getEmail());
+                    btnDatePicker.setText(user.getBirthdayDate());
+                    txtPhone.setText(user.getPhone());
+                    */
                     String[] gender = getResources().getStringArray(R.array.gender);
-                    for (int i = 0; i < gender.length; i++){
-                        if(gender[i].equals(userWithActivities.getUser().getGender())){
+                    /*for (int i = 0; i < gender.length; i++){
+                        //if(gender[i].equals(userWithActivities.getUser().getGender())){
+                        if(gender[i].equals(user.getGender())){
                             spnGender.setSelection(i);
                         }
-                    }
+                    }*/
                 }else{
                     startActivity(new Intent(UserProfileActivity.this,
                             UserLoginActivity.class));
@@ -145,15 +158,26 @@ public class UserProfileActivity extends AppCompatActivity implements DatePicker
             return;
         }
 
+
+        userWithActivities.getUser().setName(txtName.getText().toString());
+        userWithActivities.getUser().setSurname(txtSurname.getText().toString());
+        userWithActivities.getUser().setEmail(txtEmail.getText().toString());
+        userWithActivities.getUser().setBirthdayDate(btnDatePicker.getText().toString());
+        userWithActivities.getUser().setPhone(txtPhone.getText().toString());
+
+        /*
         user.setName(txtName.getText().toString());
         user.setSurname(txtSurname.getText().toString());
         user.setEmail(txtEmail.getText().toString());
         user.setBirthdayDate(btnDatePicker.getText().toString());
         user.setPhone(txtPhone.getText().toString());
+         */
         getResources().getStringArray(R.array.gender);
-        user.setGender(getResources().getStringArray(R.array.gender)[spnGender.getSelectedItemPosition()]);
+        userWithActivities.getUser().setGender(getResources().getStringArray(R.array.gender)[spnGender.getSelectedItemPosition()]);
+        //user.setGender(getResources().getStringArray(R.array.gender)[spnGender.getSelectedItemPosition()]);
 
-        userViewModel.update(user);
+        userViewModel.update(userWithActivities);
+        //userViewModel.update(user);
         Toast.makeText(this, getString(R.string.user_profile_success), Toast.LENGTH_SHORT).show();
     }
 

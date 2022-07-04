@@ -22,6 +22,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.navigation.NavigationView;
 
 import br.edu.ifsp.dmo.ifitness.model.User;
+import br.edu.ifsp.dmo.ifitness.model.UserWithActivities;
 import br.edu.ifsp.dmo.ifitness.viewmodel.UserViewModel;
 
 public class MainActivity extends AppCompatActivity {
@@ -99,13 +100,13 @@ public class MainActivity extends AppCompatActivity {
                         finish();
                         startActivity(getIntent());
                         break;
+                        /*
                     case R.id.nav_test:
                         intent = new Intent(MainActivity.this,
                                 SportEditActivity.class);
                         startActivity(intent);
                         break;
-                    default:
-                        throw new IllegalStateException("Unexpected value: " + item.getItemId());
+                        */
                 }
 
                 toolbarDrawer.closeDrawer(GravityCompat.START);
@@ -135,12 +136,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        userViewModel.islogged().observe(this, new Observer<User>() {
+        userViewModel.islogged().observe(this, new Observer<UserWithActivities>() {
+        //userViewModel.islogged().observe(this, new Observer<User>() {
             @Override
-            public void onChanged(User user) {
-                if(user != null){
-                    txtLogin.setText(user.getName()
-                            + " " + user.getSurname());
+            public void onChanged(UserWithActivities userWithActivities) {
+            //public void onChanged(User user) {
+                if(userWithActivities != null){
+                //if(user != null){
+                    txtLogin.setText(userWithActivities.getUser().getName()
+                            + " " + userWithActivities.getUser().getSurname());
+                    //txtLogin.setText(user.getName()
+                    //        + " " + user.getSurname());
                     String imageProfile = PreferenceManager
                             .getDefaultSharedPreferences(MainActivity.this)
                             .getString(MediaStore.EXTRA_OUTPUT, null);

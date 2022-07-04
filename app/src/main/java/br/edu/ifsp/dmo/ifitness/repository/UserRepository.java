@@ -17,6 +17,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -28,7 +29,9 @@ import java.io.UnsupportedEncodingException;
 import br.edu.ifsp.dmo.ifitness.R;
 import br.edu.ifsp.dmo.ifitness.database.AppDatabase;
 import br.edu.ifsp.dmo.ifitness.database.UserDAO;
+import br.edu.ifsp.dmo.ifitness.model.PhysicalActivities;
 import br.edu.ifsp.dmo.ifitness.model.User;
+import br.edu.ifsp.dmo.ifitness.model.UserWithActivities;
 import br.edu.ifsp.dmo.ifitness.viewmodel.UserViewModel;
 
 public class UserRepository {
@@ -219,8 +222,11 @@ public class UserRepository {
         queue.add(request);
     }
 
-    public LiveData<User> load(String userId) {
-        MutableLiveData<User> liveData = new MutableLiveData<>();
+    public LiveData<UserWithActivities> load(String userId) {
+    //public LiveData<User> load(String userId) {
+        UserWithActivities userWithActivities = new UserWithActivities();
+        MutableLiveData<UserWithActivities> liveData = new MutableLiveData<>();
+        //MutableLiveData<User> liveData = new MutableLiveData<>();
 
         DocumentReference userRef =
                 firestore.collection("user")
@@ -231,19 +237,52 @@ public class UserRepository {
 
             user.setId(user.getId());
 
-            liveData.setValue(user);
+
+            userWithActivities.setUser(user);
+
+
+            userRef.collection("physical-activities").get().addOnCompleteListener( snap -> {
+                snap.getResult().forEach(doc ->{
+                    PhysicalActivities physicalActivities = doc.toObject(PhysicalActivities.class);
+                    physicalActivities.setId(doc.getId());
+                    userWithActivities.getPhysicalActivities().add(physicalActivities);
+                });
+
+                liveData.setValue(userWithActivities);
+                //liveData.setValue(user);
+            });
         });
         return liveData;
     }
 
-    public Boolean update(User user){
+    public Boolean update(UserWithActivities userWithActivities){
+    //public Boolean update(User user){
         final Boolean[] atualized = {false};
 
-        DocumentReference usuarioRef = firestore.collection("user").document(user.getId());
+        DocumentReference userRef = firestore.collection("user").document(userWithActivities.getUser().getId());
+        //DocumentReference userRef = firestore.collection("user").document(user.getId());
 
-        usuarioRef.set(user).addOnSuccessListener(unused -> {
+        userRef.set(userWithActivities.getUser()).addOnSuccessListener(unused -> {
+        //userRef.set(user).addOnSuccessListener(unused -> {
             atualized[0] = true;
         });
+
+        /*
+        CollectionReference physicalActivitiesRef = userRef.collection("physical-activities");
+
+        PhysicalActivities physicalActivities = userWithActivities.getPhysicalActivities().get();
+
+        if(physicalActivities.getId().isEmpty()){
+            physicalActivitiesRef.add(physicalActivities).addOnSuccessListener( end ->{
+                physicalActivities.setId(end.getId());
+                atualized[0] = true;
+            });
+        }else{
+            physicalActivitiesRef.document(physicalActivities.getId()).set(physicalActivities).addOnSuccessListener(unused -> {
+                atualized[0] = true;
+            });
+        }
+        */
 
         return atualized[0];
     }
