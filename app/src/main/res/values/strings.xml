@@ -48,9 +48,10 @@
 
     <!-- res/layout/activity_user_register.xml -->
     <string name="user_register_title">Register</string>
-    <string name="user_register_name">User Name</string>
+    <string name="user_register_name">Name</string>
     <string name="user_register_email">E-mail</string>
     <string name="user_register_password">Password</string>
+    <string name="user_register_confirm_password">Confirm password</string>
 
     <!-- app/src/main/java/br/edu/ifsp/dmo/ifitness/UserRegisterActivity.java -->
     <string name="user_register_error_msg_password">Password must be 6 or more digits.</string>
@@ -147,4 +148,11 @@
 
     <!-- res/layout/dialog_reset_password.xml -->
     <string name="dialog_reset_email">E-mail</string>
+    <string name="user_registry_check_password">Please check both having same password.</string>
+    <string name="user_registry_credentials">Please enter your credentials.</string>
+    <string name="user_register_success">User registered.</string>
+    <string name="user_register_fail">Fail to register user.</string>
+    <string name="user_login_credentials">Please enter your credentials.</string>
+    <string name="user_login_success">Login successful.</string>
+    <string name="user_login_valid_credentials">Please enter valid user credentials.</string>
 </resources>

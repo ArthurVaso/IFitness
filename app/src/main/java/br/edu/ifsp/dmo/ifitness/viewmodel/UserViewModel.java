@@ -12,12 +12,11 @@ import androidx.lifecycle.MutableLiveData;
 import java.util.Optional;
 
 import br.edu.ifsp.dmo.ifitness.model.User;
-import br.edu.ifsp.dmo.ifitness.model.UserWithActivities;
 import br.edu.ifsp.dmo.ifitness.repository.UserRepository;
 
 public class UserViewModel extends AndroidViewModel {
 
-    public static final String USER_ID = "user_id";
+    public static final String USER_ID = "USER_ID";
 
     private UserRepository userRepository;
 
@@ -40,12 +39,12 @@ public class UserViewModel extends AndroidViewModel {
                 .apply();
     }
 
-    public LiveData<UserWithActivities> islogged() {
+    public LiveData<User> islogged() {
         SharedPreferences sharedPreferences =
                 PreferenceManager
                         .getDefaultSharedPreferences(getApplication());
-        Optional<String> id = Optional
-                .ofNullable(sharedPreferences
+        Optional<String> id =
+                Optional.ofNullable(sharedPreferences
                         .getString(USER_ID, null));
         if(!id.isPresent()){
             return new MutableLiveData<>(null);

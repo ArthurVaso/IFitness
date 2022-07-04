@@ -29,6 +29,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import br.edu.ifsp.dmo.ifitness.model.User;
 import br.edu.ifsp.dmo.ifitness.model.UserWithActivities;
 import br.edu.ifsp.dmo.ifitness.viewmodel.UserViewModel;
 
@@ -105,10 +106,10 @@ public class UserProfileActivity extends AppCompatActivity implements DatePicker
             profileImage.setImageResource(R.drawable.profile_image);
         }
 
-        userViewModel.islogged().observe(this, new Observer<UserWithActivities>() {
+        userViewModel.islogged().observe(this, new Observer<User>() {
             @Override
-            public void onChanged(UserWithActivities userWithActivities) {
-                if(userWithActivities != null){
+            public void onChanged(User user) {
+                if(user != null){
                     UserProfileActivity.this.userWithActivities = userWithActivities;
                     txtName.setText(userWithActivities.getUser().getName());
                     txtSurname.setText(userWithActivities.getUser().getSurname());
@@ -121,23 +122,6 @@ public class UserProfileActivity extends AppCompatActivity implements DatePicker
                             spnGender.setSelection(i);
                         }
                     }
-
-                    /*
-                    if (usuarioComEndereco.getEnderecos().size() > 0){
-                        Endereco endereco = usuarioComEndereco.getEnderecos().get(0);
-                        txtLogradouro.setText(endereco.getLogradouro());
-                        txtNumero.setText(endereco.getNumero());
-                        txtComplemento.setText(endereco.getComplemento());
-                        txtCidade.setText(endereco.getCidade());
-                        txtCep.setText(endereco.getCep());
-                        String[] uf = getResources().getStringArray(R.array.uf);
-                        for (int i = 0; i < uf.length; i++){
-                            if(uf[i].equals(endereco.getEstado())){
-                                spnUf.setSelection(i);
-                            }
-                        }
-                    }
-                    */
                 }else{
                     startActivity(new Intent(UserProfileActivity.this,
                             UserLoginActivity.class));

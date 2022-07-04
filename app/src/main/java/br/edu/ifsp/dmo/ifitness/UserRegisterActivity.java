@@ -24,6 +24,7 @@ public class UserRegisterActivity extends AppCompatActivity {
     private TextInputEditText txtName;
     private TextInputEditText txtEmail;
     private TextInputEditText txtPassword;
+    private TextInputEditText txtConfirmPassword;
     private Button btnRegister;
 
     private UserViewModel userViewModel;
@@ -48,41 +49,49 @@ public class UserRegisterActivity extends AppCompatActivity {
         txtName = findViewById(R.id.user_register_edit_name);
         txtEmail = findViewById(R.id.user_register_edit_email);
         txtPassword = findViewById(R.id.user_register_edit_password);
+        txtConfirmPassword = findViewById(R.id.user_register_edit_confirm_password);
 
         btnRegister = findViewById(R.id.user_register_btn_register);
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(validate()){
-                    User user = new User(
-                            txtName.getText().toString(),
-                            "",
-                            "",
-                            "",
-                            "",
-                            txtEmail.getText().toString(),
-                            txtPassword.getText().toString(),
-                            "0",
-                            "",
-                            ""
-                    );
-                    if(user.getPassword().length() >= 6){
-                        // insere um novo usuário no BD
-                        userViewModel.createUser(user);
-                        // efetua o login do novo usuário
-                        userViewModel.login(user.getEmail(), user.getPassword())
-                                .observe(UserRegisterActivity.this, new Observer<User>() {
-                                    @Override
-                                    public void onChanged(User user) {
-                                        finish();
-                                    }
-                                });
-                    }else {
+                if (validate()) {
+                    if (!txtPassword.getText().toString().equals(txtConfirmPassword.getText().toString())) {
                         Toast.makeText(UserRegisterActivity.this,
-                                R.string.user_register_error_msg_password,
+                                R.string.user_registry_check_password,
                                 Toast.LENGTH_SHORT).show();
-                    }
+                        return;
+                    } else {
+                        User user = new User(
+                                txtName.getText().toString(),
+                                "",
+                                "",
+                                "",
+                                "",
+                                txtEmail.getText().toString(),
+                                txtPassword.getText().toString(),
+                                "0",
+                                "",
+                                ""
+                        );
+                        if (user.getPassword().length() >= 6) {
+                            // insere um novo usuário no BD
+                            userViewModel.createUser(user);
+                            // efetua o login do novo usuário
+                            userViewModel.login(user.getEmail(), user.getPassword())
+                                    .observe(UserRegisterActivity.this, new Observer<User>() {
+                                        @Override
+                                        public void onChanged(User user) {
+                                            finish();
+                                        }
+                                    });
+                        } else {
+                            Toast.makeText(UserRegisterActivity.this,
+                                    R.string.user_register_error_msg_password,
+                                    Toast.LENGTH_SHORT).show();
+                        }
 
+                    }
                 }
             }
         });
@@ -96,17 +105,23 @@ public class UserRegisterActivity extends AppCompatActivity {
         } else {
             txtName.setError(null);
         }
+        if (txtEmail.getText().toString().trim().isEmpty()) {
+            txtEmail.setError(getString(R.string.user_register_email_empty));
+            isValid = false;
+        } else {
+            txtEmail.setError(null);
+        }
         if (txtPassword.getText().toString().trim().isEmpty()) {
             txtPassword.setError(getString(R.string.user_register_password_empty));
             isValid = false;
         } else {
             txtPassword.setError(null);
         }
-        if (txtEmail.getText().toString().trim().isEmpty()) {
-            txtEmail.setError(getString(R.string.user_register_email_empty));
+        if (txtConfirmPassword.getText().toString().trim().isEmpty()) {
+            txtConfirmPassword.setError(getString(R.string.user_register_name_empty));
             isValid = false;
         } else {
-            txtEmail.setError(null);
+            txtConfirmPassword.setError(null);
         }
         return isValid;
     }

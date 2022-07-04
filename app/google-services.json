@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "13083808077",
-    "project_id": "ifitness-aj",
-    "storage_bucket": "ifitness-aj.appspot.com"
+    "project_number": "15937802928",
+    "project_id": "ifitness-ja",
+    "storage_bucket": "ifitness-ja.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:13083808077:android:e7b81e38f2c2388f336704",
+        "mobilesdk_app_id": "1:15937802928:android:74d38fa65563c24330a175",
         "android_client_info": {
           "package_name": "br.edu.ifsp.dmo.ifitness"
         }
       },
       "oauth_client": [
         {
-          "client_id": "13083808077-0l3p6j15r6kl6o633eot61b5l65fatli.apps.googleusercontent.com",
+          "client_id": "15937802928-ee6ilhvun2d0bp2ia9bksvk42l820v48.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD8FN9UcnBnCp1VQlN-js5urciuquukDHc"
+          "current_key": "AIzaSyCcbFuZD2jZcSGw7R8ZhVVhNeXTtQPXjhw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "13083808077-0l3p6j15r6kl6o633eot61b5l65fatli.apps.googleusercontent.com",
+              "client_id": "15937802928-ee6ilhvun2d0bp2ia9bksvk42l820v48.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
