@@ -62,4 +62,7 @@ public class UserViewModel extends AndroidViewModel {
         userRepository.update(userWithActivities);
     }
 
+    public void addActivity(UserWithActivities userWithActivities) {
+        userRepository.addActivity(userWithActivities);
+    }
 }

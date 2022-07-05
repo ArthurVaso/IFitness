@@ -252,32 +252,53 @@ public class UserRepository {
         return liveData;
     }
 
-    public Boolean update(UserWithActivities userWithActivities){
-        final Boolean[] atualized = {false};
+    public Boolean addActivity(UserWithActivities userWithActivities){
+        final Boolean[] updated = {false};
 
-        DocumentReference userRef = firestore.collection("user").document(userWithActivities.getUser().getId());
+        DocumentReference userRef = firestore.collection("user")
+                .document(userWithActivities.getUser().getId());
 
         userRef.set(userWithActivities.getUser()).addOnSuccessListener(unused -> {
-            atualized[0] = true;
+            updated[0] = true;
         });
-
 
         CollectionReference physicalActivitiesRef = userRef.collection("physical-activities");
 
         PhysicalActivities physicalActivities = userWithActivities.getPhysicalActivities().get(0);
 
+        physicalActivitiesRef.add(physicalActivities).addOnSuccessListener( phy -> {
+            physicalActivities.setId(phy.getId());
+            updated[0] = true;
+        });
+
+        return updated[0];
+    }
+
+    public Boolean update(UserWithActivities userWithActivities){
+        final Boolean[] updated = {false};
+
+        DocumentReference userRef = firestore.collection("user").document(userWithActivities.getUser().getId());
+
+        userRef.set(userWithActivities.getUser()).addOnSuccessListener(unused -> {
+            updated[0] = true;
+        });
+/*
+        CollectionReference physicalActivitiesRef = userRef.collection("physical-activities");
+
+        PhysicalActivities physicalActivities = userWithActivities.getPhysicalActivities().;
+
         if(physicalActivities.getId().isEmpty()){
-            physicalActivitiesRef.add(physicalActivities).addOnSuccessListener( end ->{
-                physicalActivities.setId(end.getId());
-                atualized[0] = true;
+            physicalActivitiesRef.add(physicalActivities).addOnSuccessListener( pa ->{
+                physicalActivities.setId(pa.getId());
+                updated[0] = true;
             });
         }else{
             physicalActivitiesRef.document(physicalActivities.getId()).set(physicalActivities).addOnSuccessListener(unused -> {
-                atualized[0] = true;
+                updated[0] = true;
             });
-        }
+        }*/
 
-        return atualized[0];
+        return updated[0];
     }
 
 }

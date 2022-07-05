@@ -3,6 +3,7 @@ package br.edu.ifsp.dmo.ifitness;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -74,6 +75,7 @@ public class SportRegisterActivity extends AppCompatActivity implements DatePick
                 save();
             }
         });
+
         btnDatePicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -97,7 +99,9 @@ public class SportRegisterActivity extends AppCompatActivity implements DatePick
             return;
         }
 
-        String duration = String.valueOf(Double.parseDouble(txtHour.getText().toString())*60 + Double.parseDouble(txtHour.getText().toString()));
+        String duration = String.valueOf(
+                Double.parseDouble(txtHour.getText().toString())*60
+                        + Double.parseDouble(txtHour.getText().toString()));
 
         PhysicalActivities physicalActivities = new PhysicalActivities(
                 userId,
@@ -106,12 +110,14 @@ public class SportRegisterActivity extends AppCompatActivity implements DatePick
                 duration,
                 btnDatePicker.getText().toString() );
 
-        userWithActivities.getPhysicalActivities().add(physicalActivities);
+        userWithActivities.getPhysicalActivities().add(0, physicalActivities);
 
-        Double points = Double.parseDouble(userWithActivities.getUser().getPoints().toString()) + Double.parseDouble(txtDistance.getText().toString());
+        Double points = Double.parseDouble(
+                userWithActivities.getUser().getPoints().toString())
+                + Double.parseDouble(txtDistance.getText().toString());
         userWithActivities.getUser().setPoints(String.valueOf(points));
 
-        userViewModel.update(userWithActivities);
+        userViewModel.addActivity(userWithActivities);
         Toast.makeText(this, getString(R.string.user_profile_success), Toast.LENGTH_SHORT).show();
     }
 
