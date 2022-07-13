@@ -14,6 +14,7 @@
 
     <!-- res/layout/activity_main.xml -->
     <string name="app_name">IFitness</string>
+    <string name="main_recent_activities">Recent Activities</string>
 
     <!-- res/layout/activity_sports.xml -->
     <string name="sports_title">Activities</string>

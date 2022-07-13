@@ -5,6 +5,7 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -21,22 +22,27 @@ public class PhysicalActivities implements Serializable {
     private String distance;
     private String duration;
     private String activityDate;
+    private String timestamp;
 
     public PhysicalActivities(String user,
                               String activityCategory,
                               String distance, String duration,
-                              String activityDate) {
+                              String activityDate,
+                              String timestamp) {
         this.id = UUID.randomUUID().toString();
         this.user = user;
         this.activityCategory = activityCategory;
         this.distance = distance;
         this.duration = duration;
         this.activityDate = activityDate;
+        this.timestamp = timestamp;
     }
 
     @Ignore
     public PhysicalActivities() {
-        this("", "", "", "", "");
+        this("", "",
+                "", "", "",
+                "");
     }
 
     @Nonnull
@@ -86,6 +92,14 @@ public class PhysicalActivities implements Serializable {
 
     public void setActivityDate(String activityDate) {
         this.activityDate = activityDate;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
     }
 
     @Override

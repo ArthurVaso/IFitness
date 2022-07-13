@@ -3,14 +3,17 @@ package br.edu.ifsp.dmo.ifitness.viewmodel;
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import java.util.List;
 import java.util.Optional;
 
+import br.edu.ifsp.dmo.ifitness.model.PhysicalActivities;
 import br.edu.ifsp.dmo.ifitness.model.User;
 import br.edu.ifsp.dmo.ifitness.model.UserWithActivities;
 import br.edu.ifsp.dmo.ifitness.repository.UserRepository;
@@ -27,6 +30,7 @@ public class UserViewModel extends AndroidViewModel {
     }
 
     public void createUser(User user){
+        Log.d("repo", "createUser: viewmodel create user");
         userRepository.createUser(user);
     }
 
@@ -64,5 +68,24 @@ public class UserViewModel extends AndroidViewModel {
 
     public void addActivity(UserWithActivities userWithActivities) {
         userRepository.addActivity(userWithActivities);
+    }
+
+    public LiveData<List<PhysicalActivities>> recentActivities() {
+        Log.d("frag", "onChanged: no viewmodel");
+        SharedPreferences sharedPreferences =
+                PreferenceManager
+                        .getDefaultSharedPreferences(
+                                getApplication());
+        Optional<String> id =
+                Optional.ofNullable(sharedPreferences
+                        .getString(USER_ID, null));
+        Log.d("frag", "onChanged: procura user");
+        if(!id.isPresent()){
+
+            Log.d("frag", "onChanged: retorno null");
+            return new MutableLiveData<>(null);
+        }
+        Log.d("frag", "onChanged: retorno valido");
+        return userRepository.recentActivities(id.get());
     }
 }

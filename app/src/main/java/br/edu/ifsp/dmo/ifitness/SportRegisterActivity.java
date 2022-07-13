@@ -17,7 +17,10 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -99,6 +102,8 @@ public class SportRegisterActivity extends AppCompatActivity implements DatePick
             return;
         }
 
+        DateFormat timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
+
         String duration = String.valueOf(
                 Double.parseDouble(txtHour.getText().toString())*60
                         + Double.parseDouble(txtHour.getText().toString()));
@@ -108,7 +113,9 @@ public class SportRegisterActivity extends AppCompatActivity implements DatePick
                 title,
                 txtDistance.getText().toString(),
                 duration,
-                btnDatePicker.getText().toString() );
+                btnDatePicker.getText().toString(),
+                String.valueOf(timestamp)
+                );
 
         userWithActivities.getPhysicalActivities().add(0, physicalActivities);
 

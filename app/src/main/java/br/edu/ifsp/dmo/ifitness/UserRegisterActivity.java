@@ -1,6 +1,7 @@
 package br.edu.ifsp.dmo.ifitness;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -75,7 +76,9 @@ public class UserRegisterActivity extends AppCompatActivity {
                                 ""
                         );
                         if (user.getPassword().length() >= 6) {
+                            Log.d("repo", "registry: antes create user");
                             userViewModel.createUser(user);
+                            Log.d("repo", "registry: depois create user");
                             userViewModel.login(user.getEmail(), user.getPassword())
                                     .observe(UserRegisterActivity.this, new Observer<User>() {
                                         @Override

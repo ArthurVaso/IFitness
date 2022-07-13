@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -17,14 +18,20 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.edu.ifsp.dmo.ifitness.R;
 import br.edu.ifsp.dmo.ifitness.database.AppDatabase;
@@ -60,15 +67,18 @@ public class UserRepository {
     }
 
     public void createUser(User user){
+        Log.d("repo", "createUser: inicio");
         JSONObject parameters = new JSONObject();
 
         try{
+            Log.d("repo", "createUser: try json");
             parameters.put("email", user.getEmail());
             parameters.put("password", user.getPassword());
             parameters.put("returnSecureToken", true);
             parameters.put("Content-Type",
                     "application/json; charset=utf-8");
         }catch (JSONException e){
+            Log.d("repo", "createUser: catch json");
             e.printStackTrace();
         }
 
@@ -80,8 +90,11 @@ public class UserRepository {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
+                            Log.d("repo", "createUser: try on response");
                             user.setId(response.getString("localId"));
+                            Log.d("repo", "createUser: setID");
                             user.setPassword(response.getString("idToken"));
+                            Log.d("repo", "createUser: setPassword");
 
                             firestore.collection("user")
                                     .document(user.getId())
@@ -90,7 +103,9 @@ public class UserRepository {
                                         Log.d(this.toString(), R.string.user_repository_user +
                                                 user.getEmail() + R.string.user_repository_success);
                                     });
+                            Log.d("repo", "createUser: pos firebase");
                         }catch (JSONException e){
+                            Log.d("repo", "createUser: catch on response");
                             e.printStackTrace();
                         }
                     }
@@ -98,10 +113,12 @@ public class UserRepository {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        Log.d("repo", "createUser: error");
                         Log.e(this.toString(), error.getMessage());
                     }
                 }
         );
+        Log.d("repo", "createUser: queue");
         queue.add(request);
     }
 
@@ -224,7 +241,6 @@ public class UserRepository {
     public LiveData<UserWithActivities> load(String userId) {
         UserWithActivities userWithActivities = new UserWithActivities();
         MutableLiveData<UserWithActivities> liveData = new MutableLiveData<>();
-        //MutableLiveData<User> liveData = new MutableLiveData<>();
 
         DocumentReference userRef =
                 firestore.collection("user")
@@ -235,9 +251,7 @@ public class UserRepository {
 
             user.setId(user.getId());
 
-
             userWithActivities.setUser(user);
-
 
             userRef.collection("physical-activities").get().addOnCompleteListener( snap -> {
                 snap.getResult().forEach(doc ->{
@@ -301,4 +315,51 @@ public class UserRepository {
         return updated[0];
     }
 
+    public LiveData<List<PhysicalActivities>> recentActivities(String userId) {
+        UserWithActivities userWithActivities = new UserWithActivities();
+        MutableLiveData<List<PhysicalActivities>> liveData = new MutableLiveData<>();
+        Log.d("frag", "onChanged: inicio");
+
+        DocumentReference userRef =
+                firestore.collection("user")
+                        .document(userId);
+
+        Log.d("frag", "onChanged: refuser");
+
+        userRef.get().addOnSuccessListener(snapshot -> {
+            User user = snapshot.toObject(User.class);
+
+            user.setId(user.getId());
+            Log.d("frag", "onChanged: refuser get id");
+
+            userWithActivities.setUser(user);
+
+            userRef.collection("physical-activities")
+                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    Log.d("frag", "onChanged: on complete");
+                    if (task.isSuccessful()) {
+
+                        Log.d("frag", "onChanged: is successful");
+                        List<PhysicalActivities> physicalActivitiesList = new ArrayList<>();
+                        PhysicalActivities physicalActivities = null;
+
+                        Log.d("frag", "onChanged: para o loop da lista");
+                        for (QueryDocumentSnapshot queryDocumentSnapshots : task.getResult()) {
+                            physicalActivities = queryDocumentSnapshots.toObject(PhysicalActivities.class);
+                            physicalActivities.setId(queryDocumentSnapshots.getId());
+                            physicalActivitiesList.add(physicalActivities);
+                            Log.d("frag", "onChanged: " + physicalActivities.getDistance());
+                        }
+                        Log.d("frag", "onChanged: saiu loop " + physicalActivitiesList.size());
+                        liveData.setValue(physicalActivitiesList);
+                    }
+                }
+            });
+        });
+
+        Log.d("frag", "onChanged: retornou valor");
+        return  liveData;
+    }
 }

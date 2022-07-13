@@ -1,5 +1,7 @@
 package br.edu.ifsp.dmo.ifitness.model;
 
+import android.util.Log;
+
 import androidx.room.Embedded;
 import androidx.room.Relation;
 
@@ -29,6 +31,7 @@ public class UserWithActivities {
     }
 
     public List<PhysicalActivities> getPhysicalActivities() {
+        Log.d("phy", "getPhysicalActivities: " + physicalActivities.size());
         return physicalActivities;
     }
 

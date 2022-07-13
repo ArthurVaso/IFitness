@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:cardElevation="8dp"
+    android:padding="8dp"
+    android:layout_margin="8dp"
+    android:id="@+id/cardItemActivity">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtItemActivity"
+            android:text="Walking"
+            android:textAppearance="@android:style/TextAppearance.Small"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtItemDate"
+            android:text="07/05/2022"
+            android:textAppearance="@android:style/TextAppearance.Small"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtItemTime"
+            android:text="1.0"
+            android:textAppearance="@android:style/TextAppearance.Small"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtItemMiddleText"
+            android:text="km in"
+            android:textAppearance="@android:style/TextAppearance.Small"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtItemDistance"
+            android:text="20"
+            android:textAppearance="@android:style/TextAppearance.Small"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtItemEndText"
+            android:text="minutes"
+            android:textAppearance="@android:style/TextAppearance.Small"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtItemTimeDistance"
+            android:text="1.0 km in 20 minutes"
+            android:textAppearance="@android:style/TextAppearance.Small"/>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
