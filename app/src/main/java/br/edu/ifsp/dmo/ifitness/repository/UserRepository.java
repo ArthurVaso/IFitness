@@ -23,6 +23,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -335,6 +336,8 @@ public class UserRepository {
             userWithActivities.setUser(user);
 
             userRef.collection("physical-activities")
+                    .orderBy("timestamp", Query.Direction.DESCENDING)
+                    .limit(5)
                     .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -347,10 +350,10 @@ public class UserRepository {
 
                         Log.d("frag", "onChanged: para o loop da lista");
                         for (QueryDocumentSnapshot queryDocumentSnapshots : task.getResult()) {
-                            physicalActivities = queryDocumentSnapshots.toObject(PhysicalActivities.class);
-                            physicalActivities.setId(queryDocumentSnapshots.getId());
-                            physicalActivitiesList.add(physicalActivities);
-                            Log.d("frag", "onChanged: " + physicalActivities.getDistance());
+                                physicalActivities = queryDocumentSnapshots.toObject(PhysicalActivities.class);
+                                physicalActivities.setId(queryDocumentSnapshots.getId());
+                                physicalActivitiesList.add(physicalActivities);
+                                Log.d("frag", "onChanged: " + physicalActivities.getTimestamp());
                         }
                         Log.d("frag", "onChanged: saiu loop " + physicalActivitiesList.size());
                         liveData.setValue(physicalActivitiesList);

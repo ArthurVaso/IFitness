@@ -112,20 +112,12 @@ public class MainActivity extends AppCompatActivity {
                         finish();
                         startActivity(getIntent());
                         break;
-                        /*
-                    case R.id.nav_test:
-                        intent = new Intent(MainActivity.this,
-                                SportEditActivity.class);
-                        startActivity(intent);
-                        break;
-                        */
                 }
 
                 toolbarDrawer.closeDrawer(GravityCompat.START);
                 return true;
             }
         });
-
 
         txtLogin = navigationView.getHeaderView(0)
                 .findViewById(R.id.header_profile_name);
@@ -155,10 +147,10 @@ public class MainActivity extends AppCompatActivity {
                 });
 */
 
-        recyclerActivities.setAdapter(activityAdapter);
+        //recyclerActivities.setAdapter(activityAdapter);
         recyclerActivities.setLayoutManager(
                 new LinearLayoutManager(this,
-                        LinearLayoutManager.HORIZONTAL,
+                        LinearLayoutManager.VERTICAL,
                         false));
 
 
@@ -205,13 +197,13 @@ public class MainActivity extends AppCompatActivity {
                                 }
                             });
 
-/*
+
                     Log.d("frag", "onChanged: setadapter");
                     recyclerActivities.setAdapter(activityAdapter);
                     Log.d("frag", "onChanged: setLayoutManager");
-                    recyclerActivities.setLayoutManager(
+/*                    recyclerActivities.setLayoutManager(
                             new LinearLayoutManager(MainActivity.this,
-                                    LinearLayoutManager.HORIZONTAL,
+                                    LinearLayoutManager.VERTICAL,
                                     false));
 
  */

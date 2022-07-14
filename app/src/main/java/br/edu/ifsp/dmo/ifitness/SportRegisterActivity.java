@@ -3,7 +3,6 @@ package br.edu.ifsp.dmo.ifitness;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -18,7 +17,6 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.sql.Timestamp;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Calendar;
@@ -40,6 +38,7 @@ public class SportRegisterActivity extends AppCompatActivity implements DatePick
     private Button btnSave;
 
     private String userId;
+    private String activityKind;
 
     private UserViewModel userViewModel;
 
@@ -65,8 +64,21 @@ public class SportRegisterActivity extends AppCompatActivity implements DatePick
         toolbarTitle = findViewById(R.id.toolbar_title);
         toolbarTitle.setText(title);
 
+        if (title.equalsIgnoreCase(getString(R.string.sports_walking))) {
+            activityKind = getString(R.string.kind_walking);
+        }
+        if (title.equals(getString(R.string.sports_running))) {
+            activityKind = getString(R.string.kind_running);
+        }
+        if (title.equals(getString(R.string.sports_swimming))) {
+            activityKind = getString(R.string.kind_swimming);
+        }
+        if (title.equals(getString(R.string.sports_cycling))) {
+            activityKind = getString(R.string.kind_cycling);
+        }
+
         btnDatePicker = findViewById(R.id.sport_register_btn_date_picker);
-        btnDatePicker.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
+        btnDatePicker.setText(new SimpleDateFormat(getString(R.string.sport_register_date_pattern)).format(new Date()));
         txtHour = findViewById(R.id.sport_register_edit_txt_hour);
         txtMinute = findViewById(R.id.sport_register_edit_txt_minute);
         txtDistance = findViewById(R.id.sport_register_edit_txt_distance);
@@ -89,7 +101,7 @@ public class SportRegisterActivity extends AppCompatActivity implements DatePick
         userViewModel.islogged().observe(this, new Observer<UserWithActivities>() {
             @Override
             public void onChanged(UserWithActivities userWithActivities) {
-                if(userWithActivities != null){
+                if (userWithActivities != null) {
                     userId = userWithActivities.getUser().getId();
                     SportRegisterActivity.this.userWithActivities = userWithActivities;
                 }
@@ -98,24 +110,21 @@ public class SportRegisterActivity extends AppCompatActivity implements DatePick
     }
 
     private void save() {
-        if(!validate()){
+        if (!validate()) {
             return;
         }
 
-        DateFormat timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
-
-        String duration = String.valueOf(
-                Double.parseDouble(txtHour.getText().toString())*60
-                        + Double.parseDouble(txtHour.getText().toString()));
+        String timestamp = String.valueOf(new Date().getTime());
 
         PhysicalActivities physicalActivities = new PhysicalActivities(
                 userId,
                 title,
                 txtDistance.getText().toString(),
-                duration,
+                txtHour.getText().toString(),
+                txtMinute.getText().toString(),
                 btnDatePicker.getText().toString(),
-                String.valueOf(timestamp)
-                );
+                timestamp,
+                activityKind);
 
         userWithActivities.getPhysicalActivities().add(0, physicalActivities);
 
@@ -125,33 +134,35 @@ public class SportRegisterActivity extends AppCompatActivity implements DatePick
         userWithActivities.getUser().setPoints(String.valueOf(points));
 
         userViewModel.addActivity(userWithActivities);
-        Toast.makeText(this, getString(R.string.user_profile_success), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.user_profile_success), Toast.LENGTH_LONG).show();
+
+        finish();
     }
 
     private boolean validate() {
         boolean isValid = true;
-        if(txtHour.getText().toString().trim().isEmpty()){
+        if (txtHour.getText().toString().trim().isEmpty()) {
             txtHour.setError("Fill the field name.");
             isValid = false;
-        }else{
+        } else {
             txtHour.setError(null);
         }
-        if(txtMinute.getText().toString().trim().isEmpty()){
+        if (txtMinute.getText().toString().trim().isEmpty()) {
             txtMinute.setError("Fill the field surname.");
             isValid = false;
-        }else{
+        } else {
             txtMinute.setError(null);
         }
-        if(txtDistance.getText().toString().trim().isEmpty()){
+        if (txtDistance.getText().toString().trim().isEmpty()) {
             txtDistance.setError("Fill the field  e-mail.");
             isValid = false;
-        }else{
+        } else {
             txtDistance.setError(null);
         }
         return isValid;
     }
 
-    public void showDatePickerDialog(){
+    public void showDatePickerDialog() {
         DatePickerDialog datePickerDialog = new DatePickerDialog(
                 this,
                 this,

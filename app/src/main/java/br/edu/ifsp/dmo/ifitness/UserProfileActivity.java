@@ -78,6 +78,7 @@ public class UserProfileActivity extends AppCompatActivity implements DatePicker
         txtSurname = findViewById(R.id.user_profile_txt_surname);
         txtEmail = findViewById(R.id.user_profile_txt_email);
         btnDatePicker = findViewById(R.id.user_profile_btn_date_picker);
+        btnDatePicker.setText(R.string.user_profile_select_date);
         txtPhone = findViewById(R.id.user_profile_txt_phone);
         spnGender = findViewById(R.id.user_profile_sp_gender);
         profileImage = findViewById(R.id.user_profile_image);

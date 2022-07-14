@@ -71,7 +71,6 @@ public class UserViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<PhysicalActivities>> recentActivities() {
-        Log.d("frag", "onChanged: no viewmodel");
         SharedPreferences sharedPreferences =
                 PreferenceManager
                         .getDefaultSharedPreferences(
@@ -79,13 +78,11 @@ public class UserViewModel extends AndroidViewModel {
         Optional<String> id =
                 Optional.ofNullable(sharedPreferences
                         .getString(USER_ID, null));
-        Log.d("frag", "onChanged: procura user");
-        if(!id.isPresent()){
 
-            Log.d("frag", "onChanged: retorno null");
+        if(!id.isPresent()){
             return new MutableLiveData<>(null);
         }
-        Log.d("frag", "onChanged: retorno valido");
+
         return userRepository.recentActivities(id.get());
     }
 }

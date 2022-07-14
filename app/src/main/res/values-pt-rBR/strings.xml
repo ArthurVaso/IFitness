@@ -5,6 +5,12 @@
         <string name="toggle_open">Open</string>
         <string name="toggle_close">Close</string>
 
+        <!-- For set activity identification -->
+        <string name="kind_walking">walking</string>
+        <string name="kind_running">running</string>
+        <string name="kind_swimming">swimming</string>
+        <string name="kind_cycling">cycling</string>
+
         <!-- Buttons -->
         <string name="btn_register">CADASTRAR</string>
         <string name="btn_login">ENTRAR</string>
@@ -73,6 +79,7 @@
         <string name="user_profile_name">Nome</string>
         <string name="user_profile_surname">Sobrenome</string>
         <string name="user_profile_email">E-mail</string>
+        <string name="user_profile_select_date">Selecione a data</string>
 
     <!-- NOT USED
         <string name="user_profile_address">Endereço</string>
@@ -129,6 +136,7 @@
         <string name="sport_register_minute">Minuto</string>
         <string name="sport_register_distance">Distância</string>
         <string name="sport_register_meters">Metros</string>
+        <string name="sport_register_date_pattern">dd/MM/yyyy</string>
         <string-array name="distance">
             <item>km</item>
             <item>m</item>
@@ -144,13 +152,13 @@
     <!-- res/layout/activity_badges.xml -->
         <string name="badges_title">Conquistas</string>
         <string name="badges_no_badges">Nenhuma conquista adquirida</string>
-        <string name="badge_15">Exercitou-se por 15km</string>
-        <string name="badge_25">Exercitou-se por 25km</string>
-        <string name="badge_50">Exercitou-se por 50km</string>
-        <string name="badge_100">Exercitou-se por 100km</string>
-        <string name="badge_150">Exercitou-se por 150km</string>
+        <string name="badge_15">Exercitou-se por 15 km</string>
+        <string name="badge_25">Exercitou-se por 25 km</string>
+        <string name="badge_50">Exercitou-se por 50 km</string>
+        <string name="badge_100">Exercitou-se por 100 km</string>
+        <string name="badge_150">Exercitou-se por 150 km</string>
         <string name="badges_your_points">Sua pontuação: </string>
-        <string name="badges_km">km</string>
+        <string name="badges_km"> km.</string>
 
     <!-- res/layout/activity_leaderboard.xml -->
         <string name="leaderboard_title">Leaderboard</string>
@@ -161,4 +169,11 @@
 
     <!-- res/layout/dialog_reset_password.xml -->
         <string name="dialog_reset_email">E-mail</string>
+
+    <!-- res/layout/item_activity.xml -->
+
+    <!-- app/src/main/java/br/edu/ifsp/dmo/ifitness/ActivityAdapter.java -->
+        <string name="activity_adapter_you_did">"Você fez "</string>
+        <string name="activity_adapter_km_in">" km em "</string>
+        <string name="activity_adapter_hours"> horas.</string>
 </resources>

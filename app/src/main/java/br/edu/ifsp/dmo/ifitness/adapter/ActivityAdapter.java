@@ -48,13 +48,18 @@ public class ActivityAdapter
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Log.d("phy", "onBindViewHolder: " + activities.size() + " pos: " + position);
-        if(activities != null && activities.size() >= position ) {
+        if(activities != null && activities.size() >= position) {
             Log.d("phy", "onBindViewHolder: " + activities.size());
             PhysicalActivities physicalActivities = activities.get(position);
             holder.activity.setText(physicalActivities.getActivityCategory());
             holder.date.setText(physicalActivities.getActivityDate());
-            holder.time.setText(physicalActivities.getDistance());
-            holder.distance.setText(physicalActivities.getDuration());
+            holder.distance.setText(context.getString(R.string.activity_adapter_you_did)
+                    + String .valueOf(Double.parseDouble(physicalActivities.getDistance())/1000)
+                    + context.getString(R.string.activity_adapter_km_in));
+            holder.time.setText(physicalActivities.getHours()
+                    +":"
+                    +physicalActivities.getMinutes()
+                    + context.getString(R.string.activity_adapter_hours));
             holder.cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -82,6 +87,7 @@ public class ActivityAdapter
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            Log.d("phy", "ViewHolder: external");
             activity = itemView.findViewById(R.id.txtItemActivity);
             date = itemView.findViewById(R.id.txtItemDate);
             time = itemView.findViewById(R.id.txtItemTime);

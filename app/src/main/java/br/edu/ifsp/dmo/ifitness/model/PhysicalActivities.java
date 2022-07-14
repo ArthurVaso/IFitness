@@ -5,7 +5,6 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -20,29 +19,34 @@ public class PhysicalActivities implements Serializable {
     private String user;
     private String activityCategory;
     private String distance;
-    private String duration;
+    private String hours;
+    private String minutes;
     private String activityDate;
     private String timestamp;
+    private String activityKind;
 
     public PhysicalActivities(String user,
                               String activityCategory,
-                              String distance, String duration,
+                              String distance,
+                              String hours,
+                              String minutes,
                               String activityDate,
-                              String timestamp) {
+                              String timestamp,
+                              String activityKind) {
         this.id = UUID.randomUUID().toString();
         this.user = user;
         this.activityCategory = activityCategory;
         this.distance = distance;
-        this.duration = duration;
+        this.hours = hours;
+        this.minutes = minutes;
         this.activityDate = activityDate;
         this.timestamp = timestamp;
+        this.activityKind = activityKind;
     }
 
     @Ignore
     public PhysicalActivities() {
-        this("", "",
-                "", "", "",
-                "");
+        this("", "", "", "", "", "", "", "");
     }
 
     @Nonnull
@@ -78,12 +82,20 @@ public class PhysicalActivities implements Serializable {
         this.distance = distance;
     }
 
-    public String getDuration() {
-        return duration;
+    public String getHours() {
+        return hours;
     }
 
-    public void setDuration(String duration) {
-        this.duration = duration;
+    public void setHours(String hours) {
+        this.hours = hours;
+    }
+
+    public String getMinutes() {
+        return minutes;
+    }
+
+    public void setMinutes(String minutes) {
+        this.minutes = minutes;
     }
 
     public String getActivityDate() {
@@ -100,6 +112,14 @@ public class PhysicalActivities implements Serializable {
 
     public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public String getActivityKind() {
+        return activityKind;
+    }
+
+    public void setActivityKind(String activityKind) {
+        this.activityKind = activityKind;
     }
 
     @Override
