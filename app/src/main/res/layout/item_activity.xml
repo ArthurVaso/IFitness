@@ -26,6 +26,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/txtItemActivityId"
+            android:text="id"
+            android:textSize="1dp"
+            android:visibility="invisible"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/txtItemDate"
             android:text="07/05/2022"
             android:textAppearance="@android:style/TextAppearance.Medium"/>

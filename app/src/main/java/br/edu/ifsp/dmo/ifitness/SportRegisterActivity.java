@@ -87,7 +87,7 @@ public class SportRegisterActivity extends AppCompatActivity implements DatePick
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                save();
+                savePhysicalActivity();
             }
         });
 
@@ -109,7 +109,7 @@ public class SportRegisterActivity extends AppCompatActivity implements DatePick
         });
     }
 
-    private void save() {
+    private void savePhysicalActivity() {
         if (!validate()) {
             return;
         }
@@ -128,13 +128,13 @@ public class SportRegisterActivity extends AppCompatActivity implements DatePick
 
         userWithActivities.getPhysicalActivities().add(0, physicalActivities);
 
-        Double points = Double.parseDouble(
-                userWithActivities.getUser().getPoints().toString())
+        Double points = Double.parseDouble(userWithActivities.getUser().getPoints())
                 + Double.parseDouble(txtDistance.getText().toString());
+
         userWithActivities.getUser().setPoints(String.valueOf(points));
 
         userViewModel.addActivity(userWithActivities);
-        Toast.makeText(this, getString(R.string.user_profile_success), Toast.LENGTH_LONG).show();
+        Toast.makeText(this, getString(R.string.sport_edit_success), Toast.LENGTH_LONG).show();
 
         finish();
     }

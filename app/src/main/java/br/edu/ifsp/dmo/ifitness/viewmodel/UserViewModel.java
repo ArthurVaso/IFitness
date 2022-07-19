@@ -62,8 +62,8 @@ public class UserViewModel extends AndroidViewModel {
         userRepository.resetPassword(email);
     }
 
-    public void update(UserWithActivities userWithActivities) {
-        userRepository.update(userWithActivities);
+    public void updateUser(UserWithActivities userWithActivities) {
+        userRepository.updateUser(userWithActivities);
     }
 
     public void addActivity(UserWithActivities userWithActivities) {
@@ -84,5 +84,17 @@ public class UserViewModel extends AndroidViewModel {
         }
 
         return userRepository.recentActivities(id.get());
+    }
+
+    public LiveData<PhysicalActivities> loadActivitiesById(String userId, String activityId) {
+        return userRepository.loadActivitiesById(userId, activityId);
+    }
+
+    public void updatePhysicalActivity(UserWithActivities userWithActivities, PhysicalActivities physicalActivities) {
+        userRepository.updatePhysicalActivity(userWithActivities, physicalActivities);
+    }
+
+    public void deletePhysicalActivity(UserWithActivities userWithActivities) {
+        userRepository.deletePhysicalActivity(userWithActivities);
     }
 }

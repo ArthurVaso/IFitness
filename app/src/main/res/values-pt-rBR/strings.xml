@@ -137,6 +137,7 @@
         <string name="sport_register_distance">Distância</string>
         <string name="sport_register_meters">Metros</string>
         <string name="sport_register_date_pattern">dd/MM/yyyy</string>
+        <string name="sport_register_success">Atividade salva com sucesso.</string>
         <string-array name="distance">
             <item>km</item>
             <item>m</item>
@@ -148,6 +149,9 @@
         <string name="sport_edit_hour">Hora</string>
         <string name="sport_edit_minute">Minuto</string>
         <string name="sport_edit_distance">Distância</string>
+        <string name="sport_edit_meters">Metros</string>
+        <string name="sport_edit_success">Atividade atulizada com sucesso.</string>
+        <string name="sport_edit_delete">Atividade excluída com sucesso.</string>
 
     <!-- res/layout/activity_badges.xml -->
         <string name="badges_title">Conquistas</string>
@@ -157,15 +161,15 @@
         <string name="badge_50">Exercitou-se por 50 km</string>
         <string name="badge_100">Exercitou-se por 100 km</string>
         <string name="badge_150">Exercitou-se por 150 km</string>
-        <string name="badges_your_points">Sua pontuação: </string>
+        <string name="badges_your_points">Sua pontuação:\u0020</string>
         <string name="badges_km"> km.</string>
 
     <!-- res/layout/activity_leaderboard.xml -->
         <string name="leaderboard_title">Leaderboard</string>
 
     <!-- app/src/main/java/br/edu/ifsp/dmo/ifitness/RepositoryActivity.java -->
-		<string name="user_repository_user">Usuário </string>
-		<string name="user_repository_success"> registrado com sucesso.</string>
+		<string name="user_repository_user">Usuário\u0020</string>
+		<string name="user_repository_success">\u0020registrado com sucesso.</string>
 
     <!-- res/layout/dialog_reset_password.xml -->
         <string name="dialog_reset_email">E-mail</string>
@@ -173,7 +177,7 @@
     <!-- res/layout/item_activity.xml -->
 
     <!-- app/src/main/java/br/edu/ifsp/dmo/ifitness/ActivityAdapter.java -->
-        <string name="activity_adapter_you_did">"Você fez "</string>
-        <string name="activity_adapter_km_in">" km em "</string>
-        <string name="activity_adapter_hours"> horas.</string>
+        <string name="activity_adapter_you_did">"Você fez\u0020"</string>
+        <string name="activity_adapter_km_in">"\u0020km em\u0020"</string>
+        <string name="activity_adapter_hours">\u0020horas.</string>
 </resources>

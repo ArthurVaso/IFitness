@@ -156,7 +156,7 @@ public class UserProfileActivity extends AppCompatActivity implements DatePicker
         getResources().getStringArray(R.array.gender);
         userWithActivities.getUser().setGender(getResources().getStringArray(R.array.gender)[spnGender.getSelectedItemPosition()]);
 
-        userViewModel.update(userWithActivities);
+        userViewModel.updateUser(userWithActivities);
         Toast.makeText(this, getString(R.string.user_profile_success), Toast.LENGTH_SHORT).show();
     }
 

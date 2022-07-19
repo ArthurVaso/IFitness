@@ -31,7 +31,9 @@ public class UserWithActivities {
     }
 
     public List<PhysicalActivities> getPhysicalActivities() {
-        Log.d("phy", "getPhysicalActivities: " + physicalActivities.size());
+        physicalActivities.forEach(pa -> {
+            Log.d("getPhysicalActivities", "PA: " + pa.getId() + " -> " + pa.getDistance());
+        });
         return physicalActivities;
     }
 

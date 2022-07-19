@@ -178,19 +178,19 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     MainActivity.this.userWithActivities = userWithActivities;
-                    Log.d("frag", "onChanged: userview");
+                    //Log.d("frag", "onChanged: userview");
                     userViewModel = new ViewModelProvider(MainActivity.this)
                             .get(UserViewModel.class);
 
-                    Log.d("frag", "onChanged: adapter");
+                    //Log.d("frag", "onChanged: adapter");
                     activityAdapter = new ActivityAdapter(MainActivity.this);
 
-                    Log.d("frag", "onChanged: chama atividades recentes");
+                    //Log.d("frag", "onChanged: chama atividades recentes");
                     userViewModel.recentActivities().observe(MainActivity.this,
                             new Observer<List<PhysicalActivities>>() {
                                 @Override
                                 public void onChanged(List<PhysicalActivities> physicalActivities) {
-                                    Log.d("frag", "onChanged: setfrag no viewmodel");
+                                    //Log.d("frag", "onChanged: setfrag no viewmodel");
                                     physicalActivities = userWithActivities.getPhysicalActivities();
                                     activityAdapter.setActivities(physicalActivities);
                                     activityAdapter.notifyDataSetChanged();
@@ -198,9 +198,9 @@ public class MainActivity extends AppCompatActivity {
                             });
 
 
-                    Log.d("frag", "onChanged: setadapter");
+                    //Log.d("frag", "onChanged: setadapter");
                     recyclerActivities.setAdapter(activityAdapter);
-                    Log.d("frag", "onChanged: setLayoutManager");
+                    //Log.d("frag", "onChanged: setLayoutManager");
 /*                    recyclerActivities.setLayoutManager(
                             new LinearLayoutManager(MainActivity.this,
                                     LinearLayoutManager.VERTICAL,

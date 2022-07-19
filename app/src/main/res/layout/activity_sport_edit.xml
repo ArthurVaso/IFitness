@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SportRegisterActivity">
+    tools:context=".SportEditActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -25,14 +25,14 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="60dp"
                 android:layout_margin="4dp"
                 android:orientation="horizontal">
 
@@ -40,25 +40,26 @@
                     android:id="@+id/img_date"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginStart="8dp"
                     android:layout_weight=".5"
                     android:src="@drawable/date" />
 
                 <Button
                     android:id="@+id/sport_edit_btn_date_picker"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_weight="2"
                     android:text="@string/sport_edit_select_date"
-                    android:textColor="@android:color/black"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+                    android:textColor="@android:color/black" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="60dp"
                 android:layout_margin="4dp"
                 android:orientation="horizontal">
 
@@ -66,6 +67,7 @@
                     android:id="@+id/img_time"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginStart="8dp"
                     android:layout_weight=".5"
                     android:src="@drawable/time" />
@@ -106,7 +108,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="60dp"
                 android:layout_margin="4dp"
                 android:orientation="horizontal">
 
@@ -114,6 +116,7 @@
                     android:id="@+id/img_distance"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginStart="8dp"
                     android:layout_weight=".5"
                     android:src="@drawable/distance" />
@@ -136,31 +139,20 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
-                    android:id="@+id/sport_register_distance"
+                    android:id="@+id/sport_edit_distance"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="8dp"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:paddingStart="16dp"
-                    android:text="@string/sport_register_meters"
+                    android:text="@string/sport_edit_meters"
                     android:textAppearance="@android:style/TextAppearance.Medium" />
-
-                <!--
-                <Spinner
-                    android:id="@+id/sport_register_sp_distance"
-                    style="@style/Widget.AppCompat.Spinner.DropDown"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginRight="8dp"
-                    android:layout_weight="1"
-                    android:entries="@array/distance" />
-                    -->
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="50dp"
                 android:layout_margin="4dp"
                 android:orientation="horizontal">
 
@@ -178,7 +170,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="50dp"
                 android:layout_margin="4dp"
                 android:orientation="horizontal">
 

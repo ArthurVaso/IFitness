@@ -31,9 +31,9 @@ public class ActivityAdapter
     }
 
     public void setActivities(List<PhysicalActivities> activities) {
-        Log.d("phy", "setActivities one: " + activities.size());
+        //Log.d("phy", "setActivities one: " + activities.size());
         this.activities = activities;
-        Log.d("phy", "setActivities two: " + this.activities.size());
+        //Log.d("phy", "setActivities two: " + this.activities.size());
     }
 
     @NonNull
@@ -47,11 +47,12 @@ public class ActivityAdapter
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Log.d("phy", "onBindViewHolder: " + activities.size() + " pos: " + position);
+        //Log.d("phy", "onBindViewHolder: " + activities.size() + " pos: " + position);
         if(activities != null && activities.size() >= position) {
-            Log.d("phy", "onBindViewHolder: " + activities.size());
+            //Log.d("phy", "onBindViewHolder: " + activities.size());
             PhysicalActivities physicalActivities = activities.get(position);
             holder.activity.setText(physicalActivities.getActivityCategory());
+            holder.activityId.setText(physicalActivities.getId());
             holder.date.setText(physicalActivities.getActivityDate());
             holder.distance.setText(context.getString(R.string.activity_adapter_you_did)
                     + String .valueOf(Double.parseDouble(physicalActivities.getDistance())/1000)
@@ -64,22 +65,24 @@ public class ActivityAdapter
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context, SportEditActivity.class);
+                    //intent.putExtra("title", physicalActivities.getActivityCategory());
                     intent.putExtra("activity", physicalActivities);
                     context.startActivity(intent);
                 }
             });
         }
-        Log.d("phy", "onBindViewHolder: " + activities.size() + " pos: " + position);
+        //Log.d("phy", "onBindViewHolder: " + activities.size() + " pos: " + position);
     }
 
     @Override
     public int getItemCount() {
-        Log.d("phy", "getItemCount: " + activities.size());
+        //Log.d("phy", "getItemCount: " + activities.size());
         return activities.size();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView activity;
+        private TextView activityId;
         private TextView date;
         private TextView time;
         private TextView distance;
@@ -87,8 +90,9 @@ public class ActivityAdapter
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            Log.d("phy", "ViewHolder: external");
+            //Log.d("phy", "ViewHolder: external");
             activity = itemView.findViewById(R.id.txtItemActivity);
+            activityId = itemView.findViewById(R.id.txtItemActivityId);
             date = itemView.findViewById(R.id.txtItemDate);
             time = itemView.findViewById(R.id.txtItemTime);
             distance = itemView.findViewById(R.id.txtItemDistance);

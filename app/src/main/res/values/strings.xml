@@ -136,6 +136,7 @@
     <string name="sport_register_distance">Distance</string>
     <string name="sport_register_meters">Meters</string>
     <string name="sport_register_date_pattern">MM/dd/yyyy</string>
+    <string name="sport_register_success">Activity saved with success.</string>
     <string-array name="distance">
         <item>km</item>
         <item>m</item>
@@ -147,6 +148,9 @@
     <string name="sport_edit_hour">Hour</string>
     <string name="sport_edit_minute">Minute</string>
     <string name="sport_edit_distance">Distance</string>
+    <string name="sport_edit_meters">Meters</string>
+    <string name="sport_edit_success">Activity actualized with success.</string>
+    <string name="sport_edit_delete">Activity deleted with success.</string>
 
     <!-- res/layout/activity_badges.xml -->
     <string name="badges_title">Badges</string>
@@ -156,15 +160,15 @@
     <string name="badge_50">You exercised for 50 km</string>
     <string name="badge_100">You exercised for 100 km</string>
     <string name="badge_150">You exercised for 150 km</string>
-    <string name="badges_your_points">Your points: </string>
+    <string name="badges_your_points">Your points:\u0020</string>
     <string name="badges_km"> km.</string>
 
     <!-- res/layout/activity_leaderboard.xml -->
     <string name="leaderboard_title">Leaderboard</string>
 
     <!-- app/src/main/java/br/edu/ifsp/dmo/ifitness/RepositoryActivity.java -->
-    <string name="user_repository_user">User </string>
-    <string name="user_repository_success"> registered with success.</string>
+    <string name="user_repository_user">User\u0020</string>
+    <string name="user_repository_success">\u0020registered with success.</string>
 
     <!-- res/layout/dialog_reset_password.xml -->
     <string name="dialog_reset_email">E-mail</string>
@@ -172,7 +176,7 @@
     <!-- res/layout/item_activity.xml -->
 
     <!-- app/src/main/java/br/edu/ifsp/dmo/ifitness/ActivityAdapter.java -->
-    <string name="activity_adapter_you_did">"You did "</string>
-    <string name="activity_adapter_km_in">" km in "</string>
-    <string name="activity_adapter_hours"> hours.</string>
+    <string name="activity_adapter_you_did">"You did\u0020"</string>
+    <string name="activity_adapter_km_in">"\u0020km in\u0020"</string>
+    <string name="activity_adapter_hours">\u0020hours.</string>
 </resources>
