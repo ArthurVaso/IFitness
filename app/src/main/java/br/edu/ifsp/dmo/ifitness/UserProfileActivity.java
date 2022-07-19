@@ -56,7 +56,6 @@ public class UserProfileActivity extends AppCompatActivity implements DatePicker
     private UserViewModel userViewModel;
 
     private UserWithActivities userWithActivities;
-    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +78,7 @@ public class UserProfileActivity extends AppCompatActivity implements DatePicker
         txtSurname = findViewById(R.id.user_profile_txt_surname);
         txtEmail = findViewById(R.id.user_profile_txt_email);
         btnDatePicker = findViewById(R.id.user_profile_btn_date_picker);
+        btnDatePicker.setText(R.string.user_profile_select_date);
         txtPhone = findViewById(R.id.user_profile_txt_phone);
         spnGender = findViewById(R.id.user_profile_sp_gender);
         profileImage = findViewById(R.id.user_profile_image);
@@ -116,10 +116,8 @@ public class UserProfileActivity extends AppCompatActivity implements DatePicker
         }
 
         userViewModel.islogged().observe(this, new Observer<UserWithActivities>() {
-        //userViewModel.islogged().observe(this, new Observer<User>() {
             @Override
             public void onChanged(UserWithActivities userWithActivities) {
-            //public void onChanged(User user) {
                 if(userWithActivities != null){
 
                     UserProfileActivity.this.userWithActivities = userWithActivities;
@@ -129,21 +127,12 @@ public class UserProfileActivity extends AppCompatActivity implements DatePicker
                     btnDatePicker.setText(userWithActivities.getUser().getBirthdayDate());
                     txtPhone.setText(userWithActivities.getUser().getPhone());
 
-                    /*
-                    UserProfileActivity.this.user = user;
-                    txtName.setText(user.getName());
-                    txtSurname.setText(user.getSurname());
-                    txtEmail.setText(user.getEmail());
-                    btnDatePicker.setText(user.getBirthdayDate());
-                    txtPhone.setText(user.getPhone());
-                    */
                     String[] gender = getResources().getStringArray(R.array.gender);
-                    /*for (int i = 0; i < gender.length; i++){
-                        //if(gender[i].equals(userWithActivities.getUser().getGender())){
-                        if(gender[i].equals(user.getGender())){
+                    for (int i = 0; i < gender.length; i++){
+                        if(gender[i].equals(userWithActivities.getUser().getGender())){
                             spnGender.setSelection(i);
                         }
-                    }*/
+                    }
                 }else{
                     startActivity(new Intent(UserProfileActivity.this,
                             UserLoginActivity.class));
@@ -158,26 +147,16 @@ public class UserProfileActivity extends AppCompatActivity implements DatePicker
             return;
         }
 
-
         userWithActivities.getUser().setName(txtName.getText().toString());
         userWithActivities.getUser().setSurname(txtSurname.getText().toString());
         userWithActivities.getUser().setEmail(txtEmail.getText().toString());
         userWithActivities.getUser().setBirthdayDate(btnDatePicker.getText().toString());
         userWithActivities.getUser().setPhone(txtPhone.getText().toString());
 
-        /*
-        user.setName(txtName.getText().toString());
-        user.setSurname(txtSurname.getText().toString());
-        user.setEmail(txtEmail.getText().toString());
-        user.setBirthdayDate(btnDatePicker.getText().toString());
-        user.setPhone(txtPhone.getText().toString());
-         */
         getResources().getStringArray(R.array.gender);
         userWithActivities.getUser().setGender(getResources().getStringArray(R.array.gender)[spnGender.getSelectedItemPosition()]);
-        //user.setGender(getResources().getStringArray(R.array.gender)[spnGender.getSelectedItemPosition()]);
 
-        userViewModel.update(userWithActivities);
-        //userViewModel.update(user);
+        userViewModel.updateUser(userWithActivities);
         Toast.makeText(this, getString(R.string.user_profile_success), Toast.LENGTH_SHORT).show();
     }
 

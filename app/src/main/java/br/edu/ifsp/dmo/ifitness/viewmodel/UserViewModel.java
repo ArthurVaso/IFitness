@@ -3,14 +3,17 @@ package br.edu.ifsp.dmo.ifitness.viewmodel;
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import java.util.List;
 import java.util.Optional;
 
+import br.edu.ifsp.dmo.ifitness.model.PhysicalActivities;
 import br.edu.ifsp.dmo.ifitness.model.User;
 import br.edu.ifsp.dmo.ifitness.model.UserWithActivities;
 import br.edu.ifsp.dmo.ifitness.repository.UserRepository;
@@ -27,6 +30,7 @@ public class UserViewModel extends AndroidViewModel {
     }
 
     public void createUser(User user){
+        Log.d("repo", "createUser: viewmodel create user");
         userRepository.createUser(user);
     }
 
@@ -41,7 +45,6 @@ public class UserViewModel extends AndroidViewModel {
     }
 
     public LiveData<UserWithActivities> islogged() {
-    //public LiveData<User> islogged() {
         SharedPreferences sharedPreferences =
                 PreferenceManager
                         .getDefaultSharedPreferences(
@@ -59,13 +62,39 @@ public class UserViewModel extends AndroidViewModel {
         userRepository.resetPassword(email);
     }
 
-    public void update(UserWithActivities userWithActivities) {
-        userRepository.update(userWithActivities);
+    public void updateUser(UserWithActivities userWithActivities) {
+        userRepository.updateUser(userWithActivities);
     }
 
-    /*
-    public void update(User user) {
-        userRepository.update(user);
+    public void addActivity(UserWithActivities userWithActivities) {
+        userRepository.addActivity(userWithActivities);
     }
-    */
+
+    public LiveData<List<PhysicalActivities>> recentActivities() {
+        SharedPreferences sharedPreferences =
+                PreferenceManager
+                        .getDefaultSharedPreferences(
+                                getApplication());
+        Optional<String> id =
+                Optional.ofNullable(sharedPreferences
+                        .getString(USER_ID, null));
+
+        if(!id.isPresent()){
+            return new MutableLiveData<>(null);
+        }
+
+        return userRepository.recentActivities(id.get());
+    }
+
+    public LiveData<PhysicalActivities> loadActivitiesById(String userId, String activityId) {
+        return userRepository.loadActivitiesById(userId, activityId);
+    }
+
+    public void updatePhysicalActivity(UserWithActivities userWithActivities, PhysicalActivities physicalActivities) {
+        userRepository.updatePhysicalActivity(userWithActivities, physicalActivities);
+    }
+
+    public void deletePhysicalActivity(UserWithActivities userWithActivities) {
+        userRepository.deletePhysicalActivity(userWithActivities);
+    }
 }

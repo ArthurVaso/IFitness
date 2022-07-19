@@ -4,7 +4,9 @@ import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -17,16 +19,27 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.edu.ifsp.dmo.ifitness.R;
+import br.edu.ifsp.dmo.ifitness.SportEditActivity;
 import br.edu.ifsp.dmo.ifitness.database.AppDatabase;
 import br.edu.ifsp.dmo.ifitness.database.UserDAO;
 import br.edu.ifsp.dmo.ifitness.model.PhysicalActivities;
@@ -59,16 +72,19 @@ public class UserRepository {
         preference = PreferenceManager.getDefaultSharedPreferences(application);
     }
 
-    public void createUser(User user){
+    public void createUser(User user) {
+        //Log.d("repo", "createUser: inicio");
         JSONObject parameters = new JSONObject();
 
-        try{
+        try {
+            //Log.d("repo", "createUser: try json");
             parameters.put("email", user.getEmail());
             parameters.put("password", user.getPassword());
             parameters.put("returnSecureToken", true);
             parameters.put("Content-Type",
                     "application/json; charset=utf-8");
-        }catch (JSONException e){
+        } catch (JSONException e) {
+            //Log.d("repo", "createUser: catch json");
             e.printStackTrace();
         }
 
@@ -80,18 +96,22 @@ public class UserRepository {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
+                            //Log.d("repo", "createUser: try on response");
                             user.setId(response.getString("localId"));
+                            //Log.d("repo", "createUser: setID");
                             user.setPassword(response.getString("idToken"));
-                            Log.d("create", "createUser: before firebase");
+                            //Log.d("repo", "createUser: setPassword");
 
                             firestore.collection("user")
                                     .document(user.getId())
                                     .set(user)
                                     .addOnSuccessListener(unused -> {
-                                        Log.d(this.toString(), R.string.user_repository_user +
-                                                user.getEmail() + R.string.user_repository_success);
+                                        //Log.d(this.toString(), R.string.user_repository_user +
+                                        //user.getEmail() + R.string.user_repository_success);
                                     });
-                        }catch (JSONException e){
+                            //Log.d("repo", "createUser: pos firebase");
+                        } catch (JSONException e) {
+                            //Log.d("repo", "createUser: catch on response");
                             e.printStackTrace();
                         }
                     }
@@ -99,14 +119,16 @@ public class UserRepository {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        //Log.d("repo", "createUser: error");
                         Log.e(this.toString(), error.getMessage());
                     }
                 }
         );
+        //Log.d("repo", "createUser: queue");
         queue.add(request);
     }
 
-    public LiveData<User> login(String email, String password){
+    public LiveData<User> login(String email, String password) {
         MutableLiveData<User> liveData = new MutableLiveData<>();
         JSONObject parameters = new JSONObject();
 
@@ -121,66 +143,66 @@ public class UserRepository {
         }
         JsonObjectRequest request =
                 new JsonObjectRequest(Request.Method.POST,
-                BASE_URL + SIGNIN + KEY,
-                parameters,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            String localId =
-                                    response.getString("localId");
-                            String idToken =
-                                    response.getString("idToken");
+                        BASE_URL + SIGNIN + KEY,
+                        parameters,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                try {
+                                    String localId =
+                                            response.getString("localId");
+                                    String idToken =
+                                            response.getString("idToken");
 
-                            firestore.collection("user")
-                                    .document(localId)
-                                    .get()
-                                    .addOnSuccessListener(snapshot -> {
-                                        User user = snapshot.toObject(User.class);
+                                    firestore.collection("user")
+                                            .document(localId)
+                                            .get()
+                                            .addOnSuccessListener(snapshot -> {
+                                                User user = snapshot.toObject(User.class);
 
-                                        user.setId(localId);
-                                        user.setPassword(idToken);
+                                                user.setId(localId);
+                                                user.setPassword(idToken);
 
-                                liveData.setValue(user);
+                                                liveData.setValue(user);
 
-                                preference.edit()
-                                        .putString(UserViewModel.USER_ID, localId)
-                                        .apply();
+                                                preference.edit()
+                                                        .putString(UserViewModel.USER_ID, localId)
+                                                        .apply();
 
-                                firestore.collection("user")
-                                        .document(localId).set(user);
-                            });
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        NetworkResponse response = error.networkResponse;
-                        if (error instanceof ServerError && response != null) {
-                            try {
-                                String res = new String(response.data,
-                                        HttpHeaderParser.parseCharset(response.headers, "utf-8"));
-                                JSONObject obj = new JSONObject(res);
-                                Log.d(this.toString(), obj.toString());
-                            } catch ( UnsupportedEncodingException e1) {
-                                e1.printStackTrace();
-                            } catch (JSONException e2) {
-                                e2.printStackTrace();
+                                                firestore.collection("user")
+                                                        .document(localId).set(user);
+                                            });
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
                             }
-                        }
-                        liveData.setValue(null);
-                    }
-                });
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                NetworkResponse response = error.networkResponse;
+                                if (error instanceof ServerError && response != null) {
+                                    try {
+                                        String res = new String(response.data,
+                                                HttpHeaderParser.parseCharset(response.headers, "utf-8"));
+                                        JSONObject obj = new JSONObject(res);
+                                        Log.d(this.toString(), obj.toString());
+                                    } catch (UnsupportedEncodingException e1) {
+                                        e1.printStackTrace();
+                                    } catch (JSONException e2) {
+                                        e2.printStackTrace();
+                                    }
+                                }
+                                liveData.setValue(null);
+                            }
+                        });
 
         queue.add(request);
 
         return liveData;
     }
 
-    public void resetPassword(String email){
+    public void resetPassword(String email) {
         JSONObject parameters = new JSONObject();
         try {
             parameters.put("email", email);
@@ -210,7 +232,7 @@ public class UserRepository {
                                         HttpHeaderParser.parseCharset(response.headers, "utf-8"));
                                 JSONObject obj = new JSONObject(res);
                                 Log.d(this.toString(), obj.toString());
-                            } catch ( UnsupportedEncodingException e1) {
+                            } catch (UnsupportedEncodingException e1) {
                                 e1.printStackTrace();
                             } catch (JSONException e2) {
                                 e2.printStackTrace();
@@ -223,10 +245,8 @@ public class UserRepository {
     }
 
     public LiveData<UserWithActivities> load(String userId) {
-    //public LiveData<User> load(String userId) {
         UserWithActivities userWithActivities = new UserWithActivities();
         MutableLiveData<UserWithActivities> liveData = new MutableLiveData<>();
-        //MutableLiveData<User> liveData = new MutableLiveData<>();
 
         DocumentReference userRef =
                 firestore.collection("user")
@@ -237,54 +257,267 @@ public class UserRepository {
 
             user.setId(user.getId());
 
-
             userWithActivities.setUser(user);
 
-
-            userRef.collection("physical-activities").get().addOnCompleteListener( snap -> {
-                snap.getResult().forEach(doc ->{
+            userRef.collection("physical-activities").get().addOnCompleteListener(snap -> {
+                snap.getResult().forEach(doc -> {
                     PhysicalActivities physicalActivities = doc.toObject(PhysicalActivities.class);
                     physicalActivities.setId(doc.getId());
                     userWithActivities.getPhysicalActivities().add(physicalActivities);
                 });
 
                 liveData.setValue(userWithActivities);
-                //liveData.setValue(user);
             });
         });
+
         return liveData;
     }
 
-    public Boolean update(UserWithActivities userWithActivities){
-    //public Boolean update(User user){
-        final Boolean[] atualized = {false};
-
-        DocumentReference userRef = firestore.collection("user").document(userWithActivities.getUser().getId());
-        //DocumentReference userRef = firestore.collection("user").document(user.getId());
+    public Boolean addActivity(UserWithActivities userWithActivities) {
+        final Boolean[] updated = {false};
+        Log.d("addActivity", "addActivity: adicionando nova atividade");
+        DocumentReference userRef = firestore.collection("user")
+                .document(userWithActivities.getUser().getId());
 
         userRef.set(userWithActivities.getUser()).addOnSuccessListener(unused -> {
-        //userRef.set(user).addOnSuccessListener(unused -> {
-            atualized[0] = true;
+            updated[0] = true;
         });
 
-        /*
         CollectionReference physicalActivitiesRef = userRef.collection("physical-activities");
 
-        PhysicalActivities physicalActivities = userWithActivities.getPhysicalActivities().get();
+        PhysicalActivities physicalActivities = userWithActivities.getPhysicalActivities().get(0);
+
+        physicalActivitiesRef.document(physicalActivities.getId())
+                .set(physicalActivities)
+                .addOnSuccessListener(unused -> {
+                    updated[0] = true;
+                });
+
+        return updated[0];
+    }
+
+    public Boolean updateUser(UserWithActivities userWithActivities) {
+        final Boolean[] updated = {false};
+        Log.d("loadUser", "updateUser: ");
+        DocumentReference userRef = firestore.collection("user").document(userWithActivities.getUser().getId());
+
+        userRef.set(userWithActivities.getUser()).addOnSuccessListener(unused -> {
+            updated[0] = true;
+        });
+/*
+        CollectionReference physicalActivitiesRef = userRef.collection("physical-activities");
+
+        PhysicalActivities physicalActivities = userWithActivities.getPhysicalActivities().;
 
         if(physicalActivities.getId().isEmpty()){
-            physicalActivitiesRef.add(physicalActivities).addOnSuccessListener( end ->{
-                physicalActivities.setId(end.getId());
-                atualized[0] = true;
+            physicalActivitiesRef.add(physicalActivities).addOnSuccessListener( pa ->{
+                physicalActivities.setId(pa.getId());
+                updated[0] = true;
             });
         }else{
             physicalActivitiesRef.document(physicalActivities.getId()).set(physicalActivities).addOnSuccessListener(unused -> {
-                atualized[0] = true;
+                updated[0] = true;
             });
-        }
-        */
+        }*/
 
-        return atualized[0];
+        return updated[0];
     }
 
+    public LiveData<List<PhysicalActivities>> recentActivities(String userId) {
+        UserWithActivities userWithActivities = new UserWithActivities();
+        MutableLiveData<List<PhysicalActivities>> liveData = new MutableLiveData<>();
+        Log.d("frag", "onChanged: inicio recentActivities");
+
+        DocumentReference userRef =
+                firestore.collection("user")
+                        .document(userId);
+
+        //Log.d("frag", "onChanged: refuser");
+
+        userRef.get().addOnSuccessListener(snapshot -> {
+            User user = snapshot.toObject(User.class);
+
+            user.setId(user.getId());
+            //Log.d("frag", "onChanged: refuser get id");
+
+            userWithActivities.setUser(user);
+
+            userRef.collection("physical-activities")
+                    .orderBy("timestamp", Query.Direction.DESCENDING)
+                    .limit(5)
+                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    //Log.d("frag", "onChanged: on complete");
+                    if (task.isSuccessful()) {
+
+                        //Log.d("frag", "onChanged: is successful");
+                        List<PhysicalActivities> physicalActivitiesList = new ArrayList<>();
+                        PhysicalActivities physicalActivities = null;
+
+                        //Log.d("frag", "onChanged: para o loop da lista");
+                        for (QueryDocumentSnapshot queryDocumentSnapshots : task.getResult()) {
+                            physicalActivities = queryDocumentSnapshots.toObject(PhysicalActivities.class);
+                            physicalActivities.setId(queryDocumentSnapshots.getId());
+                            physicalActivitiesList.add(physicalActivities);
+                            //Log.d("frag", "onChanged: " + physicalActivities.getTimestamp());
+                        }
+                        //Log.d("frag", "onChanged: saiu loop " + physicalActivitiesList.size());
+                        liveData.setValue(physicalActivitiesList);
+                    }
+                }
+            });
+        });
+
+        //Log.d("frag", "onChanged: retornou valor");
+        return liveData;
+    }
+
+    public LiveData<PhysicalActivities> loadActivitiesById(String userId, String activityId) {
+        MutableLiveData<PhysicalActivities> liveData = new MutableLiveData<>();
+        //Log.d("act", "onChanged: inicio");
+
+        DocumentReference userRef =
+                firestore.collection("user")
+                        .document(userId)
+                        .collection("physical-activities")
+                        .document(activityId);
+
+        //Log.d("act", "onChanged: refuser");
+
+        userRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                Log.d("load", "onChanged: colocando valor");
+                PhysicalActivities physicalActivities =
+                        documentSnapshot.toObject(PhysicalActivities.class);
+                physicalActivities.setId(documentSnapshot.getId());
+                liveData.setValue(physicalActivities);
+            }
+        });
+
+        //Log.d("act", "onChanged: retornou valor");
+        return liveData;
+    }
+
+    public Boolean updatePhysicalActivity(UserWithActivities userWithActivities, PhysicalActivities physicalActivities) {
+        final Boolean[] updated = {false};
+        Log.d("updPA", "onChanged: inicio update");
+        userWithActivities.getPhysicalActivities().forEach(pa -> {
+            Log.d("updPhysicalActivity", "PA: " + pa.getId() + " -> " + pa.getDistance());
+        });
+
+        DocumentReference userRef = firestore.collection("user").document(userWithActivities.getUser().getId());
+
+        userRef.set(userWithActivities.getUser()).addOnSuccessListener(unused -> {
+
+            Log.d("updPA", "onChanged: busca atividade");
+
+            //PhysicalActivities physicalActivities = userWithActivities.getPhysicalActivities().get(0);
+            Log.d("updPA", "updatePhysicalActivity: update na atividade" + physicalActivities.getDistance());
+
+            Task<Void> physicalActivitiesRef = userRef.collection("physical-activities")
+                    .document(physicalActivities.getId())
+                    .update("activityDate", physicalActivities.getActivityDate(),
+                            "distance", physicalActivities.getDistance(),
+                            "hours", physicalActivities.getHours(),
+                            "minutes", physicalActivities.getMinutes());
+                    //.whereArrayContains("id", physicalActivities.getId());
+
+
+            updated[0] = true;
+        });
+
+        Log.d("updPA", "updatePhysicalActivity: saindo" + (userWithActivities.getPhysicalActivities().get(0).getId()));
+/*
+        physicalActivitiesRef.delete().addOnSuccessListener(unused -> {
+            Log.d("updPA", "onChanged: exclui");
+            updated[0] = true;
+        });
+        */
+        /*
+        DocumentReference userRef = firestore.collection("user")
+                .document(userWithActivities.getUser().getId());
+        Log.d("updPA", "updatePhysicalActivity: update na atividade" + physicalActivities.getDistance());
+*/
+/*
+        DocumentReference physicalActivitiesRef = userRef.collection("physical-activities")
+                .document(physicalActivities.getId());
+        Log.d("updPA", "updatePhysicalActivity: update na atividade" + physicalActivities.getDistance());
+ */
+
+
+        /*userRef.set(userWithActivities.getUser()).addOnSuccessListener(unused -> {
+            updated[0] = true;
+        });
+*/
+        //PhysicalActivities physicalActivities = userWithActivities.getPhysicalActivities().get(0);
+        /*
+        CollectionReference physicalActivitiesRef = userRef.collection("physical-activities");
+                //.document(physicalActivities.getId());
+*/
+        /*
+        physicalActivitiesRef.document(physicalActivities.getId()).set(physicalActivities)
+                .addOnSuccessListener(unused -> {
+            updated[0] = true;
+        });
+         */
+
+        //physicalActivitiesRef.set(physicalActivities).addOnSuccessListener(unused -> {
+        //    updated[0] = true;
+        //});
+
+        return updated[0];
+        /*
+        final Boolean[] updated = {false};
+        Log.d("upd", "onChanged: inicio");
+
+        DocumentReference userRef =
+                firestore.collection("user")
+                        .document(userId)
+                        .collection("physical-activities")
+                        .document(activityId);
+        Log.d("upd", "onChanged: get valores");
+
+        PhysicalActivities physicalActivities = userWithActivities.getPhysicalActivities().get(0);
+        Log.d("upd", "onChanged: busca atividade");
+
+
+        userRef.set(physicalActivities).addOnSuccessListener(unused -> {
+            Log.d("upd", "onChanged: atualiza");
+            updated[0] = true;
+        });
+
+        Log.d("upd", "onChanged: fim");
+        return updated[0];*/
+    }
+
+    public Boolean deletePhysicalActivity(UserWithActivities userWithActivities) {
+        final Boolean[] updated = {false};
+        Log.d("dlt", "onChanged: inicio");
+
+        DocumentReference userRef =
+                firestore.collection("user")
+                        .document(userWithActivities.getUser().getId());
+
+        Log.d("dlt", "onChanged: busca atividade");
+        userRef.set(userWithActivities.getUser()).addOnSuccessListener(unused -> {
+            Log.d("dlt", "deletePhysicalActivity: removido com sucesso");
+            updated[0] = true;
+
+        });
+
+        PhysicalActivities physicalActivities = userWithActivities.getPhysicalActivities().get(0);
+
+        DocumentReference physicalActivitiesRef = userRef.collection("physical-activities")
+                .document(physicalActivities.getId());
+
+        physicalActivitiesRef.delete().addOnSuccessListener(unused -> {
+            Log.d("dlt", "onChanged: exclui");
+            updated[0] = true;
+        });
+
+        Log.d("dlt", "onChanged: finaliza");
+        return updated[0];
+    }
 }

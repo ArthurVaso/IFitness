@@ -9,6 +9,11 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+
+import br.edu.ifsp.dmo.ifitness.model.UserWithActivities;
+import br.edu.ifsp.dmo.ifitness.viewmodel.UserViewModel;
 
 public class SportsActivity extends AppCompatActivity {
 
@@ -16,15 +21,22 @@ public class SportsActivity extends AppCompatActivity {
     private TextView toolbarTitle;
     private DrawerLayout toolbarDrawer;
 
-    private LinearLayout layoutIcomWalk;
-    private LinearLayout layoutIcomRun;
-    private LinearLayout layoutIcomSwim;
-    private LinearLayout layoutIcomBike;
+    private LinearLayout layoutIconWalk;
+    private LinearLayout layoutIconRun;
+    private LinearLayout layoutIconSwim;
+    private LinearLayout layoutIconBike;
+
+    private UserViewModel userViewModel;
+
+    private UserWithActivities userWithActivities;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sports);
+
+        userViewModel = new ViewModelProvider(this)
+                .get(UserViewModel.class);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -35,8 +47,21 @@ public class SportsActivity extends AppCompatActivity {
         toolbarTitle = findViewById(R.id.toolbar_title);
         toolbarTitle.setText(getString(R.string.sports_title));
 
-        layoutIcomWalk = findViewById(R.id.sport_icon_walk);
-        layoutIcomWalk.setOnClickListener(new View.OnClickListener() {
+        userViewModel.islogged().observe(this, new Observer<UserWithActivities>() {
+            @Override
+            public void onChanged(UserWithActivities userWithActivities) {
+                if(userWithActivities != null){
+                    SportsActivity.this.userWithActivities = userWithActivities;
+                } else{
+                    startActivity(new Intent(SportsActivity.this,
+                            UserLoginActivity.class));
+                    finish();
+                }
+            }
+        });
+
+        layoutIconWalk = findViewById(R.id.sport_icon_walk);
+        layoutIconWalk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SportsActivity.this,
@@ -46,8 +71,8 @@ public class SportsActivity extends AppCompatActivity {
             }
         });
 
-        layoutIcomWalk = findViewById(R.id.sport_icon_run);
-        layoutIcomWalk.setOnClickListener(new View.OnClickListener() {
+        layoutIconWalk = findViewById(R.id.sport_icon_run);
+        layoutIconWalk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SportsActivity.this,
@@ -57,8 +82,8 @@ public class SportsActivity extends AppCompatActivity {
             }
         });
 
-        layoutIcomWalk = findViewById(R.id.sport_icon_swim);
-        layoutIcomWalk.setOnClickListener(new View.OnClickListener() {
+        layoutIconWalk = findViewById(R.id.sport_icon_swim);
+        layoutIconWalk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SportsActivity.this,
@@ -68,8 +93,8 @@ public class SportsActivity extends AppCompatActivity {
             }
         });
 
-        layoutIcomWalk = findViewById(R.id.sport_icon_bike);
-        layoutIcomWalk.setOnClickListener(new View.OnClickListener() {
+        layoutIconWalk = findViewById(R.id.sport_icon_bike);
+        layoutIconWalk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SportsActivity.this,

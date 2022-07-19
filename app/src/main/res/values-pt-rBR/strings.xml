@@ -5,6 +5,12 @@
         <string name="toggle_open">Open</string>
         <string name="toggle_close">Close</string>
 
+        <!-- For set activity identification -->
+        <string name="kind_walking">walking</string>
+        <string name="kind_running">running</string>
+        <string name="kind_swimming">swimming</string>
+        <string name="kind_cycling">cycling</string>
+
         <!-- Buttons -->
         <string name="btn_register">CADASTRAR</string>
         <string name="btn_login">ENTRAR</string>
@@ -15,6 +21,7 @@
 
     <!-- res/layout/activity_main.xml -->
         <string name="app_name">IFitness</string>
+        <string name="main_recent_activities">Atividades Recentes</string>
 
     <!-- res/layout/activity_sports.xml -->
         <string name="sports_title">Atividades</string>
@@ -46,6 +53,9 @@
         <string name="user_login_wrong_values">E-mail/Password errado!</string>
         <string name="user_login_check_email">Favor, verificar seu e-mail para alterar sua senha.</string>
         <string name="user_login_reset_password">Redefinir senha</string>
+        <string name="user_login_credentials">Por foavor entre com suas informações.</string>
+        <string name="user_login_success">Sucesso ao logar.</string>
+        <string name="user_login_valid_credentials">Por foavor entre com suas informações válidas.</string>
 
     <!-- res/layout/activity_user_register.xml -->
         <string name="user_register_title">Cadastro</string>
@@ -59,12 +69,18 @@
         <string name="user_register_name_empty">O campo nome não pode estar vazio.</string>
         <string name="user_register_password_empty">O campo senha  não pode estar vazio.</string>
         <string name="user_register_email_empty">O campo e-mail  não pode estar vazio.</string>
+        <string name="user_registry_check_password">Por favoe, verifique sua senha.</string>
+        <string name="user_registry_credentials">Por foavor entre com suas informações.</string>
+        <string name="user_register_success">Usuário registrado.</string>
+        <string name="user_register_fail">Falha ao registrar usuário.</string>
 
     <!-- res/layout/activity_user_profile.xml -->
         <string name="user_profile_title">Perfil</string>
         <string name="user_profile_name">Nome</string>
         <string name="user_profile_surname">Sobrenome</string>
         <string name="user_profile_email">E-mail</string>
+        <string name="user_profile_select_date">Selecione a data</string>
+
     <!-- NOT USED
         <string name="user_profile_address">Endereço</string>
         <string name="user_profile_street">Rua</string>
@@ -110,12 +126,18 @@
         </string-array>
     -->
 
+    <!-- app/src/main/java/br/edu/ifsp/dmo/ifitness/UserProfileActivity.java -->
+        <string name="user_profile_success">Dados atualizados com sucesso.</string>
+
     <!-- res/layout/activity_sport_register.xml -->
         <string name="sport_register_title">Registro de atividade</string>
         <string name="sport_register_select_date">Selecione a data</string>
         <string name="sport_register_hour">Hora</string>
         <string name="sport_register_minute">Minuto</string>
         <string name="sport_register_distance">Distância</string>
+        <string name="sport_register_meters">Metros</string>
+        <string name="sport_register_date_pattern">dd/MM/yyyy</string>
+        <string name="sport_register_success">Atividade salva com sucesso.</string>
         <string-array name="distance">
             <item>km</item>
             <item>m</item>
@@ -127,33 +149,35 @@
         <string name="sport_edit_hour">Hora</string>
         <string name="sport_edit_minute">Minuto</string>
         <string name="sport_edit_distance">Distância</string>
+        <string name="sport_edit_meters">Metros</string>
+        <string name="sport_edit_success">Atividade atulizada com sucesso.</string>
+        <string name="sport_edit_delete">Atividade excluída com sucesso.</string>
 
     <!-- res/layout/activity_badges.xml -->
         <string name="badges_title">Conquistas</string>
         <string name="badges_no_badges">Nenhuma conquista adquirida</string>
-        <string name="badge_15">Exercitou-se por 15km</string>
-        <string name="badge_25">Exercitou-se por 25km</string>
-        <string name="badge_50">Exercitou-se por 50km</string>
-        <string name="badge_100">Exercitou-se por 100km</string>
-        <string name="badge_150">Exercitou-se por 150km</string>
-        <string name="badges_your_points">Sua pontuação: </string>
-        <string name="badges_km">km</string>
+        <string name="badge_15">Exercitou-se por 15 km</string>
+        <string name="badge_25">Exercitou-se por 25 km</string>
+        <string name="badge_50">Exercitou-se por 50 km</string>
+        <string name="badge_100">Exercitou-se por 100 km</string>
+        <string name="badge_150">Exercitou-se por 150 km</string>
+        <string name="badges_your_points">Sua pontuação:\u0020</string>
+        <string name="badges_km"> km.</string>
 
     <!-- res/layout/activity_leaderboard.xml -->
         <string name="leaderboard_title">Leaderboard</string>
 
     <!-- app/src/main/java/br/edu/ifsp/dmo/ifitness/RepositoryActivity.java -->
-		<string name="user_repository_user">Usuário </string>
-		<string name="user_repository_success"> registrado com sucesso.</string>
+		<string name="user_repository_user">Usuário\u0020</string>
+		<string name="user_repository_success">\u0020registrado com sucesso.</string>
 
     <!-- res/layout/dialog_reset_password.xml -->
         <string name="dialog_reset_email">E-mail</string>
-    <string name="user_registry_check_password">Please check both having same password.</string>
-    <string name="user_registry_credentials">Please enter your credentials.</string>
-    <string name="user_register_success">User registered.</string>
-    <string name="user_register_fail">Fail to register user.</string>
-    <string name="user_login_credentials">Please enter your credentials.</string>
-    <string name="user_login_success">Login successful.</string>
-    <string name="user_login_valid_credentials">Please enter valid user credentials.</string>
-    <string name="user_profile_success">Data update with success.</string>
+
+    <!-- res/layout/item_activity.xml -->
+
+    <!-- app/src/main/java/br/edu/ifsp/dmo/ifitness/ActivityAdapter.java -->
+        <string name="activity_adapter_you_did">"Você fez\u0020"</string>
+        <string name="activity_adapter_km_in">"\u0020km em\u0020"</string>
+        <string name="activity_adapter_hours">\u0020horas.</string>
 </resources>
