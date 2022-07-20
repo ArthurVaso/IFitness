@@ -97,6 +97,13 @@ public class MainActivity extends AppCompatActivity {
                                 SportsActivity.class);
                         startActivity(intent);
                         break;
+                    case R.id.nav_selection:
+//                        intent = new Intent(MainActivity.this,
+//                                SportSelectionActivity.class);
+                        intent = new Intent(MainActivity.this,
+                                SportListActivity.class);
+                        startActivity(intent);
+                        break;
                     case R.id.nav_leaderboard:
                         intent = new Intent(MainActivity.this,
                                 LeaderboardActivity.class);

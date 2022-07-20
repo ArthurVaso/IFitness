@@ -29,11 +29,19 @@
     <string name="sports_swimming">Swimming</string>
     <string name="sports_cycling">Cycling</string>
 
+    <!-- res/layout/activity_sports_selection.xml -->
+    <string name="sports_selection_title">Activities</string>
+    <string name="sports_selection_walking">Walking</string>
+    <string name="sports_selection_running">Running</string>
+    <string name="sports_selection_swimming">Swimming</string>
+    <string name="sports_selection_cycling">Cycling</string>
+
     <!-- res/menu/menu_drawer.xml -->
     <string name="menu_drawer_home">Home</string>
     <string name="menu_drawer_user">User</string>
     <string name="menu_drawer_Profile">Profile</string>
     <string name="menu_drawer_activities">Activities</string>
+    <string name="menu_drawer_list">List Activities</string>
     <string name="menu_drawer_leaderboard">Leaderboard</string>
     <string name="menu_drawer_badges">Badges</string>
     <string name="menu_drawer_logout">Logout</string>
@@ -179,4 +187,5 @@
     <string name="activity_adapter_you_did">"You did\u0020"</string>
     <string name="activity_adapter_km_in">"\u0020km in\u0020"</string>
     <string name="activity_adapter_hours">\u0020hours.</string>
+    <string name="sport_list_title">Activity list</string>
 </resources>
