@@ -85,6 +85,7 @@ public class SportEditActivity extends AppCompatActivity implements DatePickerDi
                 .observe(this, new Observer<PhysicalActivities>() {
                     @Override
                     public void onChanged(PhysicalActivities physicalActivities) {
+
                         Log.d("loadPA", "onChanged: iniciando o load do ===> Sport Edit");
                         userViewModel.islogged().observe(SportEditActivity.this, new Observer<UserWithActivities>() {
                             @Override

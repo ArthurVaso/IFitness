@@ -10,7 +10,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Entity(tableName = "user")
-public class User implements Serializable {
+public class User implements Serializable, Comparable<User> {
 
     @NonNull
     @PrimaryKey
@@ -151,5 +151,16 @@ public class User implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public int compareTo(User user) {
+        if (this.points.compareTo(user.getPoints()) < 0) {
+            return 1;
+        }
+        if (this.points.compareTo(user.getPoints()) > 0) {
+            return -1;
+        }
+        return 0;
     }
 }

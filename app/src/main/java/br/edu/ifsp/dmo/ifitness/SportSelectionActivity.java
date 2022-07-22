@@ -1,21 +1,21 @@
 package br.edu.ifsp.dmo.ifitness;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
 import br.edu.ifsp.dmo.ifitness.model.UserWithActivities;
 import br.edu.ifsp.dmo.ifitness.viewmodel.UserViewModel;
 
-public class SportsActivity extends AppCompatActivity {
+public class SportSelectionActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private TextView toolbarTitle;
@@ -29,11 +29,12 @@ public class SportsActivity extends AppCompatActivity {
     private UserViewModel userViewModel;
 
     private UserWithActivities userWithActivities;
+    private String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sports);
+        setContentView(R.layout.activity_sport_selection);
 
         userViewModel = new ViewModelProvider(this)
                 .get(UserViewModel.class);
@@ -51,58 +52,56 @@ public class SportsActivity extends AppCompatActivity {
             @Override
             public void onChanged(UserWithActivities userWithActivities) {
                 if(userWithActivities != null){
-                    SportsActivity.this.userWithActivities = userWithActivities;
+                    SportSelectionActivity.this.userWithActivities = userWithActivities;
+                    userId = userWithActivities.getUser().getId();
                 } else{
-                    startActivity(new Intent(SportsActivity.this,
+                    startActivity(new Intent(SportSelectionActivity.this,
                             UserLoginActivity.class));
                     finish();
                 }
             }
         });
 
-        layoutIconWalk = findViewById(R.id.sport_icon_walk);
+        layoutIconWalk = findViewById(R.id.sport_selection_icon_walk);
         layoutIconWalk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SportsActivity.this,
-                        SportRegisterActivity.class);
-                intent.putExtra("title", getString(R.string.sports_walking));
-                startActivity(intent);
+                callSportListActivity(getString(R.string.kind_walking), getString(R.string.sports_walking));
             }
         });
 
-        layoutIconRun = findViewById(R.id.sport_icon_run);
+        layoutIconRun = findViewById(R.id.sport_selection_icon_run);
         layoutIconRun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SportsActivity.this,
-                        SportRegisterActivity.class);
-                intent.putExtra("title", getString(R.string.sports_running));
-                startActivity(intent);
+                callSportListActivity(getString(R.string.kind_running), getString(R.string.sports_running));
             }
         });
 
-        layoutIconSwim = findViewById(R.id.sport_icon_swim);
+        layoutIconSwim = findViewById(R.id.sport_selection_icon_swim);
         layoutIconSwim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SportsActivity.this,
-                        SportRegisterActivity.class);
-                intent.putExtra("title", getString(R.string.sports_swimming));
-                startActivity(intent);
+                callSportListActivity(getString(R.string.kind_swimming), getString(R.string.sports_swimming));
             }
         });
 
-        layoutIconBike = findViewById(R.id.sport_icon_bike);
+        layoutIconBike = findViewById(R.id.sport_selection_icon_bike);
         layoutIconBike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SportsActivity.this,
-                        SportRegisterActivity.class);
-                intent.putExtra("title", getString(R.string.sports_cycling));
-                startActivity(intent);
+                callSportListActivity(getString(R.string.kind_cycling), getString(R.string.sports_cycling));
             }
         });
+    }
+
+    private void callSportListActivity(String sportType, String title) {
+        Intent intent = new Intent(SportSelectionActivity.this,
+                SportListActivity.class);
+        intent.putExtra("title", title);
+        intent.putExtra("sportType", sportType);
+        intent.putExtra("userId", userId);
+        startActivity(intent);
     }
 
     @Override

@@ -120,12 +120,48 @@ public class UserRepository {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         //Log.d("repo", "createUser: error");
-                        Log.e(this.toString(), error.getMessage());
+                    Log.e(this.toString(), error.getMessage());
                     }
                 }
         );
         //Log.d("repo", "createUser: queue");
         queue.add(request);
+    }
+
+    public LiveData<List<User>> loadUsers() {
+        MutableLiveData<List<User>> liveData = new MutableLiveData<>();
+        //Log.d("act", "onChanged: inicio");
+
+        CollectionReference userRef =
+                firestore.collection("user");
+
+        //Log.d("act", "onChanged: refuser");
+
+        userRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+
+                    //Log.d("frag", "onChanged: is successful");
+                    List<User> userList = new ArrayList<>();
+                    User user = null;
+
+                    //Log.d("frag", "onChanged: para o loop da lista");
+                    for (QueryDocumentSnapshot queryDocumentSnapshots : task.getResult()) {
+                        user = queryDocumentSnapshots.toObject(User.class);
+                        user.setId(queryDocumentSnapshots.getId());
+                        Log.d("teste ordem", "onComplete: " + user.getEmail());
+                        userList.add(user);
+                        //Log.d("frag", "onChanged: " + physicalActivities.getTimestamp());
+                    }
+                    //Log.d("frag", "onChanged: saiu loop " + physicalActivitiesList.size());
+                    liveData.setValue(userList);
+                }
+            }
+        });
+
+        //Log.d("act", "onChanged: retornou valor");
+        return liveData;
     }
 
     public LiveData<User> login(String email, String password) {
@@ -344,7 +380,7 @@ public class UserRepository {
 
             userRef.collection("physical-activities")
                     .orderBy("timestamp", Query.Direction.DESCENDING)
-                    .limit(5)
+                    .limitToLast(5)
                     .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -359,6 +395,7 @@ public class UserRepository {
                         for (QueryDocumentSnapshot queryDocumentSnapshots : task.getResult()) {
                             physicalActivities = queryDocumentSnapshots.toObject(PhysicalActivities.class);
                             physicalActivities.setId(queryDocumentSnapshots.getId());
+                            Log.d("teste ordem", "onComplete: timestamp" + physicalActivities.getTimestamp());
                             physicalActivitiesList.add(physicalActivities);
                             //Log.d("frag", "onChanged: " + physicalActivities.getTimestamp());
                         }
@@ -397,6 +434,55 @@ public class UserRepository {
         });
 
         //Log.d("act", "onChanged: retornou valor");
+        return liveData;
+    }
+
+    public LiveData<List<PhysicalActivities>> loadActivitiesByType(String userId, String sportType) {
+        UserWithActivities userWithActivities = new UserWithActivities();
+        MutableLiveData<List<PhysicalActivities>> liveData = new MutableLiveData<>();
+        Log.d("frag", "onChanged: inicio recentActivities");
+
+        DocumentReference userRef =
+                firestore.collection("user")
+                        .document(userId);
+
+        //Log.d("frag", "onChanged: refuser");
+
+        userRef.get().addOnSuccessListener(snapshot -> {
+            User user = snapshot.toObject(User.class);
+
+            user.setId(user.getId());
+            //Log.d("frag", "onChanged: refuser get id");
+
+            userWithActivities.setUser(user);
+            Log.d("umnome bem grande para sobresair dos demais", "loadActivitiesByType: " + sportType);
+            userRef.collection("physical-activities")
+                    //.whereArrayContains("activityKind", sportType)
+                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    //Log.d("frag", "onChanged: on complete");
+                    if (task.isSuccessful()) {
+
+                        //Log.d("frag", "onChanged: is successful");
+                        List<PhysicalActivities> physicalActivitiesList = new ArrayList<>();
+                        PhysicalActivities physicalActivities = null;
+
+                        //Log.d("frag", "onChanged: para o loop da lista");
+                        for (QueryDocumentSnapshot queryDocumentSnapshots : task.getResult()) {
+                            physicalActivities = queryDocumentSnapshots.toObject(PhysicalActivities.class);
+                            physicalActivities.setId(queryDocumentSnapshots.getId());
+                            physicalActivitiesList.add(physicalActivities);
+                            //Log.d("frag", "onChanged: " + physicalActivities.getTimestamp());
+                        }
+                        //Log.d("frag", "onChanged: saiu loop " + physicalActivitiesList.size());
+                        liveData.setValue(physicalActivitiesList);
+                    }
+                }
+            });
+        });
+
+        //Log.d("frag", "onChanged: retornou valor");
         return liveData;
     }
 

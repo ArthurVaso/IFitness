@@ -30,11 +30,19 @@
         <string name="sports_swimming">Natação</string>
         <string name="sports_cycling">Ciclismo</string>
 
+    <!-- res/layout/activity_sports_selection.xml -->
+        <string name="sports_selection_title">Atividades</string>
+        <string name="sports_selection_walking">Caminhada</string>
+        <string name="sports_selection_running">Corrida</string>
+        <string name="sports_selection_swimming">Natação</string>
+        <string name="sports_selection_cycling">Ciclismo</string>
+
     <!-- res/menu/menu_drawer.xml -->
         <string name="menu_drawer_home">Home</string>
         <string name="menu_drawer_user">Usuário</string>
         <string name="menu_drawer_Profile">Perfil</string>
         <string name="menu_drawer_activities">Atividades</string>
+        <string name="menu_drawer_list">Listar Atividades</string>
         <string name="menu_drawer_leaderboard">Leaderboard</string>
         <string name="menu_drawer_badges">Medalhas</string>
         <string name="menu_drawer_logout">Sair</string>
@@ -162,7 +170,7 @@
         <string name="badge_100">Exercitou-se por 100 km</string>
         <string name="badge_150">Exercitou-se por 150 km</string>
         <string name="badges_your_points">Sua pontuação:\u0020</string>
-        <string name="badges_km"> km.</string>
+        <string name="badges_km">\u0020km.</string>
 
     <!-- res/layout/activity_leaderboard.xml -->
         <string name="leaderboard_title">Leaderboard</string>
@@ -180,4 +188,12 @@
         <string name="activity_adapter_you_did">"Você fez\u0020"</string>
         <string name="activity_adapter_km_in">"\u0020km em\u0020"</string>
         <string name="activity_adapter_hours">\u0020horas.</string>
+
+    <!-- app/src/main/java/br/edu/ifsp/dmo/ifitness/ActivityAdapter.java -->
+        <string name="sport_list_title">Lista de atividades</string>
+
+    <!-- res/layout/activity_leaderboard.xml -->
+        <string name="activity_leaderboard_position">Posição</string>
+        <string name="activity_leaderboard_user">Usuário</string>
+        <string name="activity_leaderboard_points">Pontos (km)</string>
 </resources>
