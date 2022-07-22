@@ -101,4 +101,8 @@ public class UserViewModel extends AndroidViewModel {
     public void deletePhysicalActivity(UserWithActivities userWithActivities) {
         userRepository.deletePhysicalActivity(userWithActivities);
     }
+
+    public LiveData<List<User>> loadUsers() {
+        return userRepository.loadUsers();
+    }
 }

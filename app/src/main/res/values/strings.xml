@@ -169,7 +169,7 @@
     <string name="badge_100">You exercised for 100 km</string>
     <string name="badge_150">You exercised for 150 km</string>
     <string name="badges_your_points">Your points:\u0020</string>
-    <string name="badges_km"> km.</string>
+    <string name="badges_km">\u0020km.</string>
 
     <!-- res/layout/activity_leaderboard.xml -->
     <string name="leaderboard_title">Leaderboard</string>
@@ -188,4 +188,9 @@
     <string name="activity_adapter_km_in">"\u0020km in\u0020"</string>
     <string name="activity_adapter_hours">\u0020hours.</string>
     <string name="sport_list_title">Activity list</string>
+
+    <!-- res/layout/activity_leaderboard.xml -->
+    <string name="activity_leaderboard_position">Position</string>
+    <string name="activity_leaderboard_user">User</string>
+    <string name="activity_leaderboard_points">Points (km)</string>
 </resources>

@@ -166,7 +166,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        userViewModel.islogged().observe(this, new Observer<UserWithActivities>() {
+        userViewModel.islogged().observe(this,
+                new Observer<UserWithActivities>() {
             @Override
             public void onChanged(UserWithActivities userWithActivities) {
                 if(userWithActivities != null){

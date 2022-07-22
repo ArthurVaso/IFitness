@@ -170,7 +170,7 @@
         <string name="badge_100">Exercitou-se por 100 km</string>
         <string name="badge_150">Exercitou-se por 150 km</string>
         <string name="badges_your_points">Sua pontuação:\u0020</string>
-        <string name="badges_km"> km.</string>
+        <string name="badges_km">\u0020km.</string>
 
     <!-- res/layout/activity_leaderboard.xml -->
         <string name="leaderboard_title">Leaderboard</string>
@@ -191,4 +191,9 @@
 
     <!-- app/src/main/java/br/edu/ifsp/dmo/ifitness/ActivityAdapter.java -->
         <string name="sport_list_title">Lista de atividades</string>
+
+    <!-- res/layout/activity_leaderboard.xml -->
+        <string name="activity_leaderboard_position">Posição</string>
+        <string name="activity_leaderboard_user">Usuário</string>
+        <string name="activity_leaderboard_points">Pontos (km)</string>
 </resources>

@@ -100,7 +100,6 @@ public class SportListActivity extends AppCompatActivity {
                             });
 
 
-
                     //Log.d("frag", "onChanged: setadapter");
                     recyclerActivities.setAdapter(activityAdapter);
                     //Log.d("frag", "onChanged: setLayoutManager");
@@ -110,7 +109,7 @@ public class SportListActivity extends AppCompatActivity {
                                     false));
 
  */
-                } else{
+                } else {
                     startActivity(new Intent(SportListActivity.this,
                             UserLoginActivity.class));
                     finish();
@@ -122,6 +121,6 @@ public class SportListActivity extends AppCompatActivity {
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
-        return  true;
+        return true;
     }
 }

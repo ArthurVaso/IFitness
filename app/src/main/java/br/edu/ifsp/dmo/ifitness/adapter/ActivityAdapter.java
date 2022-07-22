@@ -2,7 +2,6 @@ package br.edu.ifsp.dmo.ifitness.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,18 +47,18 @@ public class ActivityAdapter
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         //Log.d("phy", "onBindViewHolder: " + activities.size() + " pos: " + position);
-        if(activities != null && activities.size() >= position) {
+        if (activities != null && activities.size() >= position) {
             //Log.d("phy", "onBindViewHolder: " + activities.size());
             PhysicalActivities physicalActivities = activities.get(position);
             holder.activity.setText(physicalActivities.getActivityCategory());
             holder.activityId.setText(physicalActivities.getId());
             holder.date.setText(physicalActivities.getActivityDate());
             holder.distance.setText(context.getString(R.string.activity_adapter_you_did)
-                    + String .valueOf(Double.parseDouble(physicalActivities.getDistance())/1000)
+                    + String.valueOf(Double.parseDouble(physicalActivities.getDistance()) / 1000)
                     + context.getString(R.string.activity_adapter_km_in));
             holder.time.setText(physicalActivities.getHours()
-                    +":"
-                    +physicalActivities.getMinutes()
+                    + ":"
+                    + physicalActivities.getMinutes()
                     + context.getString(R.string.activity_adapter_hours));
             holder.cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
