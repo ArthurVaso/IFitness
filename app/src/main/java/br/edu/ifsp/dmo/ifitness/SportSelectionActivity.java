@@ -51,10 +51,10 @@ public class SportSelectionActivity extends AppCompatActivity {
         userViewModel.islogged().observe(this, new Observer<UserWithActivities>() {
             @Override
             public void onChanged(UserWithActivities userWithActivities) {
-                if(userWithActivities != null){
+                if (userWithActivities != null) {
                     SportSelectionActivity.this.userWithActivities = userWithActivities;
                     userId = userWithActivities.getUser().getId();
-                } else{
+                } else {
                     startActivity(new Intent(SportSelectionActivity.this,
                             UserLoginActivity.class));
                     finish();
@@ -107,6 +107,6 @@ public class SportSelectionActivity extends AppCompatActivity {
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
-        return  true;
+        return true;
     }
 }

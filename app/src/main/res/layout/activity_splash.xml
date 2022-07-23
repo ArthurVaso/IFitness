@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SplashActivity"
     android:background="@color/colorPrimary"
-    android:gravity="center">
+    android:gravity="center"
+    tools:context=".SplashActivity">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -18,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="IFitness"
+            android:text="@string/splash_app_title"
             android:textAppearance="@style/TextAppearance.AppCompat.Title.Inverse"
             android:textColor="@android:color/black"
             android:textStyle="bold" />
@@ -27,13 +26,14 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            android:src="@mipmap/ic_launcher_ifitness" />
+            android:src="@mipmap/ic_launcher_ifitness"
+            android:contentDescription="@string/splash_app_title" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Dev fitness"
+            android:text="@string/splash_subtitle"
             android:textAppearance="@style/TextAppearance.AppCompat.Title.Inverse"
             android:textColor="@android:color/black"
             android:textStyle="bold" />
@@ -43,11 +43,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="200dp"
             android:gravity="center"
-            android:text="Institituto Federal de São Paulo"
+            android:text="@string/splash_organization"
             android:textAppearance="@style/TextAppearance.AppCompat.Small.Inverse"
             android:textColor="@android:color/black"
             android:textStyle="bold" />
-
     </LinearLayout>
-
 </RelativeLayout>

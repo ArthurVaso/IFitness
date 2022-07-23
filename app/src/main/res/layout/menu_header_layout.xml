@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
     android:background="@color/colorPrimary"
-    android:padding="16dp"
-    android:gravity="center_vertical">
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="16dp">
 
     <ImageView
+        android:id="@+id/header_profile_image"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:id="@+id/header_profile_image"
-        android:src="@drawable/profile_image"/>
+        android:src="@drawable/profile_image"
+        android:contentDescription="@string/menu_header_image" />
 
     <TextView
+        android:id="@+id/header_profile_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/header_profile_name"
+        android:layout_marginStart="16dp"
         android:text="@string/menu_header_login"
-        android:textColor="@android:color/black"
         android:textAppearance="@android:style/TextAppearance.Large"
-        android:layout_marginLeft="16dp"/>
+        android:textColor="@android:color/black" />
 </LinearLayout>

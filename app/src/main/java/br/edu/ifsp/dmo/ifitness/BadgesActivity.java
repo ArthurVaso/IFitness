@@ -2,7 +2,6 @@ package br.edu.ifsp.dmo.ifitness;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;

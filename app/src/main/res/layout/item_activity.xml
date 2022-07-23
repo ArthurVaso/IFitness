@@ -1,61 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardItemActivity"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardElevation="8dp"
-    android:padding="8dp"
     android:layout_margin="8dp"
-    android:id="@+id/cardItemActivity" >
+    android:padding="8dp"
+    app:cardElevation="8dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_gravity="center_horizontal"
         android:gravity="center"
-        android:layout_gravity="center_horizontal">
+        android:orientation="vertical">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/txtItemActivity"
-            android:text="Walking"
-            android:textAppearance="@android:style/TextAppearance.Large"/>
-
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/txtItemActivityId"
-            android:text="id"
-            android:textSize="1dp"
-            android:visibility="invisible"/>
+            android:text=""
+            android:textAppearance="@android:style/TextAppearance.Large" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/txtItemDate"
-            android:text="07/05/2022"
-            android:textAppearance="@android:style/TextAppearance.Medium"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textAppearance="@android:style/TextAppearance.Medium" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/txtItemDistance"
-                android:text="You did 1 km in"
-                android:textAppearance="@android:style/TextAppearance.Medium"/>
-
-            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text=""
+                android:textAppearance="@android:style/TextAppearance.Medium" />
+
+            <TextView
                 android:id="@+id/txtItemTime"
-                android:text="1: 20 hours"
-                android:textAppearance="@android:style/TextAppearance.Medium"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textAppearance="@android:style/TextAppearance.Medium" />
         </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

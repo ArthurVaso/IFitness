@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Cores definidas para uso no projeto -->
     <color name="colorPrimary">#EB3530</color>
     <color name="colorPrimaryVariant">#FF524D</color>
     <color name="colorPrimaryVariantStrong">#9E1510</color>

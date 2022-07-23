@@ -1,34 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <item android:id="@+id/nav_home"
-        android:title="@string/menu_drawer_home"
-        android:icon="@drawable/ic_menu_home"/>
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_menu_home"
+        android:title="@string/menu_drawer_home" />
 
-    <item android:id="@+id/nav_user"
-        android:title="@string/menu_drawer_user"
-        android:icon="@drawable/ic_menu_user_black"/>
+    <item
+        android:id="@+id/nav_user"
+        android:icon="@drawable/ic_menu_user_black"
+        android:title="@string/menu_drawer_user" />
 
-    <item android:id="@+id/nav_activities"
-        android:title="@string/menu_drawer_activities"
-        android:icon="@drawable/ic_menu_new_activity"/>
+    <item
+        android:id="@+id/nav_activities"
+        android:icon="@drawable/ic_menu_new_activity"
+        android:title="@string/menu_drawer_activities" />
 
-    <item android:id="@+id/nav_selection"
-        android:title="@string/menu_drawer_list"
-        android:icon="@drawable/ic_menu_list"/>
+    <item
+        android:id="@+id/nav_selection"
+        android:icon="@drawable/ic_menu_list"
+        android:title="@string/menu_drawer_list" />
 
-    <item android:id="@+id/nav_leaderboard"
-        android:title="@string/menu_drawer_leaderboard"
-        android:icon="@drawable/ic_menu_leaderboard"/>
+    <item
+        android:id="@+id/nav_leaderboard"
+        android:icon="@drawable/ic_menu_leaderboard"
+        android:title="@string/menu_drawer_leaderboard" />
 
-    <item android:id="@+id/nav_badges"
-        android:title="@string/menu_drawer_badges"
-        android:icon="@drawable/ic_menu_badge"/>
+    <item
+        android:id="@+id/nav_badges"
+        android:icon="@drawable/ic_menu_badge"
+        android:title="@string/menu_drawer_badges" />
 
-    <item android:id="@+id/nav_logout"
-        android:title="@string/menu_drawer_logout"
-        android:icon="@drawable/ic_menu_logout"/>
+    <item
+        android:id="@+id/nav_logout"
+        android:icon="@drawable/ic_menu_logout"
+        android:title="@string/menu_drawer_logout" />
 </menu>

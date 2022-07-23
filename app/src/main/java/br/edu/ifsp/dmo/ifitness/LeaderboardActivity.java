@@ -1,7 +1,6 @@
 package br.edu.ifsp.dmo.ifitness;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import br.edu.ifsp.dmo.ifitness.adapter.ActivityAdapter;
 import br.edu.ifsp.dmo.ifitness.adapter.LeaderboardAdapter;
 import br.edu.ifsp.dmo.ifitness.model.User;
 import br.edu.ifsp.dmo.ifitness.viewmodel.UserViewModel;
@@ -22,7 +20,7 @@ public class LeaderboardActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private TextView toolbarTitle;
-    
+
     private UserViewModel userViewModel;
     private RecyclerView recyclerLeaderboard;
     private LeaderboardAdapter leaderboardAdapter;

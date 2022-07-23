@@ -76,9 +76,7 @@ public class UserRegisterActivity extends AppCompatActivity {
                                 ""
                         );
                         if (user.getPassword().length() >= 6) {
-                            Log.d("repo", "registry: antes create user");
                             userViewModel.createUser(user);
-                            Log.d("repo", "registry: depois create user");
                             userViewModel.login(user.getEmail(), user.getPassword())
                                     .observe(UserRegisterActivity.this, new Observer<User>() {
                                         @Override
@@ -91,7 +89,6 @@ public class UserRegisterActivity extends AppCompatActivity {
                                     R.string.user_register_error_msg_password,
                                     Toast.LENGTH_SHORT).show();
                         }
-
                     }
                 }
             }

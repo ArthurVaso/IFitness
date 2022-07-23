@@ -122,6 +122,6 @@ public class UserLoginActivity extends AppCompatActivity {
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
-        return  true;
+        return true;
     }
 }

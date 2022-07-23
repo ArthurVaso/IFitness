@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserRegisterActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".UserRegisterActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -15,85 +14,85 @@
         <include
             layout="@layout/menu_toolbar_layout"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"/>
+            android:layout_height="?attr/actionBarSize" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/user_register_name"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
         android:hint="@string/user_register_name">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/user_register_edit_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/user_register_edit_name"
-            android:inputType="textCapWords"/>
+            android:inputType="textCapWords" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/user_register_email"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
         android:hint="@string/user_register_email">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/user_register_edit_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/user_register_edit_email"
-            android:inputType="textEmailAddress"/>
+            android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/user_register_password"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
         android:hint="@string/user_register_password">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/user_register_edit_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/user_register_edit_password"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/user_register_confirm_password"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
         android:hint="@string/user_register_confirm_password">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/user_register_edit_confirm_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/user_register_edit_confirm_password"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
+        android:id="@+id/user_register_btn_register"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/user_register_btn_register"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
-        android:text="@string/btn_register"
+        android:layout_marginRight="8dp"
         android:background="@color/colorPrimary"
-        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"/>
+        android:text="@string/btn_register" />
 </LinearLayout>

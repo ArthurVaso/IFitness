@@ -3,7 +3,6 @@ package br.edu.ifsp.dmo.ifitness;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -25,9 +24,6 @@ import br.edu.ifsp.dmo.ifitness.model.UserWithActivities;
 import br.edu.ifsp.dmo.ifitness.viewmodel.UserViewModel;
 
 public class SportEditActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
-
-    //ESTA CLASSE É CHAMDA DIRETAMENTE DA MAIN
-    //UM ICONE SELECIONA DA LISTA TRAZ PARA CA
 
     private Toolbar toolbar;
     private TextView toolbarTitle;
@@ -64,43 +60,22 @@ public class SportEditActivity extends AppCompatActivity implements DatePickerDi
 
         Intent intent = getIntent();
         physicalActivities = (PhysicalActivities) intent.getSerializableExtra("activity");
-        Log.d("SportEditActivity", "onCreate: PA = " + physicalActivities.getId());
-        //title = intent.getStringExtra("title");
 
-        //toolbarTitle = findViewById(R.id.toolbar_title);
-        //toolbarTitle.setText(title);
-/*
-        userViewModel.islogged().observe(this, new Observer<UserWithActivities>() {
-            @Override
-            public void onChanged(UserWithActivities userWithActivities) {
-                if (userWithActivities != null) {
-                    SportEditActivity.this.userWithActivities = userWithActivities;
-                    userId = SportEditActivity.this.userWithActivities.getUser().getId();
-                    Log.d("sedAct", "onChanged do islogged: " + userId);
-                }
-            }
-        });
-*/
         userViewModel.loadActivitiesById(physicalActivities.getUser(), physicalActivities.getId())
                 .observe(this, new Observer<PhysicalActivities>() {
                     @Override
                     public void onChanged(PhysicalActivities physicalActivities) {
-
-                        Log.d("loadPA", "onChanged: iniciando o load do ===> Sport Edit");
                         userViewModel.islogged().observe(SportEditActivity.this, new Observer<UserWithActivities>() {
                             @Override
                             public void onChanged(UserWithActivities userWithActivities) {
-                                Log.d("sedAct", "onChanged do islogged: ");
                                 if (userWithActivities != null) {
                                     SportEditActivity.this.userWithActivities = userWithActivities;
                                     userId = SportEditActivity.this.userWithActivities.getUser().getId();
-                                    Log.d("sedAct", "onChanged do islogged: " + userId);
                                 }
                             }
                         });
 
                         SportEditActivity.this.physicalActivities = physicalActivities;
-                        Log.d("sedAct", "onChanged do load: " + userId);
 
                         toolbarTitle = findViewById(R.id.toolbar_title);
                         title = SportEditActivity.this.physicalActivities.getActivityCategory();
@@ -122,7 +97,6 @@ public class SportEditActivity extends AppCompatActivity implements DatePickerDi
                         btnSave.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                //deletePhysicalActivity();
                                 updatePhysicalActivity();
                             }
                         });
@@ -151,11 +125,8 @@ public class SportEditActivity extends AppCompatActivity implements DatePickerDi
 
         userWithActivities.getUser().setPoints(String.valueOf(points));
 
-        //userViewModel.addActivity(userWithActivities);
-        Log.d("delete", "deletePhysicalActivity: " + userWithActivities.getUser().getName());
-        Log.d("delete", "deletePhysicalActivity: " + userWithActivities.getUser().getName());
         userViewModel.deletePhysicalActivity(userWithActivities);
-        Toast.makeText(this, getString(R.string.sport_edit_delete), Toast.LENGTH_LONG).show();
+        Toast.makeText(this, getString(R.string.sport_edit_delete), Toast.LENGTH_SHORT).show();
 
         finish();
     }
@@ -181,14 +152,11 @@ public class SportEditActivity extends AppCompatActivity implements DatePickerDi
         int position = 0;
 
         for (int i = 0; i < userWithActivities.getPhysicalActivities().size(); i++) {
-            Log.d("update", "updatePhysicalActivity: for userPA: "
-                    + userWithActivities.getPhysicalActivities().get(i).getId()
-                    + " for do OnchangePA: "
-                    + physicalActivities.getId());
-                    if (userWithActivities.getPhysicalActivities().get(i).equals(physicalActivities.getId())) {
-                        position = i;
-                    }
-                };
+            if (userWithActivities.getPhysicalActivities().get(i).equals(physicalActivities.getId())) {
+                position = i;
+            }
+        }
+        ;
 
         userWithActivities.getPhysicalActivities().add(position, physicalActivities);
 
@@ -198,11 +166,8 @@ public class SportEditActivity extends AppCompatActivity implements DatePickerDi
 
         userWithActivities.getUser().setPoints(String.valueOf(points));
 
-        //userViewModel.deletePhysicalActivity(userWithActivities);
-        //userViewModel.addActivity(userWithActivities);
-        Log.d("update", "updatePhysicalActivity: " + userWithActivities.getUser().getName());
         userViewModel.updatePhysicalActivity(userWithActivities, physicalActivities);
-        Toast.makeText(this, getString(R.string.sport_edit_success), Toast.LENGTH_LONG).show();
+        Toast.makeText(this, getString(R.string.sport_edit_success), Toast.LENGTH_SHORT).show();
 
         finish();
     }

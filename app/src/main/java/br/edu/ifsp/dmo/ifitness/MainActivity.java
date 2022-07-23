@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,7 +18,6 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,7 +27,6 @@ import java.util.List;
 
 import br.edu.ifsp.dmo.ifitness.adapter.ActivityAdapter;
 import br.edu.ifsp.dmo.ifitness.model.PhysicalActivities;
-import br.edu.ifsp.dmo.ifitness.model.User;
 import br.edu.ifsp.dmo.ifitness.model.UserWithActivities;
 import br.edu.ifsp.dmo.ifitness.viewmodel.UserViewModel;
 
@@ -69,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         toolbarDrawer = findViewById(R.id.nav_drawer_layout);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
-                toolbarDrawer, toolbar,  R.string.toggle_open, R.string.toggle_close);
+                toolbarDrawer, toolbar, R.string.toggle_open, R.string.toggle_close);
         toolbarDrawer.addDrawerListener(toggle);
 
         toggle.syncState();
@@ -139,28 +136,14 @@ public class MainActivity extends AppCompatActivity {
 
         profileImage = navigationView.getHeaderView(0)
                 .findViewById(R.id.header_profile_image);
-        
+
         recyclerActivities = findViewById(R.id.main_recycler_activities);
 
         activityAdapter = new ActivityAdapter(this);
-/*
-        userViewModel.recentActivities().observe(this,
-                new Observer<List<PhysicalActivities>>() {
-                    @Override
-                    public void onChanged(List<PhysicalActivities> physicalActivities) {
-                        activityAdapter.setActivities(physicalActivities);
-                        activityAdapter.notifyDataSetChanged();
-                    }
-                });
-*/
-
-        //recyclerActivities.setAdapter(activityAdapter);
         recyclerActivities.setLayoutManager(
                 new LinearLayoutManager(this,
                         LinearLayoutManager.VERTICAL,
                         false));
-
-
     }
 
     @Override
@@ -168,64 +151,50 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         userViewModel.islogged().observe(this,
                 new Observer<UserWithActivities>() {
-            @Override
-            public void onChanged(UserWithActivities userWithActivities) {
-                if(userWithActivities != null){
-                    txtLogin.setText(new StringBuilder()
-                            .append(userWithActivities.getUser().getName())
-                            .append(" ")
-                            .append(userWithActivities.getUser().getSurname())
-                            .toString());
-                    String imageProfile = PreferenceManager
-                            .getDefaultSharedPreferences(MainActivity.this)
-                            .getString(MediaStore.EXTRA_OUTPUT, null);
-                    if(imageProfile != null){
-                        profileImage.setImageURI(Uri.parse(imageProfile));
-                    }else{
-                        profileImage.setImageResource(R.drawable.profile_image);
+                    @Override
+                    public void onChanged(UserWithActivities userWithActivities) {
+                        if (userWithActivities != null) {
+                            txtLogin.setText(new StringBuilder()
+                                    .append(userWithActivities.getUser().getName())
+                                    .append(" ")
+                                    .append(userWithActivities.getUser().getSurname())
+                                    .toString());
+                            String imageProfile = PreferenceManager
+                                    .getDefaultSharedPreferences(MainActivity.this)
+                                    .getString(MediaStore.EXTRA_OUTPUT, null);
+                            if (imageProfile != null) {
+                                profileImage.setImageURI(Uri.parse(imageProfile));
+                            } else {
+                                profileImage.setImageResource(R.drawable.profile_image);
+                            }
+
+                            MainActivity.this.userWithActivities = userWithActivities;
+                            userViewModel = new ViewModelProvider(MainActivity.this)
+                                    .get(UserViewModel.class);
+
+                            activityAdapter = new ActivityAdapter(MainActivity.this);
+
+                            userViewModel.recentActivities().observe(MainActivity.this,
+                                    new Observer<List<PhysicalActivities>>() {
+                                        @Override
+                                        public void onChanged(List<PhysicalActivities> physicalActivities) {
+                                            physicalActivities = userWithActivities.getPhysicalActivities();
+                                            activityAdapter.setActivities(physicalActivities);
+                                            activityAdapter.notifyDataSetChanged();
+                                        }
+                                    });
+
+                            recyclerActivities.setAdapter(activityAdapter);
+                        }
                     }
-
-                    MainActivity.this.userWithActivities = userWithActivities;
-                    //Log.d("frag", "onChanged: userview");
-                    userViewModel = new ViewModelProvider(MainActivity.this)
-                            .get(UserViewModel.class);
-
-                    //Log.d("frag", "onChanged: adapter");
-                    activityAdapter = new ActivityAdapter(MainActivity.this);
-
-                    //Log.d("frag", "onChanged: chama atividades recentes");
-                    userViewModel.recentActivities().observe(MainActivity.this,
-                            new Observer<List<PhysicalActivities>>() {
-                                @Override
-                                public void onChanged(List<PhysicalActivities> physicalActivities) {
-                                    //Log.d("frag", "onChanged: setfrag no viewmodel");
-                                    physicalActivities = userWithActivities.getPhysicalActivities();
-                                    activityAdapter.setActivities(physicalActivities);
-                                    activityAdapter.notifyDataSetChanged();
-                                }
-                            });
-
-
-                    //Log.d("frag", "onChanged: setadapter");
-                    recyclerActivities.setAdapter(activityAdapter);
-                    //Log.d("frag", "onChanged: setLayoutManager");
-/*                    recyclerActivities.setLayoutManager(
-                            new LinearLayoutManager(MainActivity.this,
-                                    LinearLayoutManager.VERTICAL,
-                                    false));
-
- */
-
-                }
-            }
-        });
+                });
     }
 
     @Override
     public void onBackPressed() {
-        if(toolbarDrawer.isDrawerOpen(GravityCompat.START)){
+        if (toolbarDrawer.isDrawerOpen(GravityCompat.START)) {
             toolbarDrawer.closeDrawer(GravityCompat.START);
-        }else {
+        } else {
             super.onBackPressed();
         }
     }
