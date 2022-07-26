@@ -1,5 +1,8 @@
 <resources>
     <!-- for general purpose -->
+    <!-- For standat country date -->
+    <string name="language">english</string>
+
     <!-- Commands -->
     <string name="toggle_open">Open</string>
     <string name="toggle_close">Close</string>

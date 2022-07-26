@@ -208,7 +208,14 @@ public class UserProfileActivity extends AppCompatActivity implements DatePicker
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        String txtDate = dayOfMonth + "/" + month + "/" + year;
+        month += 1;
+        String txtDate = null;
+        if (getString(R.string.language).equals("english")){
+            txtDate = month + "/" + dayOfMonth + "/" + year;
+        }
+        if (getString(R.string.language).equals("portuguese")){
+            txtDate = dayOfMonth + "/" + month + "/" + year;
+        }
         btnDatePicker.setText(txtDate);
     }
 

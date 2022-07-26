@@ -36,6 +36,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.edu.ifsp.dmo.ifitness.R;
 import br.edu.ifsp.dmo.ifitness.database.AppDatabase;
 import br.edu.ifsp.dmo.ifitness.database.UserDAO;
 import br.edu.ifsp.dmo.ifitness.model.PhysicalActivities;
@@ -287,7 +288,7 @@ public class UserRepository {
 
     public Boolean addActivity(UserWithActivities userWithActivities) {
         final Boolean[] updated = {false};
-        Log.d("addActivity", "addActivity: adicionando nova atividade");
+
         DocumentReference userRef = firestore.collection("user")
                 .document(userWithActivities.getUser().getId());
 
@@ -310,7 +311,7 @@ public class UserRepository {
 
     public Boolean updateUser(UserWithActivities userWithActivities) {
         final Boolean[] updated = {false};
-        Log.d("loadUser", "updateUser: ");
+
         DocumentReference userRef = firestore.collection("user").document(userWithActivities.getUser().getId());
 
         userRef.set(userWithActivities.getUser()).addOnSuccessListener(unused -> {
@@ -349,6 +350,7 @@ public class UserRepository {
                             physicalActivities = queryDocumentSnapshots.toObject(PhysicalActivities.class);
                             physicalActivities.setId(queryDocumentSnapshots.getId());
                             physicalActivitiesList.add(physicalActivities);
+
                         }
 
                         liveData.setValue(physicalActivitiesList);
@@ -399,7 +401,7 @@ public class UserRepository {
             userWithActivities.setUser(user);
 
             userRef.collection("physical-activities")
-                    //.whereArrayContains("activityKind", sportType)
+                    .whereEqualTo("activityKind", sportType)
                     .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -418,7 +420,6 @@ public class UserRepository {
                 }
             });
         });
-
         return liveData;
     }
 

@@ -90,11 +90,12 @@
                 android:id="@+id/user_profile_btn_date_picker"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="50dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginRight="8dp"
                 android:text="@string/user_profile_birthday"
+                android:gravity="center"
                 android:textColor="@android:color/black" />
 
             <LinearLayout

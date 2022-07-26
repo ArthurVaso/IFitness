@@ -2,7 +2,6 @@ package br.edu.ifsp.dmo.ifitness;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,10 +9,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.ifsp.dmo.ifitness.adapter.ActivityAdapter;
@@ -51,7 +49,9 @@ public class SportListActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        title = getString(R.string.sport_list_title);
+        Intent intent = getIntent();
+        title = intent.getStringExtra("title");
+        sportType = intent.getStringExtra("sportType");
 
         toolbarTitle = findViewById(R.id.toolbar_title);
         toolbarTitle.setText(title);
@@ -80,11 +80,12 @@ public class SportListActivity extends AppCompatActivity {
                     SportListActivity.this.userWithActivities = userWithActivities;
                     userId = SportListActivity.this.userWithActivities.getUser().getId();
 
+                    List<PhysicalActivities> physicalActivitiesList = new ArrayList<>();
+
                     userViewModel.loadActivitiesByType(userId, sportType).observe(SportListActivity.this,
                             new Observer<List<PhysicalActivities>>() {
                                 @Override
                                 public void onChanged(List<PhysicalActivities> physicalActivities) {
-                                    physicalActivities = userWithActivities.getPhysicalActivities();
                                     activityAdapter.setActivities(physicalActivities);
                                     activityAdapter.notifyDataSetChanged();
                                 }

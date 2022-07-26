@@ -173,8 +173,14 @@ public class SportRegisterActivity extends AppCompatActivity implements DatePick
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         month += 1;
-        String date = dayOfMonth + "/" + month + "/" + year;
-        btnDatePicker.setText(date);
+        String txtDate = null;
+        if (getString(R.string.language).equals("english")){
+            txtDate = month + "/" + dayOfMonth + "/" + year;
+        }
+        if (getString(R.string.language).equals("portuguese")){
+            txtDate = dayOfMonth + "/" + month + "/" + year;
+        }
+        btnDatePicker.setText(txtDate);
     }
 
     @Override

@@ -121,7 +121,7 @@ public class SportEditActivity extends AppCompatActivity implements DatePickerDi
     }
 
     private void deletePhysicalActivity() {
-        Double points = Double.parseDouble(userWithActivities.getUser().getPoints()) - oldDistance;
+        Double points = Double.parseDouble(SportEditActivity.this.userWithActivities.getUser().getPoints()) - oldDistance;
 
         userWithActivities.getUser().setPoints(String.valueOf(points));
 
@@ -207,8 +207,15 @@ public class SportEditActivity extends AppCompatActivity implements DatePickerDi
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        String date = dayOfMonth + "/" + month + "/" + year;
-        btnDatePicker.setText(date);
+        month += 1;
+        String txtDate = null;
+        if (getString(R.string.language).equals("english")){
+            txtDate = month + "/" + dayOfMonth + "/" + year;
+        }
+        if (getString(R.string.language).equals("portuguese")){
+            txtDate = dayOfMonth + "/" + month + "/" + year;
+        }
+        btnDatePicker.setText(txtDate);
     }
 
     @Override

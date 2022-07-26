@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -95,10 +96,8 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                         break;
                     case R.id.nav_selection:
-//                        intent = new Intent(MainActivity.this,
-//                                SportSelectionActivity.class);
                         intent = new Intent(MainActivity.this,
-                                SportListActivity.class);
+                                SportSelectionActivity.class);
                         startActivity(intent);
                         break;
                     case R.id.nav_leaderboard:
@@ -178,7 +177,6 @@ public class MainActivity extends AppCompatActivity {
                                     new Observer<List<PhysicalActivities>>() {
                                         @Override
                                         public void onChanged(List<PhysicalActivities> physicalActivities) {
-                                            physicalActivities = userWithActivities.getPhysicalActivities();
                                             activityAdapter.setActivities(physicalActivities);
                                             activityAdapter.notifyDataSetChanged();
                                         }
