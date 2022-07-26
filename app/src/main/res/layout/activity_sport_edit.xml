@@ -43,7 +43,8 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="8dp"
                     android:layout_weight=".5"
-                    android:src="@drawable/date" />
+                    android:src="@drawable/date"
+                    android:contentDescription="@string/sport_edit_calendar_description" />
 
                 <Button
                     android:id="@+id/sport_edit_btn_date_picker"
@@ -70,7 +71,8 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="8dp"
                     android:layout_weight=".5"
-                    android:src="@drawable/time" />
+                    android:src="@drawable/time"
+                    android:contentDescription="@string/sport_edit_timer_description" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/sport_edit_txt_hour"
@@ -119,7 +121,8 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="8dp"
                     android:layout_weight=".5"
-                    android:src="@drawable/distance" />
+                    android:src="@drawable/distance"
+                    android:contentDescription="@string/sport_edit_distance_description" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/sport_edit_txt_distance"

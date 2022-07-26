@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- for general purpose -->
+        <!-- For standat country date -->
+        <string name="language">portuguese</string>
+
         <!-- Commands -->
         <string name="toggle_open">Open</string>
         <string name="toggle_close">Close</string>
@@ -19,6 +22,11 @@
         <string name="btn_cancel">CANCEL</string>
         <string name="btn_ok">OK</string>
 
+    <!-- res/layout/activity_splash.xml -->
+        <string name="splash_app_title">IFitness</string>
+        <string name="splash_subtitle">Dev fitness</string>
+        <string name="splash_organization">Institituto Federal de São Paulo</string>
+
     <!-- res/layout/activity_main.xml -->
         <string name="app_name">IFitness</string>
         <string name="main_recent_activities">Atividades Recentes</string>
@@ -29,6 +37,7 @@
         <string name="sports_running">Corrida</string>
         <string name="sports_swimming">Natação</string>
         <string name="sports_cycling">Ciclismo</string>
+        <string name="sports_empty">Vazio</string>
 
     <!-- res/layout/activity_sports_selection.xml -->
         <string name="sports_selection_title">Atividades</string>
@@ -36,6 +45,7 @@
         <string name="sports_selection_running">Corrida</string>
         <string name="sports_selection_swimming">Natação</string>
         <string name="sports_selection_cycling">Ciclismo</string>
+        <string name="sports_selection_empty">Vazio</string>
 
     <!-- res/menu/menu_drawer.xml -->
         <string name="menu_drawer_home">Home</string>
@@ -49,6 +59,7 @@
 
     <!-- res/layout/menu_header_layout.xml -->
         <string name="menu_header_login">Entrar</string>
+        <string name="menu_header_image">Imagem de perfil</string>
 
     <!-- res/layout/activity_user_login.xml -->
         <string name="user_login_title">Login</string>
@@ -81,13 +92,19 @@
         <string name="user_registry_credentials">Por foavor entre com suas informações.</string>
         <string name="user_register_success">Usuário registrado.</string>
         <string name="user_register_fail">Falha ao registrar usuário.</string>
+        <string name="sport_register_fill_name">Fill the field name.</string>
+        <string name="sport_register_fill_surname">Fill the field surname.</string>
+        <string name="sport_register_fill_email">Fill the field  e-mail.</string>
 
     <!-- res/layout/activity_user_profile.xml -->
         <string name="user_profile_title">Perfil</string>
+        <string name="user_profile_image">Imagem de perfil</string>
         <string name="user_profile_name">Nome</string>
         <string name="user_profile_surname">Sobrenome</string>
         <string name="user_profile_email">E-mail</string>
+        <string name="user_profile_birthday">Data de nascimento</string>
         <string name="user_profile_select_date">Selecione a data</string>
+        <string name="user_profile_phone">Fone</string>
 
     <!-- NOT USED
         <string name="user_profile_address">Endereço</string>
@@ -136,12 +153,20 @@
 
     <!-- app/src/main/java/br/edu/ifsp/dmo/ifitness/UserProfileActivity.java -->
         <string name="user_profile_success">Dados atualizados com sucesso.</string>
+        <string name="user_profile_fill_name">Fill the field name.</string>
+        <string name="user_profile_fill_surname">Fill the field surname.</string>
+        <string name="user_profile_fill_email">Fill the field e-mail.</string>
+        <string name="user_profile_fill_phone">Fill the field phone.</string>
+        <string name="user_profile_fill_birthday">Select your birthday</string>
 
     <!-- res/layout/activity_sport_register.xml -->
         <string name="sport_register_title">Registro de atividade</string>
+        <string name="sport_register_calendar_description">Calendário</string>
         <string name="sport_register_select_date">Selecione a data</string>
+        <string name="sport_register_timer_description">Cronômetro</string>
         <string name="sport_register_hour">Hora</string>
         <string name="sport_register_minute">Minuto</string>
+        <string name="sport_register_distance_description">Distância</string>
         <string name="sport_register_distance">Distância</string>
         <string name="sport_register_meters">Metros</string>
         <string name="sport_register_date_pattern">dd/MM/yyyy</string>
@@ -153,9 +178,12 @@
 
     <!-- res/layout/activity_sport_edit.xml -->
         <string name="sport_edit_title">Editar atividade</string>
+        <string name="sport_edit_calendar_description">Calendrário</string>
         <string name="sport_edit_select_date">Selecione a data</string>
+        <string name="sport_edit_timer_description">Cronômetro</string>
         <string name="sport_edit_hour">Hora</string>
         <string name="sport_edit_minute">Minuto</string>
+        <string name="sport_edit_distance_description">Distância</string>
         <string name="sport_edit_distance">Distância</string>
         <string name="sport_edit_meters">Metros</string>
         <string name="sport_edit_success">Atividade atulizada com sucesso.</string>
@@ -164,16 +192,21 @@
     <!-- res/layout/activity_badges.xml -->
         <string name="badges_title">Conquistas</string>
         <string name="badges_no_badges">Nenhuma conquista adquirida</string>
+        <string name="badge_15_description">Medalha iniciante</string>
         <string name="badge_15">Exercitou-se por 15 km</string>
+        <string name="badge_25_description">Medalha de Bronze</string>
         <string name="badge_25">Exercitou-se por 25 km</string>
+        <string name="badge_50_description">Medalha de Prata</string>
         <string name="badge_50">Exercitou-se por 50 km</string>
+        <string name="badge_100_description">Medalha de Ouro</string>
         <string name="badge_100">Exercitou-se por 100 km</string>
+        <string name="badge_150_description">Medalha de Platina</string>
         <string name="badge_150">Exercitou-se por 150 km</string>
         <string name="badges_your_points">Sua pontuação:\u0020</string>
         <string name="badges_km">\u0020km.</string>
 
     <!-- res/layout/activity_leaderboard.xml -->
-        <string name="leaderboard_title">Leaderboard</string>
+        <string name="leaderboard_title">Quadro de líderes</string>
 
     <!-- app/src/main/java/br/edu/ifsp/dmo/ifitness/RepositoryActivity.java -->
 		<string name="user_repository_user">Usuário\u0020</string>

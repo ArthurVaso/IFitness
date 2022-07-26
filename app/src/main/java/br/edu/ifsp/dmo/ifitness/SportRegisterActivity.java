@@ -16,9 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.textfield.TextInputEditText;
 
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -142,19 +140,19 @@ public class SportRegisterActivity extends AppCompatActivity implements DatePick
     private boolean validate() {
         boolean isValid = true;
         if (txtHour.getText().toString().trim().isEmpty()) {
-            txtHour.setError("Fill the field name.");
+            txtHour.setError(getString(R.string.sport_register_fill_name));
             isValid = false;
         } else {
             txtHour.setError(null);
         }
         if (txtMinute.getText().toString().trim().isEmpty()) {
-            txtMinute.setError("Fill the field surname.");
+            txtMinute.setError(getString(R.string.sport_register_fill_surname));
             isValid = false;
         } else {
             txtMinute.setError(null);
         }
         if (txtDistance.getText().toString().trim().isEmpty()) {
-            txtDistance.setError("Fill the field  e-mail.");
+            txtDistance.setError(getString(R.string.sport_register_fill_email));
             isValid = false;
         } else {
             txtDistance.setError(null);
@@ -174,8 +172,15 @@ public class SportRegisterActivity extends AppCompatActivity implements DatePick
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        String date = dayOfMonth + "/" + month + "/" + year;
-        btnDatePicker.setText(date);
+        month += 1;
+        String txtDate = null;
+        if (getString(R.string.language).equals("english")){
+            txtDate = month + "/" + dayOfMonth + "/" + year;
+        }
+        if (getString(R.string.language).equals("portuguese")){
+            txtDate = dayOfMonth + "/" + month + "/" + year;
+        }
+        btnDatePicker.setText(txtDate);
     }
 
     @Override

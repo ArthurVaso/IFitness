@@ -30,7 +30,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import br.edu.ifsp.dmo.ifitness.model.User;
 import br.edu.ifsp.dmo.ifitness.model.UserWithActivities;
 import br.edu.ifsp.dmo.ifitness.viewmodel.UserViewModel;
 
@@ -48,11 +47,11 @@ public class UserProfileActivity extends AppCompatActivity implements DatePicker
     private TextInputEditText txtPhone;
     private Spinner spnGender;
     private ImageView profileImage;
-    
+
     private Button btnUpdate;
-    
+
     private Uri photoURI;
-    
+
     private UserViewModel userViewModel;
 
     private UserWithActivities userWithActivities;
@@ -108,17 +107,17 @@ public class UserProfileActivity extends AppCompatActivity implements DatePicker
         String imageProfile = PreferenceManager.getDefaultSharedPreferences(this)
                 .getString(MediaStore.EXTRA_OUTPUT, null);
 
-        if(imageProfile != null){
+        if (imageProfile != null) {
             photoURI = Uri.parse(imageProfile);
             profileImage.setImageURI(photoURI);
-        }else{
+        } else {
             profileImage.setImageResource(R.drawable.profile_image);
         }
 
         userViewModel.islogged().observe(this, new Observer<UserWithActivities>() {
             @Override
             public void onChanged(UserWithActivities userWithActivities) {
-                if(userWithActivities != null){
+                if (userWithActivities != null) {
 
                     UserProfileActivity.this.userWithActivities = userWithActivities;
                     txtName.setText(userWithActivities.getUser().getName());
@@ -128,12 +127,12 @@ public class UserProfileActivity extends AppCompatActivity implements DatePicker
                     txtPhone.setText(userWithActivities.getUser().getPhone());
 
                     String[] gender = getResources().getStringArray(R.array.gender);
-                    for (int i = 0; i < gender.length; i++){
-                        if(gender[i].equals(userWithActivities.getUser().getGender())){
+                    for (int i = 0; i < gender.length; i++) {
+                        if (gender[i].equals(userWithActivities.getUser().getGender())) {
                             spnGender.setSelection(i);
                         }
                     }
-                }else{
+                } else {
                     startActivity(new Intent(UserProfileActivity.this,
                             UserLoginActivity.class));
                     finish();
@@ -143,7 +142,7 @@ public class UserProfileActivity extends AppCompatActivity implements DatePicker
     }
 
     private void update() {
-        if(!validate()){
+        if (!validate()) {
             return;
         }
 
@@ -158,38 +157,46 @@ public class UserProfileActivity extends AppCompatActivity implements DatePicker
 
         userViewModel.updateUser(userWithActivities);
         Toast.makeText(this, getString(R.string.user_profile_success), Toast.LENGTH_SHORT).show();
+
+        finish();
     }
 
-    private boolean validate(){
+    private boolean validate() {
         boolean isValid = true;
-        if(txtName.getText().toString().trim().isEmpty()){
-            txtName.setError("Fill the field name.");
+        if (txtName.getText().toString().trim().isEmpty()) {
+            txtName.setError(getString(R.string.user_profile_fill_name));
             isValid = false;
-        }else{
+        } else {
             txtName.setError(null);
         }
-        if(txtSurname.getText().toString().trim().isEmpty()){
-            txtSurname.setError("Fill the field surname.");
+        if (txtSurname.getText().toString().trim().isEmpty()) {
+            txtSurname.setError(getString(R.string.user_profile_fill_surname));
             isValid = false;
-        }else{
+        } else {
             txtSurname.setError(null);
         }
-        if(txtEmail.getText().toString().trim().isEmpty()){
-            txtEmail.setError("Fill the field  e-mail.");
+        if (txtEmail.getText().toString().trim().isEmpty()) {
+            txtEmail.setError(getString(R.string.user_profile_fill_email));
             isValid = false;
-        }else{
+        } else {
             txtEmail.setError(null);
         }
-        if(txtPhone.getText().toString().trim().isEmpty()){
-            txtPhone.setError("Fill the field  phone.");
+        if (txtPhone.getText().toString().trim().isEmpty()) {
+            txtPhone.setError(getString(R.string.user_profile_fill_phone));
             isValid = false;
-        }else{
+        } else {
             txtPhone.setError(null);
+        }
+        if (btnDatePicker.getText().equals(getString(R.string.user_profile_select_date))) {
+            btnDatePicker.setError(getString(R.string.user_profile_fill_birthday));
+            isValid = false;
+        } else {
+            btnDatePicker.setError(null);
         }
         return isValid;
     }
 
-    public void showDatePickerDialog(){
+    public void showDatePickerDialog() {
         DatePickerDialog datePickerDialog = new DatePickerDialog(
                 this,
                 this,
@@ -201,17 +208,24 @@ public class UserProfileActivity extends AppCompatActivity implements DatePicker
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        String txtDate = dayOfMonth + "/" + month + "/" + year;
+        month += 1;
+        String txtDate = null;
+        if (getString(R.string.language).equals("english")){
+            txtDate = month + "/" + dayOfMonth + "/" + year;
+        }
+        if (getString(R.string.language).equals("portuguese")){
+            txtDate = dayOfMonth + "/" + month + "/" + year;
+        }
         btnDatePicker.setText(txtDate);
     }
 
     private void takePicture() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if(intent.resolveActivity(getPackageManager()) != null){
+        if (intent.resolveActivity(getPackageManager()) != null) {
             File photoFile = null;
-            try{
+            try {
                 photoFile = createImageFile();
-            }catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
             photoURI = FileProvider.getUriForFile(this,
@@ -226,7 +240,7 @@ public class UserProfileActivity extends AppCompatActivity implements DatePicker
         String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
                 Locale.getDefault()).format(new Date());
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        return File.createTempFile("PROFILE_" + timestamp,".jpg", storageDir);
+        return File.createTempFile("PROFILE_" + timestamp, ".jpg", storageDir);
     }
 
     @Override

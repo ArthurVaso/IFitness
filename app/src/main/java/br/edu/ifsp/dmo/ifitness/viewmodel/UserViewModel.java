@@ -3,7 +3,6 @@ package br.edu.ifsp.dmo.ifitness.viewmodel;
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -29,8 +28,7 @@ public class UserViewModel extends AndroidViewModel {
         userRepository = new UserRepository(application);
     }
 
-    public void createUser(User user){
-        Log.d("repo", "createUser: viewmodel create user");
+    public void createUser(User user) {
         userRepository.createUser(user);
     }
 
@@ -38,7 +36,7 @@ public class UserViewModel extends AndroidViewModel {
         return userRepository.login(email, password);
     }
 
-    public void logout(){
+    public void logout() {
         PreferenceManager.getDefaultSharedPreferences(getApplication())
                 .edit().remove(USER_ID)
                 .apply();
@@ -52,7 +50,7 @@ public class UserViewModel extends AndroidViewModel {
         Optional<String> id =
                 Optional.ofNullable(sharedPreferences
                         .getString(USER_ID, null));
-        if(!id.isPresent()){
+        if (!id.isPresent()) {
             return new MutableLiveData<>(null);
         }
         return userRepository.load(id.get());
@@ -79,7 +77,7 @@ public class UserViewModel extends AndroidViewModel {
                 Optional.ofNullable(sharedPreferences
                         .getString(USER_ID, null));
 
-        if(!id.isPresent()){
+        if (!id.isPresent()) {
             return new MutableLiveData<>(null);
         }
 
